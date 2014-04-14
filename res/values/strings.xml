@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">爱的监护者</string>
+    <string name="login_user_name_label">帐号</string>
+    <string name="login_label_password">密码</string>
+    <string name="ok">确定</string>
+    <string name="cancel">取消</string>
+    <string name="login_str">登 录</string>
+    <string name="logout_str">注 销</string>
+    <string name="login_status_logging_in">登录中...</string>
+    <string name="login_user_name_hint">Email或手机号</string>
+    <string name="login_forget_password_str"><a href="#">忘记密码？</a></string>
+    <string name="logo_desprition">logo</string>
+    <string name="copyright_str">copyright©jlu</string>
+    <string name="aboutInfo">版    本:1.0\n制作人:王昌帅 \n邮    箱: 415939252@qq.com</string>
+    <string name="MENU_EXIT">退出</string>
+    <string name="MENU_ABOUT">关于</string>
+
+</resources>

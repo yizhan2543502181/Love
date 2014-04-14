@@ -55,11 +55,16 @@ public class FragmentPageOverview extends Fragment implements OnClickListener {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		baiduMapInit();
+	}
+
+	private void baiduMapInit() {
 		/**
 		 * 使用地图sdk前需先初始化BMapManager. BMapManager是全局的，可为多个MapView共用，它需要地图模块创建前创建，
 		 * 并在地图地图模块销毁后销毁，只要还有地图模块在使用，BMapManager就不应该销毁
 		 */
-		AidApplication app = (AidApplication) getActivity().getApplication();
+		AidApplication app = (AidApplication) getActivity()
+				.getApplication();
 		if (app.mBMapManager == null) {
 			app.mBMapManager = new BMapManager(getActivity()
 					.getApplicationContext());
@@ -94,7 +99,7 @@ public class FragmentPageOverview extends Fragment implements OnClickListener {
 		mMapView.getController().setRotationGesturesEnabled(false);
 		mMapView.getController().setScrollGesturesEnabled(true);
 		if (null != FragmentPageOverview.point) {
-			moveToSpecialPoint(FragmentPageOverview.point, location);
+			moveToSpecialPoint(FragmentPageOverview.point, FragmentPageOverview.location);
 		} else {
 			startLocate();
 		}
@@ -161,33 +166,33 @@ public class FragmentPageOverview extends Fragment implements OnClickListener {
 		case R.id.logout_btn:
 			Util.showOptionWindow(getActivity(), "提示", "注销后需重新登录，确定注销?",
 					new OnOptionListener() {
+				@Override
+				public void onOK() {
+					AsyncAid aAid = new AsyncAid(Aid.getInstance());
+					aAid.logout(new RequestListener() {
 						@Override
-						public void onOK() {
-							AsyncAid aAid = new AsyncAid(Aid.getInstance());
-							aAid.logout(new RequestListener() {
-								@Override
-								public void onFault(Throwable fault) {
-									getActivity().finish();
-								}
-
-								@Override
-								public void onComplete(String response) {
-									getActivity().finish();
-								}
-
-								@Override
-								public void onAidError(AidError renrenError) {
-									getActivity().finish();
-								}
-							});
-							JPushInterface.stopPush(getActivity()
-									.getApplicationContext());
+						public void onFault(Throwable fault) {
+							getActivity().finish();
 						}
 
 						@Override
-						public void onCancel() {
+						public void onComplete(String response) {
+							getActivity().finish();
+						}
+
+						@Override
+						public void onAidError(AidError renrenError) {
+							getActivity().finish();
 						}
 					});
+					JPushInterface.stopPush(getActivity()
+							.getApplicationContext());
+				}
+
+				@Override
+				public void onCancel() {
+				}
+			});
 			break;
 		case R.id.overview_location_text:
 			startLocate();
@@ -211,8 +216,8 @@ public class FragmentPageOverview extends Fragment implements OnClickListener {
 				progressDialog.dismiss();
 			}
 			if (error != 0) {
-				location = "位置获取失败,点此重新获取";
-				locationText.setText(location);
+				FragmentPageOverview.location = "位置获取失败,点此重新获取";
+				locationText.setText(FragmentPageOverview.location);
 				String str = String.format("错误号：%d", error);
 				Toast.makeText(getActivity(), str, Toast.LENGTH_LONG).show();
 				return;
@@ -225,16 +230,16 @@ public class FragmentPageOverview extends Fragment implements OnClickListener {
 						res.geoPt.getLatitudeE6() / 1e6,
 						res.geoPt.getLongitudeE6() / 1e6);
 				Toast.makeText(getActivity(), strInfo, Toast.LENGTH_LONG)
-						.show();
+				.show();
 			}
 			if (res.type == MKAddrInfo.MK_REVERSEGEOCODE) {
 				// 反地理编码：通过坐标点检索详细地址及周边poi
 				String strInfo = res.strAddr;
-				location = strInfo;
-				location = (location == null ? "位置获取失败,点此重新获取" : location);
-				locationText.setText(location + "附近(点击重新获取)");
+				FragmentPageOverview.location = strInfo;
+				FragmentPageOverview.location = FragmentPageOverview.location == null ? "位置获取失败,点此重新获取" : FragmentPageOverview.location;
+				locationText.setText(FragmentPageOverview.location + "附近(点击重新获取)");
 			}
-			moveToSpecialPoint(res.geoPt, location);
+			moveToSpecialPoint(res.geoPt, FragmentPageOverview.location);
 		}
 
 		@Override
@@ -291,8 +296,8 @@ public class FragmentPageOverview extends Fragment implements OnClickListener {
 	@Override
 	public void onStart() {
 		super.onStart();
-		if ((null != LoginActivity.getInstance())
-				&& (null != LoginActivity.getInstance().getProgressDialog())
+		if (null != LoginActivity.getInstance()
+				&& null != LoginActivity.getInstance().getProgressDialog()
 				&& LoginActivity.getInstance().getProgressDialog().isShowing()) {
 			LoginActivity.getInstance().getProgressDialog().dismiss();
 			LoginActivity.getInstance().finish();

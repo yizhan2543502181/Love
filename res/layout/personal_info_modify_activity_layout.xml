@@ -479,7 +479,7 @@
                     android:layout_weight="1" />
 
                 <Button
-                    android:id="@+id/personal_info_modify_modify_patient_info_ok_btn"
+                    android:id="@+id/personal_info_modify_ok_btn"
                     android:layout_width="0dip"
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"

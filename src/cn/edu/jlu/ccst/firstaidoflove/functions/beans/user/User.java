@@ -368,6 +368,14 @@ public class User implements Parcelable
 				+ workPhoneNum + "]";
 	}
 
+	public String toString2()
+	{
+		return uid + "," + uname + "," + pid + "," + pname + "," + sex + ","
+				+ age + "," + job + "," + relationship + "," + homeAddress
+				+ "," + workAddress + "," + mobilePhoneNum + "," + homePhoneNum
+				+ "," + workPhoneNum;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -378,25 +386,25 @@ public class User implements Parcelable
 	{
 		final int prime = 31;
 		int result = 1;
-		result = (prime * result) + age;
-		result = (prime * result) + ((sex == null) ? 0 : sex.hashCode());
-		result = (prime * result)
-				+ ((homeAddress == null) ? 0 : homeAddress.hashCode());
-		result = (prime * result)
-				+ ((homePhoneNum == null) ? 0 : homePhoneNum.hashCode());
-		result = (prime * result) + ((job == null) ? 0 : job.hashCode());
-		result = (prime * result)
-				+ ((mobilePhoneNum == null) ? 0 : mobilePhoneNum.hashCode());
-		result = (prime * result) + ((pname == null) ? 0 : pname.hashCode());
-		result = (prime * result) + (int) (pid ^ (pid >>> 32));
-		result = (prime * result)
-				+ ((relationship == null) ? 0 : relationship.hashCode());
-		result = (prime * result) + (int) (uid ^ (uid >>> 32));
-		result = (prime * result) + ((uname == null) ? 0 : uname.hashCode());
-		result = (prime * result)
-				+ ((workAddress == null) ? 0 : workAddress.hashCode());
-		result = (prime * result)
-				+ ((workPhoneNum == null) ? 0 : workPhoneNum.hashCode());
+		result = prime * result + age;
+		result = prime * result + (sex == null ? 0 : sex.hashCode());
+		result = prime * result
+				+ (homeAddress == null ? 0 : homeAddress.hashCode());
+		result = prime * result
+				+ (homePhoneNum == null ? 0 : homePhoneNum.hashCode());
+		result = prime * result + (job == null ? 0 : job.hashCode());
+		result = prime * result
+				+ (mobilePhoneNum == null ? 0 : mobilePhoneNum.hashCode());
+		result = prime * result + (pname == null ? 0 : pname.hashCode());
+		result = prime * result + (int) (pid ^ pid >>> 32);
+		result = prime * result
+				+ (relationship == null ? 0 : relationship.hashCode());
+		result = prime * result + (int) (uid ^ uid >>> 32);
+		result = prime * result + (uname == null ? 0 : uname.hashCode());
+		result = prime * result
+				+ (workAddress == null ? 0 : workAddress.hashCode());
+		result = prime * result
+				+ (workPhoneNum == null ? 0 : workPhoneNum.hashCode());
 		return result;
 	}
 

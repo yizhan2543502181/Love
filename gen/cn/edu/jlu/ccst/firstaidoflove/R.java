@@ -144,8 +144,8 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int personal_info_modify_home_phone_num=0x7f080066;
         public static final int personal_info_modify_job=0x7f080061;
         public static final int personal_info_modify_mobile_phone_num=0x7f080065;
-        public static final int personal_info_modify_modify_patient_info_ok_btn=0x7f080068;
         public static final int personal_info_modify_name=0x7f08005d;
+        public static final int personal_info_modify_ok_btn=0x7f080068;
         public static final int personal_info_modify_patient_name=0x7f08005e;
         public static final int personal_info_modify_relationship=0x7f080062;
         public static final int personal_info_modify_sex=0x7f08005f;

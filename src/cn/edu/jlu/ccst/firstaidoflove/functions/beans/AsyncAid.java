@@ -15,6 +15,9 @@ import cn.edu.jlu.ccst.firstaidoflove.functions.beans.login.LoginResponseBean;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.user.UserGetHelper;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.user.UserGetRequestParam;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.user.UserGetResponseBean;
+import cn.edu.jlu.ccst.firstaidoflove.functions.beans.user.UserSetHelper;
+import cn.edu.jlu.ccst.firstaidoflove.functions.beans.user.UserSetRequestParam;
+import cn.edu.jlu.ccst.firstaidoflove.functions.beans.user.UserSetResponseBean;
 import cn.edu.jlu.ccst.firstaidoflove.util.AidError;
 import cn.edu.jlu.ccst.firstaidoflove.util.Util;
 
@@ -148,6 +151,12 @@ public class AsyncAid
 			AbstractRequestListener<UserGetResponseBean> listener)
 	{
 		new UserGetHelper(aid).asyncGetUsersInfo(pool, param, listener);
+	}
+
+	public void setUserInfo(UserSetRequestParam param,
+			AbstractRequestListener<UserSetResponseBean> listener)
+	{
+		new UserSetHelper(aid).asyncsetUsersInfo(pool, param, listener);
 	}
 
 	/**

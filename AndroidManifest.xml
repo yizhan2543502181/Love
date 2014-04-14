@@ -87,21 +87,23 @@
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="qgwTnD9quWNZ2tLDWoafC7GX" >
-        </meta-data>
+        </meta-data>
         -->
         <!-- 宿舍_x86_32_android -->
-        <!--
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="xsSZ90mQC9VsFP0Hp6xC44h8" >
-        </meta-data>
-        -->
+        </meta-data>
         <!-- 507_x86_64_android -->
 
+
+        <!--
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="FTwyeMnSrBaGzbFHe1EpNzn3" >
         </meta-data>
+        -->
+
 
         <!-- Required  . Enable it you can get statistics data with channel -->
         <meta-data
@@ -110,14 +112,14 @@
         <meta-data
             android:name="JPUSH_APPKEY"
             android:value="efc668058bfbb6039d42caeb" />
- <!-- 值来自开发者平台取得的AppKey -->
+        <!-- 值来自开发者平台取得的AppKey -->
 
 
         <!--
         尹隆账号申请的key 
         <meta-data
             android:name="JPUSH_APPKEY"
-            android:value="626ed657382f8cd3b0c5027e" />
+            android:value="626ed657382f8cd3b0c5027e" />
         -->
         <activity
             android:name=".activity.main.LoginActivity"
@@ -246,7 +248,7 @@
             android:enabled="true" >
             <intent-filter android:priority="1000" >
                 <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED_PROXY" />
- <!-- Required  显示通知栏 -->
+                <!-- Required  显示通知栏 -->
                 <category android:name="cn.edu.jlu.ccst.firstaidoflove" />
             </intent-filter>
             <intent-filter>
@@ -271,16 +273,16 @@
             android:enabled="true" >
             <intent-filter>
                 <action android:name="cn.jpush.android.intent.REGISTRATION" />
- <!-- Required  用户注册SDK的intent -->
+                <!-- Required  用户注册SDK的intent -->
                 <action android:name="cn.jpush.android.intent.UNREGISTRATION" />
                 <action android:name="cn.jpush.android.intent.MESSAGE_RECEIVED" />
- <!-- Required  用户接收SDK消息的intent -->
+                <!-- Required  用户接收SDK消息的intent -->
                 <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED" />
- <!-- Required  用户接收SDK通知栏信息的intent -->
+                <!-- Required  用户接收SDK通知栏信息的intent -->
                 <action android:name="cn.jpush.android.intent.NOTIFICATION_OPENED" />
- <!-- Required  用户打开自定义通知栏的intent -->
+                <!-- Required  用户打开自定义通知栏的intent -->
                 <action android:name="cn.jpush.android.intent.ACTION_RICHPUSH_CALLBACK" />
- <!-- Optional 用户接受Rich Push Javascript 回调函数的intent -->
+                <!-- Optional 用户接受Rich Push Javascript 回调函数的intent -->
                 <category android:name="cn.edu.jlu.ccst.firstaidoflove" />
             </intent-filter>
         </receiver>

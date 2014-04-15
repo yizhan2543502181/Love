@@ -39,13 +39,13 @@ import cn.edu.jlu.ccst.firstaidoflove.util.Util;
  */
 public class RecentAccidentsActivity extends AbstractAidRequestActivity
 {
-	private TextView							noMessageText	= null;
-	private ProgressDialog						progressDialog	= null;
-	private ListView							listView;
-	private static List<Accident>				accidentList	= new ArrayList<Accident>();
-	private static List<Map<String, Object>>	list			= new ArrayList<Map<String, Object>>();
+	private TextView					noMessageText	= null;
+	private ProgressDialog				progressDialog	= null;
+	private ListView					listView;
+	private List<Accident>				accidentList	= new ArrayList<Accident>();
+	private List<Map<String, Object>>	list			= new ArrayList<Map<String, Object>>();
 	@SuppressLint("UseValueOf")
-	private static Integer						lock			= new Integer(0);
+	private Integer						lock			= new Integer(0);
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -67,36 +67,36 @@ public class RecentAccidentsActivity extends AbstractAidRequestActivity
 
 	private void genList()
 	{
-		RecentAccidentsActivity.list.clear();
+		list.clear();
 		for (int i = 0; i < 6; ++i)
 		{
-			RecentAccidentsActivity.accidentList.add(0, new Accident(
-					currentUser.getPid(), currentUser.getPname(), 110.235,
-					35.3254, "2014.04.15", "糖尿病，高血压，骨折"));
-			Accident accident = RecentAccidentsActivity.accidentList.get(i);
-			RecentAccidentsActivity.addListItem("姓名：" + accident.getPname()
-					+ "\n时间：" + accident.getTime() + "\n事故地点：" + "经"
+			accidentList.add(0,
+					new Accident(currentUser.getPid(), currentUser.getPname(),
+							110.235, 35.3254, "2014.04.15", "糖尿病，高血压，骨折"));
+			Accident accident = accidentList.get(i);
+			addListItem("姓名：" + accident.getPname() + "\n时间："
+					+ accident.getTime() + "\n事故地点：" + "经"
 					+ accident.getLongtitude() + "° " + "纬"
 					+ accident.getLatitude() + "° ");
 		}
 	}
 
-	private static void addListItem(String content)
+	private void addListItem(String content)
 	{
 		Map<String, Object> map = null;
 		map = new HashMap<String, Object>();
 		map.put("list_item_icon", R.drawable.icon_home_sel);
 		map.put("list_item_text", content);
-		synchronized (RecentAccidentsActivity.lock)
+		synchronized (lock)
 		{
-			RecentAccidentsActivity.list.add(0, map);
+			list.add(0, map);
 		}
 	}
 
 	public void updateList()
 	{
 		genList();
-		if (RecentAccidentsActivity.list.size() == 0)
+		if (list.size() == 0)
 		{
 			noMessageText.setVisibility(View.VISIBLE);
 		}
@@ -105,10 +105,9 @@ public class RecentAccidentsActivity extends AbstractAidRequestActivity
 			noMessageText.setVisibility(View.GONE);
 		}
 		final SimpleAdapter adapter = new SimpleAdapter(
-				RecentAccidentsActivity.this, RecentAccidentsActivity.list,
-				R.layout.list_item_layout, new String[] { "list_item_icon",
-						"list_item_text" }, new int[] { R.id.list_item_icon,
-						R.id.list_item_text });
+				RecentAccidentsActivity.this, list, R.layout.list_item_layout,
+				new String[] { "list_item_icon", "list_item_text" }, new int[] {
+						R.id.list_item_icon, R.id.list_item_text });
 		listView.setAdapter(adapter);
 	}
 
@@ -129,7 +128,7 @@ public class RecentAccidentsActivity extends AbstractAidRequestActivity
 													Bundle bundle = new Bundle();
 													bundle.putParcelable(
 															Constant.ACCIDENT_LABLE,
-															RecentAccidentsActivity.accidentList
+															accidentList
 																	.get(position));
 													intent.putExtras(bundle);
 													intent.setClass(
@@ -236,8 +235,7 @@ public class RecentAccidentsActivity extends AbstractAidRequestActivity
 						}
 						if (null != bean.getAccidents())
 						{
-							RecentAccidentsActivity.accidentList = bean
-									.getAccidents();
+							accidentList = bean.getAccidents();
 							updateList();
 						}
 						else

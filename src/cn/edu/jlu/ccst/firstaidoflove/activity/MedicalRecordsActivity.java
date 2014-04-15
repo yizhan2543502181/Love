@@ -39,14 +39,13 @@ import cn.edu.jlu.ccst.firstaidoflove.util.Util;
  */
 public class MedicalRecordsActivity extends AbstractAidRequestActivity
 {
-	private TextView							noMessageText		= null;
-	private ProgressDialog						progressDialog		= null;
-	private ListView							listView;
-	private static List<MedicalRecord>			medicalRecordList	= new ArrayList<MedicalRecord>();
-	private static List<Map<String, Object>>	list				= new ArrayList<Map<String, Object>>();
+	private TextView					noMessageText		= null;
+	private ProgressDialog				progressDialog		= null;
+	private ListView					listView;
+	private List<MedicalRecord>			medicalRecordList	= new ArrayList<MedicalRecord>();
+	private List<Map<String, Object>>	list				= new ArrayList<Map<String, Object>>();
 	@SuppressLint("UseValueOf")
-	private static Integer						lock				= new Integer(
-																			0);
+	private Integer						lock				= new Integer(0);
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -68,36 +67,35 @@ public class MedicalRecordsActivity extends AbstractAidRequestActivity
 
 	private void genList()
 	{
-		MedicalRecordsActivity.list.clear();
+		list.clear();
 		for (int i = 0; i < 6; ++i)
 		{
-			MedicalRecordsActivity.medicalRecordList.add(0, new MedicalRecord(
-					currentUser.getPid(), currentUser.getPname(), "男", 58,
-					"高血压", "2014.04.15", "100-170", "24ug", "89", "无"));
-			MedicalRecord medicalRecord = MedicalRecordsActivity.medicalRecordList
-					.get(i);
-			MedicalRecordsActivity.addListItem("姓名：" + medicalRecord.getPname()
-					+ "\n鉴定疾病：" + medicalRecord.getResult() + "\n鉴定时间："
+			medicalRecordList.add(0, new MedicalRecord(currentUser.getPid(),
+					currentUser.getPname(), "男", 58, "高血压", "2014.04.15",
+					"100-170", "24ug", "89", "无"));
+			MedicalRecord medicalRecord = medicalRecordList.get(i);
+			addListItem("姓名：" + medicalRecord.getPname() + "\n鉴定疾病："
+					+ medicalRecord.getResult() + "\n鉴定时间："
 					+ medicalRecord.getTime());
 		}
 	}
 
-	private static void addListItem(String content)
+	private void addListItem(String content)
 	{
 		Map<String, Object> map = null;
 		map = new HashMap<String, Object>();
 		map.put("list_item_icon", R.drawable.icon_home_sel);
 		map.put("list_item_text", content);
-		synchronized (MedicalRecordsActivity.lock)
+		synchronized (lock)
 		{
-			MedicalRecordsActivity.list.add(0, map);
+			list.add(0, map);
 		}
 	}
 
 	public void updateList()
 	{
 		genList();
-		if (MedicalRecordsActivity.list.size() == 0)
+		if (list.size() == 0)
 		{
 			noMessageText.setVisibility(View.VISIBLE);
 		}
@@ -106,10 +104,9 @@ public class MedicalRecordsActivity extends AbstractAidRequestActivity
 			noMessageText.setVisibility(View.GONE);
 		}
 		final SimpleAdapter adapter = new SimpleAdapter(
-				MedicalRecordsActivity.this, MedicalRecordsActivity.list,
-				R.layout.list_item_layout, new String[] { "list_item_icon",
-						"list_item_text" }, new int[] { R.id.list_item_icon,
-						R.id.list_item_text });
+				MedicalRecordsActivity.this, list, R.layout.list_item_layout,
+				new String[] { "list_item_icon", "list_item_text" }, new int[] {
+						R.id.list_item_icon, R.id.list_item_text });
 		listView.setAdapter(adapter);
 	}
 
@@ -130,7 +127,7 @@ public class MedicalRecordsActivity extends AbstractAidRequestActivity
 													Bundle bundle = new Bundle();
 													bundle.putParcelable(
 															Constant.MEDICAL_RECORD_LABLE,
-															MedicalRecordsActivity.medicalRecordList
+															medicalRecordList
 																	.get(position));
 													intent.putExtras(bundle);
 													intent.setClass(
@@ -237,8 +234,7 @@ public class MedicalRecordsActivity extends AbstractAidRequestActivity
 						}
 						if (null != bean.getMedicalRecords())
 						{
-							MedicalRecordsActivity.medicalRecordList = bean
-									.getMedicalRecords();
+							medicalRecordList = bean.getMedicalRecords();
 							updateList();
 						}
 						else

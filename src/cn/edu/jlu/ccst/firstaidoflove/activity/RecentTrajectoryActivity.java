@@ -48,16 +48,16 @@ import com.baidu.platform.comapi.basestruct.GeoPoint;
 public class RecentTrajectoryActivity extends AbstractAidRequestActivity
 {
 	// 地图相关
-	MapView										mMapView		= null;								// 地图View
-	private TextView							noMessageText	= null;
-	private ProgressDialog						progressDialog	= null;
-	private ListView							listView		= null;
-	private static List<Trajectory>				trajectoryList	= new ArrayList<Trajectory>();
-	private static List<Map<String, Object>>	list			= new ArrayList<Map<String, Object>>();
+	MapView								mMapView		= null;								// 地图View
+	private TextView					noMessageText	= null;
+	private ProgressDialog				progressDialog	= null;
+	private ListView					listView		= null;
+	private List<Trajectory>			trajectoryList	= new ArrayList<Trajectory>();
+	private List<Map<String, Object>>	list			= new ArrayList<Map<String, Object>>();
 	@SuppressLint("UseValueOf")
-	private static Integer						lock			= new Integer(0);
-	private List<GeoPoint>						pointList		= new ArrayList<GeoPoint>();
-	private RouteOverlay						routeOverlay	= null;
+	private Integer						lock			= new Integer(0);
+	private List<GeoPoint>				pointList		= new ArrayList<GeoPoint>();
+	private RouteOverlay				routeOverlay	= null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -103,36 +103,35 @@ public class RecentTrajectoryActivity extends AbstractAidRequestActivity
 
 	private void genList()
 	{
-		RecentTrajectoryActivity.list.clear();
+		list.clear();
 		for (int i = 0; i < 6; ++i)
 		{
-			RecentTrajectoryActivity.trajectoryList.add(0, new Trajectory(
-					currentUser.getPid(), currentUser.getPname(),
-					110.235 + i / 10.0, 35.3254 + i / 10.0, "2014.04.15"));
-			Trajectory trajectory = RecentTrajectoryActivity.trajectoryList
-					.get(i);
-			RecentTrajectoryActivity.addListItem("姓名：" + trajectory.getPname()
-					+ "\n时间：" + trajectory.getTime() + "\n事故地点：" + "经"
+			trajectoryList.add(0, new Trajectory(currentUser.getPid(),
+					currentUser.getPname(), 110.235 + i / 10.0,
+					35.3254 + i / 10.0, "2014.04.15"));
+			Trajectory trajectory = trajectoryList.get(i);
+			addListItem("姓名：" + trajectory.getPname() + "\n时间："
+					+ trajectory.getTime() + "\n事故地点：" + "经"
 					+ trajectory.getLongtitude() + "° " + "纬"
 					+ trajectory.getLatitude() + "° ");
 		}
 	}
 
-	private static void addListItem(String content)
+	private void addListItem(String content)
 	{
 		Map<String, Object> map = null;
 		map = new HashMap<String, Object>();
 		map.put("list_trajectory_item_text", content);
-		synchronized (RecentTrajectoryActivity.lock)
+		synchronized (lock)
 		{
-			RecentTrajectoryActivity.list.add(0, map);
+			list.add(0, map);
 		}
 	}
 
 	public void updateList()
 	{
 		genList();
-		if (RecentTrajectoryActivity.list.size() == 0)
+		if (list.size() == 0)
 		{
 			noMessageText.setVisibility(View.VISIBLE);
 		}
@@ -141,7 +140,7 @@ public class RecentTrajectoryActivity extends AbstractAidRequestActivity
 			noMessageText.setVisibility(View.GONE);
 		}
 		final SimpleAdapter adapter = new SimpleAdapter(
-				RecentTrajectoryActivity.this, RecentTrajectoryActivity.list,
+				RecentTrajectoryActivity.this, list,
 				R.layout.list_trajectory_item_layout,
 				new String[] { "list_trajectory_item_text" },
 				new int[] { R.id.list_trajectory_item_text });
@@ -156,7 +155,7 @@ public class RecentTrajectoryActivity extends AbstractAidRequestActivity
 	private void route()
 	{
 		pointList.clear();
-		for (Trajectory trajectory : RecentTrajectoryActivity.trajectoryList)
+		for (Trajectory trajectory : trajectoryList)
 		{
 			pointList.add(new GeoPoint((int) (trajectory.getLatitude() * 1E6),
 					(int) (trajectory.getLongtitude() * 1E6)));
@@ -331,8 +330,7 @@ public class RecentTrajectoryActivity extends AbstractAidRequestActivity
 						}
 						if (null != bean.getTrajectories())
 						{
-							RecentTrajectoryActivity.trajectoryList = bean
-									.getTrajectories();
+							trajectoryList = bean.getTrajectories();
 							updateList();
 						}
 						else

@@ -101,7 +101,7 @@ public class MainActivity extends AbstractAidRequestActivity
 					.setBackgroundResource(R.drawable.selector_tab_background);
 		}
 		Bundle bundle = getIntent().getExtras();
-		if ((null != bundle) && (null != bundle.getString("JPush")))
+		if (null != bundle && null != bundle.getString("JPush"))
 		{// 假如是推送消息的话
 			MainActivity.mTabHost.setCurrentTab(2);
 		}
@@ -458,6 +458,8 @@ public class MainActivity extends AbstractAidRequestActivity
 	protected void onDestroy()
 	{
 		unregisterReceiver(mMessageReceiver);
+		FragmentPageOverview.setLocation(null);
+		FragmentPageOverview.setPoint(null);
 		super.onDestroy();
 	}
 

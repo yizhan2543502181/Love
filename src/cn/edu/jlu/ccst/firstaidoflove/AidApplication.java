@@ -3,7 +3,7 @@ package cn.edu.jlu.ccst.firstaidoflove;
 import android.app.Application;
 import android.content.Context;
 import android.util.Log;
-import cn.edu.jlu.ccst.firstaidoflove.functions.beans.Aid;
+import cn.edu.jlu.ccst.firstaidoflove.util.Constant;
 
 import com.baidu.mapapi.BMapManager;
 import com.baidu.mapapi.MKGeneralListener;
@@ -31,7 +31,7 @@ public class AidApplication extends Application
 		}
 		if (!mBMapManager.init(new MyGeneralListener()))
 		{
-			Log.e(Aid.AID_LABEL, "BMapManager  初始化错误!");
+			Log.e(Constant.AID_LABEL, "BMapManager  初始化错误!");
 		}
 	}
 
@@ -53,11 +53,11 @@ public class AidApplication extends Application
 		{
 			if (iError == MKEvent.ERROR_NETWORK_CONNECT)
 			{
-				Log.e(Aid.AID_LABEL, "您的网络出错啦！");
+				Log.e(Constant.AID_LABEL, "您的网络出错啦！");
 			}
 			else if (iError == MKEvent.ERROR_NETWORK_DATA)
 			{
-				Log.e(Aid.AID_LABEL, "百度地图获取数据异常，请重试!");
+				Log.e(Constant.AID_LABEL, "百度地图获取数据异常，请重试!");
 			}
 			// ...
 		}
@@ -68,7 +68,7 @@ public class AidApplication extends Application
 			// 非零值表示key验证未通过
 			if (iError != 0)
 			{
-				Log.e(Aid.AID_LABEL,
+				Log.e(Constant.AID_LABEL,
 						"请在 AidApplication.java文件输入正确的授权Key,并检查您的网络连接是否正常！error: "
 								+ iError);
 				// 授权Key错误：
@@ -76,7 +76,7 @@ public class AidApplication extends Application
 			}
 			else
 			{
-				Log.e(Aid.AID_LABEL, "key认证成功");
+				Log.e(Constant.AID_LABEL, "key认证成功");
 				AidApplication.getInstance().m_bKeyRight = true;
 			}
 		}

@@ -6,8 +6,7 @@ package cn.edu.jlu.ccst.firstaidoflove.functions.beans.trajectory;
 import android.os.Bundle;
 import cn.edu.jlu.ccst.firstaidoflove.functions.RequestParam;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.AidException;
-import cn.edu.jlu.ccst.firstaidoflove.functions.beans.login.Login;
-import cn.edu.jlu.ccst.firstaidoflove.functions.beans.user.User;
+import cn.edu.jlu.ccst.firstaidoflove.util.Constant;
 
 /**
  * 
@@ -21,11 +20,11 @@ public class TrajectoriesGetRequestParam extends RequestParam
 	/**
 	 * 所有字段
 	 */
-	public static final String	FIELDS_ALL		= User.KEY_PID + ","
-														+ User.KEY_PNAME + ","
-														+ Login.KEY_LON + ","
-														+ Login.KEY_LAT + ","
-														+ Trajectory.KEY_TIME;
+	public static final String	FIELDS_ALL		= Constant.KEY_PID + ","
+														+ Constant.KEY_PNAME + ","
+														+ Constant.KEY_LON + ","
+														+ Constant.KEY_LAT + ","
+														+ Constant.KEY_TIME;
 	/**
 	 * 默认字段<br>
 	 * 不添加fields参数也按此字段返回
@@ -134,11 +133,11 @@ public class TrajectoriesGetRequestParam extends RequestParam
 		}
 		if (uid != null)
 		{
-			parameters.putString(User.KEY_UID, uid);
+			parameters.putString(Constant.KEY_UID, uid);
 		}
 		if (pid != null)
 		{
-			parameters.putString(User.KEY_PID, pid);
+			parameters.putString(Constant.KEY_PID, pid);
 		}
 		return parameters;
 	}

@@ -5,8 +5,8 @@ package cn.edu.jlu.ccst.firstaidoflove.functions;
 
 import android.os.Bundle;
 import android.text.TextUtils;
-import cn.edu.jlu.ccst.firstaidoflove.functions.beans.AidError;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.AidException;
+import cn.edu.jlu.ccst.firstaidoflove.util.Constant;
 
 /**
  * 
@@ -26,7 +26,7 @@ public abstract class RequestParam
 			if (TextUtils.isEmpty(param))
 			{
 				String errorMsg = "required parameter MUST NOT be null";
-				throw new AidException(AidError.ERROR_CODE_NULL_PARAMETER,
+				throw new AidException(Constant.ERROR_CODE_NULL_PARAMETER,
 						errorMsg, errorMsg);
 			}
 		}

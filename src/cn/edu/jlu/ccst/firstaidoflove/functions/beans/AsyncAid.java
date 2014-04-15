@@ -12,6 +12,9 @@ import cn.edu.jlu.ccst.firstaidoflove.functions.beans.accident.AccidentsGetRespo
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.login.LoginHelper;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.login.LoginRequestParam;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.login.LoginResponseBean;
+import cn.edu.jlu.ccst.firstaidoflove.functions.beans.medicalHistory.MedicalRecordsGetHelper;
+import cn.edu.jlu.ccst.firstaidoflove.functions.beans.medicalHistory.MedicalRecordsGetRequestParam;
+import cn.edu.jlu.ccst.firstaidoflove.functions.beans.medicalHistory.MedicalRecordsGetResponseBean;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.trajectory.TrajectoriesGetHelper;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.trajectory.TrajectoriesGetRequestParam;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.trajectory.TrajectoriesGetResponseBean;
@@ -21,6 +24,7 @@ import cn.edu.jlu.ccst.firstaidoflove.functions.beans.user.UserGetResponseBean;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.user.UserSetHelper;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.user.UserSetRequestParam;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.user.UserSetResponseBean;
+import cn.edu.jlu.ccst.firstaidoflove.util.Constant;
 import cn.edu.jlu.ccst.firstaidoflove.util.Util;
 
 /**
@@ -80,7 +84,7 @@ public class AsyncAid
 	 */
 	public void requestJSON(Bundle parameters, RequestListener listener)
 	{
-		request(parameters, listener, Aid.RESPONSE_FORMAT_JSON);
+		request(parameters, listener, Constant.RESPONSE_FORMAT_JSON);
 	}
 
 	/**
@@ -167,10 +171,17 @@ public class AsyncAid
 		new AccidentsGetHelper(aid).asyncGetAccidents(pool, param, listener);
 	}
 
-	public void getRecentTrajectoies(TrajectoriesGetRequestParam param,
+	public void getRecentTrajectories(TrajectoriesGetRequestParam param,
 			AbstractRequestListener<TrajectoriesGetResponseBean> listener)
 	{
 		new TrajectoriesGetHelper(aid).asyncGetTrajectories(pool, param,
+				listener);
+	}
+
+	public void getRecentMedicalRecords(MedicalRecordsGetRequestParam param,
+			AbstractRequestListener<MedicalRecordsGetResponseBean> listener)
+	{
+		new MedicalRecordsGetHelper(aid).asyncGetMedicalRecords(pool, param,
 				listener);
 	}
 }

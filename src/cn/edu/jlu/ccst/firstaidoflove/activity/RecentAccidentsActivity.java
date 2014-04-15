@@ -30,6 +30,7 @@ import cn.edu.jlu.ccst.firstaidoflove.functions.beans.AsyncAid;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.accident.Accident;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.accident.AccidentsGetRequestParam;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.accident.AccidentsGetResponseBean;
+import cn.edu.jlu.ccst.firstaidoflove.util.Constant;
 import cn.edu.jlu.ccst.firstaidoflove.util.Util;
 
 /**
@@ -127,7 +128,7 @@ public class RecentAccidentsActivity extends AbstractAidRequestActivity
 													Intent intent = new Intent();
 													Bundle bundle = new Bundle();
 													bundle.putParcelable(
-															Accident.ACCIDENT_LABLE,
+															Constant.ACCIDENT_LABLE,
 															RecentAccidentsActivity.accidentList
 																	.get(position));
 													intent.putExtras(bundle);

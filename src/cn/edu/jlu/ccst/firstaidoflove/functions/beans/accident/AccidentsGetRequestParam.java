@@ -6,8 +6,7 @@ package cn.edu.jlu.ccst.firstaidoflove.functions.beans.accident;
 import android.os.Bundle;
 import cn.edu.jlu.ccst.firstaidoflove.functions.RequestParam;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.AidException;
-import cn.edu.jlu.ccst.firstaidoflove.functions.beans.login.Login;
-import cn.edu.jlu.ccst.firstaidoflove.functions.beans.user.User;
+import cn.edu.jlu.ccst.firstaidoflove.util.Constant;
 
 /**
  * 
@@ -21,17 +20,17 @@ public class AccidentsGetRequestParam extends RequestParam
 	/**
 	 * 所有字段
 	 */
-	public static final String	FIELDS_ALL		= User.KEY_PID
+	public static final String	FIELDS_ALL		= Constant.KEY_PID
 														+ ","
-														+ User.KEY_PNAME
+														+ Constant.KEY_PNAME
 														+ ","
-														+ Login.KEY_LON
+														+ Constant.KEY_LON
 														+ ","
-														+ Login.KEY_LAT
+														+ Constant.KEY_LAT
 														+ ","
-														+ Accident.KEY_TIME
+														+ Constant.KEY_TIME
 														+ ","
-														+ Accident.KEY_MEDICAL_HISTORY;
+														+ Constant.KEY_MEDICAL_HISTORY;
 	/**
 	 * 默认字段<br>
 	 * 不添加fields参数也按此字段返回
@@ -140,11 +139,11 @@ public class AccidentsGetRequestParam extends RequestParam
 		}
 		if (uid != null)
 		{
-			parameters.putString(User.KEY_UID, uid);
+			parameters.putString(Constant.KEY_UID, uid);
 		}
 		if (pid != null)
 		{
-			parameters.putString(User.KEY_PID, pid);
+			parameters.putString(Constant.KEY_PID, pid);
 		}
 		return parameters;
 	}

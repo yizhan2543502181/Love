@@ -28,7 +28,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import cn.edu.jlu.ccst.firstaidoflove.R;
 import cn.edu.jlu.ccst.firstaidoflove.functions.AbstractAidRequestActivity;
-import cn.edu.jlu.ccst.firstaidoflove.functions.beans.Aid;
+import cn.edu.jlu.ccst.firstaidoflove.util.Constant;
 import cn.edu.jlu.ccst.firstaidoflove.util.JPushUtil;
 import cn.edu.jlu.ccst.firstaidoflove.util.Util;
 import cn.jpush.android.api.JPushInterface;
@@ -269,7 +269,7 @@ public class MainActivity extends AbstractAidRequestActivity
 		String alias = String.valueOf(222222222);
 		if (TextUtils.isEmpty(alias))
 		{
-			Log.e(Aid.AID_LABEL, "alias即uid为空");
+			Log.e(Constant.AID_LABEL, "alias即uid为空");
 			return;
 		}
 		// 调用JPush API设置Alias
@@ -288,7 +288,7 @@ public class MainActivity extends AbstractAidRequestActivity
 																		switch (msg.what)
 																		{
 																		case MSG_SET_ALIAS:
-																			Log.d(Aid.AID_LABEL,
+																			Log.d(Constant.AID_LABEL,
 																					"Set alias in handler.");
 																			JPushInterface
 																					.setAliasAndTags(
@@ -298,7 +298,7 @@ public class MainActivity extends AbstractAidRequestActivity
 																							mAliasCallback);
 																			break;
 																		case MSG_SET_TAGS:
-																			Log.d(Aid.AID_LABEL,
+																			Log.d(Constant.AID_LABEL,
 																					"Set tags in handler.");
 																			JPushInterface
 																					.setAliasAndTags(
@@ -308,7 +308,7 @@ public class MainActivity extends AbstractAidRequestActivity
 																							mTagsCallback);
 																			break;
 																		default:
-																			Log.i(Aid.AID_LABEL,
+																			Log.i(Constant.AID_LABEL,
 																					"Unhandled msg - "
 																							+ msg.what);
 																		}
@@ -330,12 +330,12 @@ public class MainActivity extends AbstractAidRequestActivity
 																				MainActivity.isSetAliasOk = true;
 																			}
 																			logs = "Set tag and alias success";
-																			Log.i(Aid.AID_LABEL,
+																			Log.i(Constant.AID_LABEL,
 																					logs);
 																			break;
 																		case 6002:
 																			logs = "Failed to set alias and tags due to timeout. Try again after 60s.";
-																			Log.i(Aid.AID_LABEL,
+																			Log.i(Constant.AID_LABEL,
 																					logs);
 																			if (Util.isNetworkConnected(getApplicationContext()))
 																			{
@@ -347,17 +347,17 @@ public class MainActivity extends AbstractAidRequestActivity
 																			}
 																			else
 																			{
-																				Log.i(Aid.AID_LABEL,
+																				Log.i(Constant.AID_LABEL,
 																						"No network");
 																			}
 																			break;
 																		default:
 																			logs = "Failed with errorCode = "
 																					+ code;
-																			Log.e(Aid.AID_LABEL,
+																			Log.e(Constant.AID_LABEL,
 																					logs);
 																		}
-																		Log.i(Aid.LOG_TAG,
+																		Log.i(Constant.LOG_TAG,
 																				logs);
 																	}
 																};
@@ -373,12 +373,12 @@ public class MainActivity extends AbstractAidRequestActivity
 																		{
 																		case 0:
 																			logs = "Set tag and alias success";
-																			Log.i(Aid.AID_LABEL,
+																			Log.i(Constant.AID_LABEL,
 																					logs);
 																			break;
 																		case 6002:
 																			logs = "Failed to set alias and tags due to timeout. Try again after 60s.";
-																			Log.i(Aid.AID_LABEL,
+																			Log.i(Constant.AID_LABEL,
 																					logs);
 																			if (Util.isNetworkConnected(getApplicationContext()))
 																			{
@@ -390,17 +390,17 @@ public class MainActivity extends AbstractAidRequestActivity
 																			}
 																			else
 																			{
-																				Log.i(Aid.AID_LABEL,
+																				Log.i(Constant.AID_LABEL,
 																						"No network");
 																			}
 																			break;
 																		default:
 																			logs = "Failed with errorCode = "
 																					+ code;
-																			Log.e(Aid.AID_LABEL,
+																			Log.e(Constant.AID_LABEL,
 																					logs);
 																		}
-																		Log.i(Aid.LOG_TAG,
+																		Log.i(Constant.LOG_TAG,
 																				logs);
 																	}
 																};

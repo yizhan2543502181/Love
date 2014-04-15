@@ -6,6 +6,7 @@ package cn.edu.jlu.ccst.firstaidoflove.functions.beans.login;
 import android.os.Bundle;
 import cn.edu.jlu.ccst.firstaidoflove.functions.RequestParam;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.AidException;
+import cn.edu.jlu.ccst.firstaidoflove.util.Constant;
 
 /**
  * 
@@ -16,8 +17,6 @@ import cn.edu.jlu.ccst.firstaidoflove.functions.beans.AidException;
 public class LoginRequestParam extends RequestParam
 {
 	private static final String	METHOD			= "login";
-	public static final String	LOGIN_NAME		= "login_name";
-	public static final String	LOGIN_PASSWORD	= "login_password";
 	/**
 	 * 登录的名字，如邮箱、手机号
 	 */
@@ -75,12 +74,11 @@ public class LoginRequestParam extends RequestParam
 		parameters.putString("method", LoginRequestParam.METHOD);
 		if (loginName != null)
 		{
-			parameters.putString(LoginRequestParam.LOGIN_NAME, loginName);
+			parameters.putString(Constant.LOGIN_NAME, loginName);
 		}
 		if (loginPassword != null)
 		{
-			parameters.putString(LoginRequestParam.LOGIN_PASSWORD,
-					loginPassword);
+			parameters.putString(Constant.LOGIN_PASSWORD, loginPassword);
 		}
 		return parameters;
 	}

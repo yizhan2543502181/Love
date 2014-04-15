@@ -11,6 +11,7 @@ import cn.edu.jlu.ccst.firstaidoflove.functions.beans.Aid;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.AidError;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.AidException;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.login.LoginResponseBean;
+import cn.edu.jlu.ccst.firstaidoflove.util.Constant;
 import cn.edu.jlu.ccst.firstaidoflove.util.Util;
 
 /**
@@ -48,12 +49,12 @@ public class TrajectoriesGetHelper
 			String response = aid.requestJSON(parameters);
 			if (response != null)
 			{
-				Util.checkResponse(response, Aid.RESPONSE_FORMAT_JSON);
+				Util.checkResponse(response, Constant.RESPONSE_FORMAT_JSON);
 			}
 			else
 			{
 				Util.logger("null response");
-				throw new AidException(AidError.ERROR_CODE_UNKNOWN_ERROR,
+				throw new AidException(Constant.ERROR_CODE_UNKNOWN_ERROR,
 						"null response", "null response");
 			}
 			trajectoriesBean = new TrajectoriesGetResponseBean(response);

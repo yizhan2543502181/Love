@@ -42,7 +42,6 @@ import android.util.Xml;
 import android.webkit.CookieManager;
 import android.webkit.CookieSyncManager;
 import android.widget.Toast;
-import cn.edu.jlu.ccst.firstaidoflove.functions.beans.Aid;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.AidError;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.AidException;
 
@@ -421,7 +420,7 @@ public final class Util
 		{
 			return null;
 		}
-		if (Aid.RESPONSE_FORMAT_JSON.equalsIgnoreCase(responseFormat))
+		if (Constant.RESPONSE_FORMAT_JSON.equalsIgnoreCase(responseFormat))
 		{
 			return Util.parseJson(response);
 		}
@@ -446,7 +445,7 @@ public final class Util
 				return;
 			}
 			AidError error = null;
-			if (Aid.RESPONSE_FORMAT_JSON.equalsIgnoreCase(responseFormat))
+			if (Constant.RESPONSE_FORMAT_JSON.equalsIgnoreCase(responseFormat))
 			{
 				error = Util.parseJson(response);
 			}
@@ -789,7 +788,7 @@ public final class Util
 	public static void saveSharePreferences(Context context, Bundle bundle)
 	{
 		SharedPreferences share = context.getSharedPreferences(
-				Aid.SHARE_CONFIG, Context.MODE_PRIVATE);
+				Constant.SHARE_CONFIG, Context.MODE_PRIVATE);
 		Set<String> set = bundle.keySet();
 		for (String key : set)
 		{
@@ -812,7 +811,7 @@ public final class Util
 		String value = null;
 		Bundle bundle = new Bundle();
 		SharedPreferences share = context.getSharedPreferences(
-				Aid.SHARE_CONFIG, Context.MODE_PRIVATE);
+				Constant.SHARE_CONFIG, Context.MODE_PRIVATE);
 		for (String key : keySet)
 		{
 			if (!(value = share.getString(key, "").trim()).equals(""))
@@ -833,7 +832,7 @@ public final class Util
 	public static void delSharePreferences(Context context, Set<String> keySet)
 	{
 		SharedPreferences share = context.getSharedPreferences(
-				Aid.SHARE_CONFIG, Context.MODE_PRIVATE);
+				Constant.SHARE_CONFIG, Context.MODE_PRIVATE);
 		for (String key : keySet)
 		{
 			if (!share.getString(key, "").trim().equals(""))

@@ -11,25 +11,17 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.user.User;
+import cn.edu.jlu.ccst.firstaidoflove.util.Constant;
 import cn.edu.jlu.ccst.firstaidoflove.util.Util;
 
 public class Aid implements Parcelable
 {
-	private static Aid				instance				= null;
-	public static final String		VERSION					= "1.0";
-	public static final String		LOG_TAG					= "AID";
-	public static final String		AID_LABEL				= "AID";
-	private static final String		RESTSERVER_URL			= "http://localhost:7777/service.do";
-	public static final String		SHARE_LOGIN_NAME		= "SHARE_LOGIN_NAME";
-	public static final String		SHARE_LOGIN_PASSWORD	= "SHARE_LOGIN_PASSWORD";
-	public static final String		SHARE_CONFIG			= "SHARE_CONFIG";
-	public static final String		RESPONSE_FORMAT_JSON	= "json";
-	public static final String		SHARE_SESSION_KEY		= "sessionKey";
-	private static String			sessionKey				= "1111111111111111111";
-	private static User				user					= null;
-	private Context					context					= null;
+	private static Aid				instance	= null;
+	private static String			sessionKey	= "1111111111111111111";
+	private static User				user		= null;
+	private Context					context		= null;
 	@SuppressLint("UseValueOf")
-	private static final Integer	lock					= new Integer(0);
+	private static final Integer	lock		= new Integer(0);
 
 	public Aid()
 	{
@@ -109,7 +101,8 @@ public class Aid implements Parcelable
 		}
 		prepareParams(parameters);
 		logRequest(parameters);
-		String response = Util.openUrl(Aid.RESTSERVER_URL, "POST", parameters);
+		String response = Util.openUrl(Constant.RESTSERVER_URL, "POST",
+				parameters);
 		logResponse(parameters.getString("method"), response);
 		return response;
 	}
@@ -126,7 +119,7 @@ public class Aid implements Parcelable
 
 	private void prepareParams(Bundle params)
 	{
-		params.putString("VERSION", Aid.VERSION);
+		params.putString("VERSION", Constant.VERSION);
 		StringBuffer sb = new StringBuffer();
 		Set<String> keys = new TreeSet<String>(params.keySet());
 		for (String key : keys)
@@ -151,11 +144,11 @@ public class Aid implements Parcelable
 				StringBuffer sb = new StringBuffer();
 				sb.append("method=").append(method).append("&")
 						.append(params.toString());
-				Log.i(Aid.LOG_TAG, sb.toString());
+				Log.i(Constant.LOG_TAG, sb.toString());
 			}
 			else
 			{
-				Log.i(Aid.LOG_TAG, params.toString());
+				Log.i(Constant.LOG_TAG, params.toString());
 			}
 		}
 	}
@@ -167,20 +160,20 @@ public class Aid implements Parcelable
 	 */
 	private void logResponse(String method, String response)
 	{
-		if ((method != null) && (response != null))
+		if (method != null && response != null)
 		{
 			StringBuffer sb = new StringBuffer();
 			sb.append("method=").append(method).append("&").append(response);
-			Log.i(Aid.LOG_TAG, sb.toString());
+			Log.i(Constant.LOG_TAG, sb.toString());
 		}
 	}
 
 	public Aid(Parcel in)
 	{
 		Bundle bundle = in.readBundle();
-		if ((null != bundle) && bundle.containsKey(Aid.SHARE_SESSION_KEY))
+		if (null != bundle && bundle.containsKey(Constant.SHARE_SESSION_KEY))
 		{
-			Aid.sessionKey = bundle.getString(Aid.SHARE_SESSION_KEY);
+			Aid.sessionKey = bundle.getString(Constant.SHARE_SESSION_KEY);
 		}
 		Aid.user = User.CREATOR.createFromParcel(in);
 	}
@@ -197,7 +190,7 @@ public class Aid implements Parcelable
 		Bundle bundle = new Bundle();
 		if (Aid.sessionKey != null)
 		{
-			bundle.putString(Aid.SHARE_SESSION_KEY, Aid.sessionKey);
+			bundle.putString(Constant.SHARE_SESSION_KEY, Aid.sessionKey);
 		}
 		bundle.writeToParcel(dest, flags);
 		Aid.user.writeToParcel(dest, flags);
@@ -235,9 +228,9 @@ public class Aid implements Parcelable
 
 	void clearPersistSession()
 	{
-		Editor editor = context.getSharedPreferences(Aid.SHARE_CONFIG,
+		Editor editor = context.getSharedPreferences(Constant.SHARE_CONFIG,
 				Context.MODE_PRIVATE).edit();
-		editor.remove(Aid.SHARE_SESSION_KEY);
+		editor.remove(Constant.SHARE_SESSION_KEY);
 		editor.commit();
 		synchronized (Aid.lock)
 		{
@@ -248,9 +241,9 @@ public class Aid implements Parcelable
 
 	public void savePersistSession()
 	{
-		Editor editor = context.getSharedPreferences(Aid.SHARE_CONFIG,
+		Editor editor = context.getSharedPreferences(Constant.SHARE_CONFIG,
 				Context.MODE_PRIVATE).edit();
-		editor.putString(Aid.SHARE_SESSION_KEY, Aid.sessionKey);
+		editor.putString(Constant.SHARE_SESSION_KEY, Aid.sessionKey);
 		editor.commit();
 	}
 

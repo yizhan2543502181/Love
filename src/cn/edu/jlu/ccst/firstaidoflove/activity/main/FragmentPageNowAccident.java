@@ -23,6 +23,7 @@ import cn.edu.jlu.ccst.firstaidoflove.activity.AccidentInfoActivity;
 import cn.edu.jlu.ccst.firstaidoflove.functions.AccidentArriveListener;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.AidError;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.accident.Accident;
+import cn.edu.jlu.ccst.firstaidoflove.util.Constant;
 import cn.edu.jlu.ccst.firstaidoflove.util.Util;
 
 public class FragmentPageNowAccident extends Fragment
@@ -123,7 +124,7 @@ public class FragmentPageNowAccident extends Fragment
 																			Intent intent = new Intent();
 																			Bundle bundle = new Bundle();
 																			bundle.putParcelable(
-																					Accident.ACCIDENT_LABLE,
+																					Constant.ACCIDENT_LABLE,
 																					FragmentPageNowAccident.accidentList
 																							.get(position));
 																			intent.putExtras(bundle);

@@ -16,6 +16,7 @@ import cn.edu.jlu.ccst.firstaidoflove.AidApplication;
 import cn.edu.jlu.ccst.firstaidoflove.R;
 import cn.edu.jlu.ccst.firstaidoflove.functions.AbstractAidRequestActivity;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.accident.Accident;
+import cn.edu.jlu.ccst.firstaidoflove.util.Constant;
 import cn.edu.jlu.ccst.firstaidoflove.util.Util;
 
 import com.baidu.mapapi.BMapManager;
@@ -56,9 +57,9 @@ public class AccidentInfoActivity extends AbstractAidRequestActivity implements
 	{
 		super.onCreate(savedInstanceState);
 		Bundle bundle = intent.getExtras();
-		if (bundle != null && bundle.containsKey(Accident.ACCIDENT_LABLE))
+		if (bundle != null && bundle.containsKey(Constant.ACCIDENT_LABLE))
 		{
-			accident = bundle.getParcelable(Accident.ACCIDENT_LABLE);
+			accident = bundle.getParcelable(Constant.ACCIDENT_LABLE);
 		}
 		setContentView(R.layout.accident_info_activity_layout);
 		baiduMapInit();

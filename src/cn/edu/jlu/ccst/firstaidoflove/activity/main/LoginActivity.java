@@ -27,6 +27,7 @@ import cn.edu.jlu.ccst.firstaidoflove.functions.beans.login.Login;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.login.LoginRequestParam;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.login.LoginResponseBean;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.user.User;
+import cn.edu.jlu.ccst.firstaidoflove.util.Constant;
 import cn.edu.jlu.ccst.firstaidoflove.util.Util;
 
 public class LoginActivity extends AbstractAidRequestActivity implements
@@ -87,11 +88,11 @@ public class LoginActivity extends AbstractAidRequestActivity implements
 	private String getSession()
 	{
 		Set<String> set = new HashSet<String>();
-		set.add(Aid.SHARE_SESSION_KEY);
+		set.add(Constant.SHARE_SESSION_KEY);
 		Bundle bundle = Util.getSharePreferences(LoginActivity.this, set);
-		return (null == bundle.getString(Aid.SHARE_SESSION_KEY))
-				|| bundle.getString(Aid.SHARE_SESSION_KEY).equals("") ? null
-				: bundle.getString(Aid.SHARE_SESSION_KEY);
+		return (null == bundle.getString(Constant.SHARE_SESSION_KEY))
+				|| bundle.getString(Constant.SHARE_SESSION_KEY).equals("") ? null
+				: bundle.getString(Constant.SHARE_SESSION_KEY);
 	}
 
 	/** 初始化注册View组件 */
@@ -114,11 +115,11 @@ public class LoginActivity extends AbstractAidRequestActivity implements
 	private void initViewBySharPreferences()
 	{
 		Set<String> set = new HashSet<String>();
-		set.add(Aid.SHARE_LOGIN_NAME);
-		set.add(Aid.SHARE_LOGIN_PASSWORD);
+		set.add(Constant.SHARE_LOGIN_NAME);
+		set.add(Constant.SHARE_LOGIN_PASSWORD);
 		Bundle bundle = Util.getSharePreferences(LoginActivity.this, set);
-		userName = bundle.getString(Aid.SHARE_LOGIN_NAME);
-		password = bundle.getString(Aid.SHARE_LOGIN_PASSWORD);
+		userName = bundle.getString(Constant.SHARE_LOGIN_NAME);
+		password = bundle.getString(Constant.SHARE_LOGIN_PASSWORD);
 		Log.d(toString(), "userName=" + userName + " password=" + password);
 		if ((null != userName) && !"".equals(userName.trim()))
 		{
@@ -159,14 +160,14 @@ public class LoginActivity extends AbstractAidRequestActivity implements
 	private void saveUserName()
 	{
 		Bundle bundle = new Bundle();
-		bundle.putString(Aid.SHARE_LOGIN_NAME, userName);
+		bundle.putString(Constant.SHARE_LOGIN_NAME, userName);
 		Util.saveSharePreferences(LoginActivity.this, bundle);
 	}
 
 	private void savePassword()
 	{
 		Bundle bundle = new Bundle();
-		bundle.putString(Aid.SHARE_LOGIN_PASSWORD, password);
+		bundle.putString(Constant.SHARE_LOGIN_PASSWORD, password);
 		Util.saveSharePreferences(LoginActivity.this, bundle);
 	}
 
@@ -174,7 +175,7 @@ public class LoginActivity extends AbstractAidRequestActivity implements
 	private void clearSharePassword()
 	{
 		Set<String> set = new HashSet<String>();
-		set.add(Aid.SHARE_LOGIN_PASSWORD);
+		set.add(Constant.SHARE_LOGIN_PASSWORD);
 		Util.delSharePreferences(LoginActivity.this, set);
 	}
 

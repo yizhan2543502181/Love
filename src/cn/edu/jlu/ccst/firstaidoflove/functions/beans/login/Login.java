@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.AidException;
-import cn.edu.jlu.ccst.firstaidoflove.functions.beans.user.User;
+import cn.edu.jlu.ccst.firstaidoflove.util.Constant;
 
 /**
  * 用户实体类
@@ -16,14 +16,12 @@ import cn.edu.jlu.ccst.firstaidoflove.functions.beans.user.User;
  */
 public class Login implements Parcelable
 {
-	public static final String	KEY_LON	= "longitude";
-	public static final String	KEY_LAT	= "latitude";
-	private String				uname	= null;
-	private long				uid		= -1;
-	private String				pname	= null;
-	private long				pid		= -1;
-	private double				lon		= 0;
-	private double				lat		= 0;
+	private String	uname	= null;
+	private long	uid		= -1;
+	private String	pname	= null;
+	private long	pid		= -1;
+	private double	lon		= 0;
+	private double	lat		= 0;
 
 	public Login()
 	{
@@ -151,29 +149,29 @@ public class Login implements Parcelable
 		{
 			return null;
 		}
-		if (jsonObject.has(User.KEY_UID))
+		if (jsonObject.has(Constant.KEY_UID))
 		{
-			uid = Long.parseLong(jsonObject.optString(User.KEY_UID));
+			uid = Long.parseLong(jsonObject.optString(Constant.KEY_UID));
 		}
-		if (jsonObject.has(User.KEY_UNAME))
+		if (jsonObject.has(Constant.KEY_UNAME))
 		{
-			uname = jsonObject.optString(User.KEY_UNAME);
+			uname = jsonObject.optString(Constant.KEY_UNAME);
 		}
-		if (jsonObject.has(User.KEY_PID))
+		if (jsonObject.has(Constant.KEY_PID))
 		{
-			pid = Long.parseLong(jsonObject.optString(User.KEY_PID));
+			pid = Long.parseLong(jsonObject.optString(Constant.KEY_PID));
 		}
-		if (jsonObject.has(User.KEY_PNAME))
+		if (jsonObject.has(Constant.KEY_PNAME))
 		{
-			pname = jsonObject.optString(User.KEY_PNAME);
+			pname = jsonObject.optString(Constant.KEY_PNAME);
 		}
-		if (jsonObject.has(Login.KEY_LON))
+		if (jsonObject.has(Constant.KEY_LON))
 		{
-			lon = Double.parseDouble(jsonObject.optString(Login.KEY_LON));
+			lon = Double.parseDouble(jsonObject.optString(Constant.KEY_LON));
 		}
-		if (jsonObject.has(Login.KEY_LAT))
+		if (jsonObject.has(Constant.KEY_LAT))
 		{
-			lat = Double.parseDouble(jsonObject.optString(Login.KEY_LAT));
+			lat = Double.parseDouble(jsonObject.optString(Constant.KEY_LAT));
 		}
 		return this;
 	}
@@ -203,27 +201,27 @@ public class Login implements Parcelable
 		Bundle bundle = new Bundle();
 		if (-1 != uid)
 		{
-			bundle.putLong(User.KEY_UID, uid);
+			bundle.putLong(Constant.KEY_UID, uid);
 		}
 		if (null != uname)
 		{
-			bundle.putString(User.KEY_UNAME, uname);
+			bundle.putString(Constant.KEY_UNAME, uname);
 		}
 		if (-1 != pid)
 		{
-			bundle.putLong(User.KEY_PID, pid);
+			bundle.putLong(Constant.KEY_PID, pid);
 		}
 		if (null != pname)
 		{
-			bundle.putString(User.KEY_PNAME, pname);
+			bundle.putString(Constant.KEY_PNAME, pname);
 		}
 		if (-1 != lon)
 		{
-			bundle.putDouble(Login.KEY_LON, lon);
+			bundle.putDouble(Constant.KEY_LON, lon);
 		}
 		if (-1 != lat)
 		{
-			bundle.putDouble(Login.KEY_LAT, lat);
+			bundle.putDouble(Constant.KEY_LAT, lat);
 		}
 		dest.writeBundle(bundle);
 	}
@@ -248,29 +246,29 @@ public class Login implements Parcelable
 	public Login(Parcel in)
 	{
 		Bundle bundle = in.readBundle();
-		if (bundle.containsKey(User.KEY_UID))
+		if (bundle.containsKey(Constant.KEY_UID))
 		{
-			uid = bundle.getLong(User.KEY_UID);
+			uid = bundle.getLong(Constant.KEY_UID);
 		}
-		if (bundle.containsKey(User.KEY_UNAME))
+		if (bundle.containsKey(Constant.KEY_UNAME))
 		{
-			uname = bundle.getString(User.KEY_UNAME);
+			uname = bundle.getString(Constant.KEY_UNAME);
 		}
-		if (bundle.containsKey(User.KEY_PID))
+		if (bundle.containsKey(Constant.KEY_PID))
 		{
-			pid = bundle.getLong(User.KEY_PID);
+			pid = bundle.getLong(Constant.KEY_PID);
 		}
-		if (bundle.containsKey(User.KEY_PNAME))
+		if (bundle.containsKey(Constant.KEY_PNAME))
 		{
-			pname = bundle.getString(User.KEY_PNAME);
+			pname = bundle.getString(Constant.KEY_PNAME);
 		}
-		if (bundle.containsKey(Login.KEY_LON))
+		if (bundle.containsKey(Constant.KEY_LON))
 		{
-			lon = bundle.getDouble(Login.KEY_LON);
+			lon = bundle.getDouble(Constant.KEY_LON);
 		}
-		if (bundle.containsKey(Login.KEY_LAT))
+		if (bundle.containsKey(Constant.KEY_LAT))
 		{
-			lat = bundle.getDouble(Login.KEY_LAT);
+			lat = bundle.getDouble(Constant.KEY_LAT);
 		}
 	}
 }

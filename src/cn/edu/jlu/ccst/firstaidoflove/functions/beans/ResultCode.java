@@ -5,11 +5,11 @@ import org.json.JSONObject;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
+import cn.edu.jlu.ccst.firstaidoflove.util.Constant;
 
 public class ResultCode implements Parcelable
 {
-	public static String	KEY_RESULT_CODE	= "result_code";
-	private int				resultCode		= -1;
+	private int	resultCode	= -1;
 
 	public ResultCode()
 	{
@@ -38,7 +38,7 @@ public class ResultCode implements Parcelable
 		{
 			return null;
 		}
-		resultCode = object.optInt(ResultCode.KEY_RESULT_CODE);
+		resultCode = object.optInt(Constant.KEY_RESULT_CODE);
 		return this;
 	}
 
@@ -55,7 +55,7 @@ public class ResultCode implements Parcelable
 		Bundle bundle = new Bundle();
 		if (-1 != resultCode)
 		{
-			bundle.putLong(ResultCode.KEY_RESULT_CODE, resultCode);
+			bundle.putLong(Constant.KEY_RESULT_CODE, resultCode);
 		}
 		dest.writeBundle(bundle);
 	}
@@ -80,9 +80,9 @@ public class ResultCode implements Parcelable
 	public ResultCode(Parcel in)
 	{
 		Bundle bundle = in.readBundle();
-		if (bundle.containsKey(ResultCode.KEY_RESULT_CODE))
+		if (bundle.containsKey(Constant.KEY_RESULT_CODE))
 		{
-			resultCode = bundle.getInt(ResultCode.KEY_RESULT_CODE);
+			resultCode = bundle.getInt(Constant.KEY_RESULT_CODE);
 		}
 	}
 }

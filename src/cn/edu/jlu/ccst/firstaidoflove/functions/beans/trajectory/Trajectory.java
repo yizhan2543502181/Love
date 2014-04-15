@@ -6,8 +6,7 @@ import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.AidException;
-import cn.edu.jlu.ccst.firstaidoflove.functions.beans.login.Login;
-import cn.edu.jlu.ccst.firstaidoflove.functions.beans.user.User;
+import cn.edu.jlu.ccst.firstaidoflove.util.Constant;
 
 /**
  * 用户实体类
@@ -17,30 +16,26 @@ import cn.edu.jlu.ccst.firstaidoflove.functions.beans.user.User;
  */
 public class Trajectory implements Parcelable
 {
-	// "pid":"46465165","pname":"小李","longitude":"23.4587","latitude":"65.2365","time":"2014.04.08 23:56:23"
-	public static final String	TRAJECTORY_LABLE	= "trajectory";
-	public static final String	KEY_TIME			= "time";
-	public static final String	KEY_MEDICAL_HISTORY	= "medical_history";
 	/**
 	 * 监护对象的id
 	 */
-	private long				pid					= -1;
+	private long	pid			= -1;
 	/**
 	 * 监护对象名字
 	 */
-	private String				pname				= null;
+	private String	pname		= null;
 	/**
 	 * 事故地点的经度
 	 */
-	private double				longtitude			= 0;
+	private double	longtitude	= 0;
 	/**
 	 * 事故地点的纬度
 	 */
-	private double				latitude			= 0;
+	private double	latitude	= 0;
 	/**
 	 * 事故发生时间
 	 */
-	private String				time				= null;
+	private String	time		= null;
 
 	public Trajectory()
 	{
@@ -54,11 +49,11 @@ public class Trajectory implements Parcelable
 		{
 			return null;
 		}
-		pid = object.optLong(User.KEY_PID);
-		pname = object.optString(User.KEY_PNAME);
-		longtitude = Double.parseDouble(object.optString(Login.KEY_LON));
-		latitude = Double.parseDouble(object.optString(Login.KEY_LAT));
-		time = object.optString(Trajectory.KEY_TIME);
+		pid = object.optLong(Constant.KEY_PID);
+		pname = object.optString(Constant.KEY_PNAME);
+		longtitude = Double.parseDouble(object.optString(Constant.KEY_LON));
+		latitude = Double.parseDouble(object.optString(Constant.KEY_LAT));
+		time = object.optString(Constant.KEY_TIME);
 		return this;
 	}
 
@@ -192,23 +187,23 @@ public class Trajectory implements Parcelable
 		Bundle bundle = new Bundle();
 		if (-1 != pid)
 		{
-			bundle.putLong(User.KEY_PID, pid);
+			bundle.putLong(Constant.KEY_PID, pid);
 		}
 		if (null != pname)
 		{
-			bundle.putString(User.KEY_PNAME, pname);
+			bundle.putString(Constant.KEY_PNAME, pname);
 		}
 		if (0 != longtitude)
 		{
-			bundle.putDouble(Login.KEY_LON, longtitude);
+			bundle.putDouble(Constant.KEY_LON, longtitude);
 		}
 		if (0 != latitude)
 		{
-			bundle.putDouble(Login.KEY_LAT, latitude);
+			bundle.putDouble(Constant.KEY_LAT, latitude);
 		}
 		if (null != time)
 		{
-			bundle.putString(Trajectory.KEY_TIME, time);
+			bundle.putString(Constant.KEY_TIME, time);
 		}
 		dest.writeBundle(bundle);
 	}
@@ -233,25 +228,25 @@ public class Trajectory implements Parcelable
 	public Trajectory(Parcel in)
 	{
 		Bundle bundle = in.readBundle();
-		if (bundle.containsKey(User.KEY_PID))
+		if (bundle.containsKey(Constant.KEY_PID))
 		{
-			pid = bundle.getLong(User.KEY_PID);
+			pid = bundle.getLong(Constant.KEY_PID);
 		}
-		if (bundle.containsKey(User.KEY_PNAME))
+		if (bundle.containsKey(Constant.KEY_PNAME))
 		{
-			pname = bundle.getString(User.KEY_PNAME);
+			pname = bundle.getString(Constant.KEY_PNAME);
 		}
-		if (bundle.containsKey(Login.KEY_LON))
+		if (bundle.containsKey(Constant.KEY_LON))
 		{
-			longtitude = bundle.getDouble(Login.KEY_LON);
+			longtitude = bundle.getDouble(Constant.KEY_LON);
 		}
-		if (bundle.containsKey(Login.KEY_LAT))
+		if (bundle.containsKey(Constant.KEY_LAT))
 		{
-			latitude = bundle.getDouble(Login.KEY_LAT);
+			latitude = bundle.getDouble(Constant.KEY_LAT);
 		}
-		if (bundle.containsKey(Trajectory.KEY_TIME))
+		if (bundle.containsKey(Constant.KEY_TIME))
 		{
-			time = bundle.getString(Trajectory.KEY_TIME);
+			time = bundle.getString(Constant.KEY_TIME);
 		}
 	}
 }

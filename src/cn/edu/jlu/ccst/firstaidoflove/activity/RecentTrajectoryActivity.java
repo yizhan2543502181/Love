@@ -255,7 +255,7 @@ public class RecentTrajectoryActivity extends AbstractAidRequestActivity
 			progressDialog.show();
 			AsyncAid aAid = new AsyncAid(aid);
 			// 对结果进行监听
-			aAid.getRecentTrajectoies(param, new TrajectoriesGetListener());
+			aAid.getRecentTrajectories(param, new TrajectoriesGetListener());
 		}
 		catch (Exception e)
 		{

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.AidException;
+import cn.edu.jlu.ccst.firstaidoflove.util.Constant;
 
 /**
  * 用户实体类
@@ -15,71 +16,58 @@ import cn.edu.jlu.ccst.firstaidoflove.functions.beans.AidException;
  */
 public class User implements Parcelable
 {
-	public static final String	KEY_UID					= "uid";
-	public static final String	KEY_UNAME				= "uname";
-	public static final String	KEY_PID					= "pid";
-	public static final String	KEY_PNAME				= "pname";
-	public static final String	KEY_SEX					= "sex";
-	public static final String	KEY_AGE					= "age";
-	public static final String	KEY_JOB					= "job";
-	public static final String	KEY_RELATIONSHIP		= "relationship";
-	public static final String	KEY_HOME_ADDRESS		= "home_address";
-	public static final String	KEY_WORK_ADDRESS		= "work_address";
-	public static final String	KEY_MOBILE_PHONE_NUM	= "mobile_phone_num";
-	public static final String	KEY_HOME_PHONE_NUM		= "home_phone_num";
-	public static final String	KEY_WORK_PHONE_NUM		= "work_phone_num";
 	/**
 	 * 用户id
 	 */
-	private long				uid						= -1;
+	private long	uid				= -1;
 	/**
 	 * 用户名
 	 */
-	private String				uname					= null;
+	private String	uname			= null;
 	/**
 	 * 监护对象的id
 	 */
-	private long				pid						= -1;
+	private long	pid				= -1;
 	/**
 	 * 监护对象名字
 	 */
-	private String				pname					= null;
+	private String	pname			= null;
 	/**
 	 * 性别
 	 */
-	private String				sex						= null;
+	private String	sex				= null;
 	/**
 	 * 年龄
 	 */
-	private int					age						= -1;
+	private int		age				= -1;
 	/**
 	 * 职业
 	 */
-	private String				job						= null;
+	private String	job				= null;
 	/**
 	 * 和监护对象关系
 	 */
-	private String				relationship			= null;
+	private String	relationship	= null;
 	/**
 	 * 家庭地址
 	 */
-	private String				homeAddress				= null;
+	private String	homeAddress		= null;
 	/**
 	 * 单位地址
 	 */
-	private String				workAddress				= null;
+	private String	workAddress		= null;
 	/**
 	 * 手机号
 	 */
-	private String				mobilePhoneNum			= null;
+	private String	mobilePhoneNum	= null;
 	/**
 	 * 家庭电话
 	 */
-	private String				homePhoneNum			= null;
+	private String	homePhoneNum	= null;
 	/**
 	 * 单位电话
 	 */
-	private String				workPhoneNum			= null;
+	private String	workPhoneNum	= null;
 
 	public User()
 	{
@@ -335,19 +323,19 @@ public class User implements Parcelable
 		{
 			return null;
 		}
-		uid = object.optLong(User.KEY_UID);
-		uname = object.optString(User.KEY_UNAME);
-		pid = object.optLong(User.KEY_PID);
-		pname = object.optString(User.KEY_PNAME);
-		sex = object.optString(User.KEY_SEX);
-		age = object.optInt(User.KEY_AGE);
-		job = object.optString(User.KEY_JOB);
-		relationship = object.optString(User.KEY_RELATIONSHIP);
-		homeAddress = object.optString(User.KEY_HOME_ADDRESS);
-		workAddress = object.optString(User.KEY_WORK_ADDRESS);
-		mobilePhoneNum = object.optString(User.KEY_MOBILE_PHONE_NUM);
-		homePhoneNum = object.optString(User.KEY_HOME_PHONE_NUM);
-		workPhoneNum = object.optString(User.KEY_WORK_PHONE_NUM);
+		uid = object.optLong(Constant.KEY_UID);
+		uname = object.optString(Constant.KEY_UNAME);
+		pid = object.optLong(Constant.KEY_PID);
+		pname = object.optString(Constant.KEY_PNAME);
+		sex = object.optString(Constant.KEY_SEX);
+		age = object.optInt(Constant.KEY_AGE);
+		job = object.optString(Constant.KEY_JOB);
+		relationship = object.optString(Constant.KEY_RELATIONSHIP);
+		homeAddress = object.optString(Constant.KEY_HOME_ADDRESS);
+		workAddress = object.optString(Constant.KEY_WORK_ADDRESS);
+		mobilePhoneNum = object.optString(Constant.KEY_MOBILE_PHONE_NUM);
+		homePhoneNum = object.optString(Constant.KEY_HOME_PHONE_NUM);
+		workPhoneNum = object.optString(Constant.KEY_WORK_PHONE_NUM);
 		return this;
 	}
 
@@ -567,55 +555,55 @@ public class User implements Parcelable
 		Bundle bundle = new Bundle();
 		if (-1 != uid)
 		{
-			bundle.putLong(User.KEY_UID, uid);
+			bundle.putLong(Constant.KEY_UID, uid);
 		}
 		if (null != uname)
 		{
-			bundle.putString(User.KEY_UNAME, uname);
+			bundle.putString(Constant.KEY_UNAME, uname);
 		}
 		if (-1 != pid)
 		{
-			bundle.putLong(User.KEY_PID, pid);
+			bundle.putLong(Constant.KEY_PID, pid);
 		}
 		if (null != pname)
 		{
-			bundle.putString(User.KEY_PNAME, pname);
+			bundle.putString(Constant.KEY_PNAME, pname);
 		}
 		if (null != sex)
 		{
-			bundle.putString(User.KEY_SEX, sex);
+			bundle.putString(Constant.KEY_SEX, sex);
 		}
 		if (-1 != age)
 		{
-			bundle.putInt(User.KEY_AGE, age);
+			bundle.putInt(Constant.KEY_AGE, age);
 		}
 		if (null != job)
 		{
-			bundle.putString(User.KEY_JOB, job);
+			bundle.putString(Constant.KEY_JOB, job);
 		}
 		if (null != relationship)
 		{
-			bundle.putString(User.KEY_RELATIONSHIP, relationship);
+			bundle.putString(Constant.KEY_RELATIONSHIP, relationship);
 		}
 		if (null != homeAddress)
 		{
-			bundle.putString(User.KEY_HOME_ADDRESS, homeAddress);
+			bundle.putString(Constant.KEY_HOME_ADDRESS, homeAddress);
 		}
 		if (null != workAddress)
 		{
-			bundle.putString(User.KEY_WORK_ADDRESS, workAddress);
+			bundle.putString(Constant.KEY_WORK_ADDRESS, workAddress);
 		}
 		if (null != mobilePhoneNum)
 		{
-			bundle.putString(User.KEY_MOBILE_PHONE_NUM, mobilePhoneNum);
+			bundle.putString(Constant.KEY_MOBILE_PHONE_NUM, mobilePhoneNum);
 		}
 		if (null != homePhoneNum)
 		{
-			bundle.putString(User.KEY_HOME_PHONE_NUM, homePhoneNum);
+			bundle.putString(Constant.KEY_HOME_PHONE_NUM, homePhoneNum);
 		}
 		if (null != workPhoneNum)
 		{
-			bundle.putString(User.KEY_WORK_PHONE_NUM, workPhoneNum);
+			bundle.putString(Constant.KEY_WORK_PHONE_NUM, workPhoneNum);
 		}
 		dest.writeBundle(bundle);
 	}
@@ -640,57 +628,57 @@ public class User implements Parcelable
 	public User(Parcel in)
 	{
 		Bundle bundle = in.readBundle();
-		if (bundle.containsKey(User.KEY_UID))
+		if (bundle.containsKey(Constant.KEY_UID))
 		{
-			uid = bundle.getLong(User.KEY_UID);
+			uid = bundle.getLong(Constant.KEY_UID);
 		}
-		if (bundle.containsKey(User.KEY_UNAME))
+		if (bundle.containsKey(Constant.KEY_UNAME))
 		{
-			uname = bundle.getString(User.KEY_UNAME);
+			uname = bundle.getString(Constant.KEY_UNAME);
 		}
-		if (bundle.containsKey(User.KEY_PID))
+		if (bundle.containsKey(Constant.KEY_PID))
 		{
-			pid = bundle.getLong(User.KEY_PID);
+			pid = bundle.getLong(Constant.KEY_PID);
 		}
-		if (bundle.containsKey(User.KEY_PNAME))
+		if (bundle.containsKey(Constant.KEY_PNAME))
 		{
-			pname = bundle.getString(User.KEY_PNAME);
+			pname = bundle.getString(Constant.KEY_PNAME);
 		}
-		if (bundle.containsKey(User.KEY_SEX))
+		if (bundle.containsKey(Constant.KEY_SEX))
 		{
-			sex = bundle.getString(User.KEY_SEX);
+			sex = bundle.getString(Constant.KEY_SEX);
 		}
-		if (bundle.containsKey(User.KEY_AGE))
+		if (bundle.containsKey(Constant.KEY_AGE))
 		{
-			age = bundle.getInt(User.KEY_AGE);
+			age = bundle.getInt(Constant.KEY_AGE);
 		}
-		if (bundle.containsKey(User.KEY_JOB))
+		if (bundle.containsKey(Constant.KEY_JOB))
 		{
-			job = bundle.getString(User.KEY_JOB);
+			job = bundle.getString(Constant.KEY_JOB);
 		}
-		if (bundle.containsKey(User.KEY_RELATIONSHIP))
+		if (bundle.containsKey(Constant.KEY_RELATIONSHIP))
 		{
-			relationship = bundle.getString(User.KEY_RELATIONSHIP);
+			relationship = bundle.getString(Constant.KEY_RELATIONSHIP);
 		}
-		if (bundle.containsKey(User.KEY_HOME_ADDRESS))
+		if (bundle.containsKey(Constant.KEY_HOME_ADDRESS))
 		{
-			homeAddress = bundle.getString(User.KEY_HOME_ADDRESS);
+			homeAddress = bundle.getString(Constant.KEY_HOME_ADDRESS);
 		}
-		if (bundle.containsKey(User.KEY_WORK_ADDRESS))
+		if (bundle.containsKey(Constant.KEY_WORK_ADDRESS))
 		{
-			workAddress = bundle.getString(User.KEY_WORK_ADDRESS);
+			workAddress = bundle.getString(Constant.KEY_WORK_ADDRESS);
 		}
-		if (bundle.containsKey(User.KEY_MOBILE_PHONE_NUM))
+		if (bundle.containsKey(Constant.KEY_MOBILE_PHONE_NUM))
 		{
-			mobilePhoneNum = bundle.getString(User.KEY_MOBILE_PHONE_NUM);
+			mobilePhoneNum = bundle.getString(Constant.KEY_MOBILE_PHONE_NUM);
 		}
-		if (bundle.containsKey(User.KEY_WORK_PHONE_NUM))
+		if (bundle.containsKey(Constant.KEY_WORK_PHONE_NUM))
 		{
-			workPhoneNum = bundle.getString(User.KEY_WORK_PHONE_NUM);
+			workPhoneNum = bundle.getString(Constant.KEY_WORK_PHONE_NUM);
 		}
-		if (bundle.containsKey(User.KEY_HOME_PHONE_NUM))
+		if (bundle.containsKey(Constant.KEY_HOME_PHONE_NUM))
 		{
-			homePhoneNum = bundle.getString(User.KEY_HOME_PHONE_NUM);
+			homePhoneNum = bundle.getString(Constant.KEY_HOME_PHONE_NUM);
 		}
 	}
 }

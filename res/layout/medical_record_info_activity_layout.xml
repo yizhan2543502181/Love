@@ -27,7 +27,8 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:background="@drawable/login_background_bg"
-                    android:orientation="vertical" >
+                    android:orientation="vertical"
+                    android:paddingBottom="10dp" >
 
                     <FrameLayout
                         android:layout_width="match_parent"
@@ -175,6 +176,11 @@
                             android:textSize="16sp" />
                     </LinearLayout>
 
+                    <View
+                        android:layout_width="fill_parent"
+                        android:layout_height="1px"
+                        android:background="?android:attr/listDivider" />
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -202,6 +208,11 @@
                             android:textColor="@color/black"
                             android:textSize="16sp" />
                     </LinearLayout>
+
+                    <View
+                        android:layout_width="fill_parent"
+                        android:layout_height="1px"
+                        android:background="?android:attr/listDivider" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -209,7 +220,8 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:background="@drawable/login_background_bg"
-                    android:orientation="vertical" >
+                    android:orientation="vertical"
+                    android:paddingBottom="10dp" >
 
                     <FrameLayout
                         android:layout_width="match_parent"
@@ -323,6 +335,11 @@
                             android:textColor="@color/black"
                             android:textSize="16sp" />
                     </LinearLayout>
+
+                    <View
+                        android:layout_width="fill_parent"
+                        android:layout_height="1px"
+                        android:background="?android:attr/listDivider" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -330,7 +347,8 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:background="@drawable/login_background_bg"
-                    android:orientation="vertical" >
+                    android:orientation="vertical"
+                    android:paddingBottom="10dp" >
 
                     <FrameLayout
                         android:layout_width="match_parent"
@@ -367,6 +385,11 @@
                             android:textColor="@color/black"
                             android:textSize="16sp" />
                     </LinearLayout>
+
+                    <View
+                        android:layout_width="fill_parent"
+                        android:layout_height="1px"
+                        android:background="?android:attr/listDivider" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

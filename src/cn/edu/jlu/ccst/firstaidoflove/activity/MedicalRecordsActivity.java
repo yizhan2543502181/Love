@@ -72,7 +72,7 @@ public class MedicalRecordsActivity extends AbstractAidRequestActivity
 		for (int i = 0; i < 6; ++i)
 		{
 			MedicalRecordsActivity.medicalRecordList.add(0, new MedicalRecord(
-					currentUser.getPid(), currentUser.getPname(), "男", 1,
+					currentUser.getPid(), currentUser.getPname(), "男", 58,
 					"高血压", "2014.04.15", "100-170", "24ug", "89", "无"));
 			MedicalRecord medicalRecord = MedicalRecordsActivity.medicalRecordList
 					.get(i);

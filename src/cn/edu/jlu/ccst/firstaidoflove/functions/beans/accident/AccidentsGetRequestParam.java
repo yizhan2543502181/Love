@@ -17,15 +17,21 @@ import cn.edu.jlu.ccst.firstaidoflove.functions.beans.user.User;
  */
 public class AccidentsGetRequestParam extends RequestParam
 {
-	private static final String	METHOD			= "get_accident";
+	private static final String	METHOD			= "get_accidents";
 	/**
 	 * 所有字段
 	 */
-	public static final String	FIELDS_ALL		= User.KEY_PID + ","
-														+ User.KEY_PNAME + ","
-														+ Login.KEY_LON + ","
-														+ Login.KEY_LAT + ","
-														+ Accident.KEY_TIME;
+	public static final String	FIELDS_ALL		= User.KEY_PID
+														+ ","
+														+ User.KEY_PNAME
+														+ ","
+														+ Login.KEY_LON
+														+ ","
+														+ Login.KEY_LAT
+														+ ","
+														+ Accident.KEY_TIME
+														+ ","
+														+ Accident.KEY_MEDICAL_HISTORY;
 	/**
 	 * 默认字段<br>
 	 * 不添加fields参数也按此字段返回

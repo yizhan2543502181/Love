@@ -12,6 +12,9 @@ import cn.edu.jlu.ccst.firstaidoflove.functions.beans.accident.AccidentsGetRespo
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.login.LoginHelper;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.login.LoginRequestParam;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.login.LoginResponseBean;
+import cn.edu.jlu.ccst.firstaidoflove.functions.beans.trajectory.TrajectoriesGetHelper;
+import cn.edu.jlu.ccst.firstaidoflove.functions.beans.trajectory.TrajectoriesGetRequestParam;
+import cn.edu.jlu.ccst.firstaidoflove.functions.beans.trajectory.TrajectoriesGetResponseBean;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.user.UserGetHelper;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.user.UserGetRequestParam;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.user.UserGetResponseBean;
@@ -158,16 +161,16 @@ public class AsyncAid
 		new UserSetHelper(aid).asyncsetUsersInfo(pool, param, listener);
 	}
 
-	/**
-	 * 异步登录
-	 * 
-	 * @param name
-	 * @param password
-	 * @param listener
-	 */
 	public void getRecentAccidents(AccidentsGetRequestParam param,
 			AbstractRequestListener<AccidentsGetResponseBean> listener)
 	{
 		new AccidentsGetHelper(aid).asyncGetAccidents(pool, param, listener);
+	}
+
+	public void getRecentTrajectoies(TrajectoriesGetRequestParam param,
+			AbstractRequestListener<TrajectoriesGetResponseBean> listener)
+	{
+		new TrajectoriesGetHelper(aid).asyncGetTrajectories(pool, param,
+				listener);
 	}
 }

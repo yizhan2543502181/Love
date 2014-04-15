@@ -15,7 +15,7 @@ import cn.edu.jlu.ccst.firstaidoflove.util.Util;
 
 /**
  * 
- * @author hecao (he.cao@aid-inc.com) users.getInfo接口 助手类
+ * @author hecao (he.cao@aid-inc.com) accidents.getInfo接口 助手类
  * 
  */
 public class AccidentsGetHelper
@@ -31,7 +31,7 @@ public class AccidentsGetHelper
 	}
 
 	/**
-	 * 同步调用users.getInfo接口<br>
+	 * 同步调用accidents.getInfo接口<br>
 	 * 
 	 * @param param
 	 *            请求对象
@@ -42,7 +42,7 @@ public class AccidentsGetHelper
 			throws AidException, Throwable
 	{
 		Bundle parameters = param.getParams();
-		AccidentsGetResponseBean usersBean = null;
+		AccidentsGetResponseBean accidentsBean = null;
 		try
 		{
 			String response = aid.requestJSON(parameters);
@@ -56,18 +56,18 @@ public class AccidentsGetHelper
 				throw new AidException(AidError.ERROR_CODE_UNKNOWN_ERROR,
 						"null response", "null response");
 			}
-			usersBean = new AccidentsGetResponseBean(response);
+			accidentsBean = new AccidentsGetResponseBean(response);
 		}
 		catch (RuntimeException re)
 		{
 			Util.logger("runtime exception " + re.getMessage());
 			throw new Throwable(re);
 		}
-		return usersBean;
+		return accidentsBean;
 	}
 
 	/**
-	 * 异步方法调用users.getInfo接口<br>
+	 * 异步方法调用accidents.getInfo接口<br>
 	 * 
 	 * @param pool
 	 *            线程池
@@ -86,10 +86,10 @@ public class AccidentsGetHelper
 			{
 				try
 				{
-					AccidentsGetResponseBean usersBean = getAccidents(param);
+					AccidentsGetResponseBean accidentsBean = getAccidents(param);
 					if (listener != null)
 					{
-						listener.onComplete(usersBean);
+						listener.onComplete(accidentsBean);
 					}
 				}
 				catch (AidException e)

@@ -71,6 +71,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int imageview=0x7f080022;
         public static final int list_item_icon=0x7f080009;
         public static final int list_item_text=0x7f08000a;
+        public static final int list_trajectory_item_text=0x7f08000b;
         public static final int locale_add_btn=0x7f08001b;
         public static final int locale_info_add_address=0x7f080013;
         public static final int locale_info_add_contact_person=0x7f080014;
@@ -169,7 +170,6 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int temp1_layout=0x7f080039;
         public static final int temp2_layout=0x7f08003d;
         public static final int textview=0x7f080023;
-        public static final int trajectory_item_text=0x7f08000b;
     }
     public static final class layout {
         public static final int accident_info_activity_layout=0x7f030000;

@@ -53,7 +53,6 @@ public class RecentAccidentsActivity extends AbstractAidRequestActivity
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.recent_accidents_activity_layout);
 		initView();
-		genList();
 		updateList();
 	}
 
@@ -65,9 +64,9 @@ public class RecentAccidentsActivity extends AbstractAidRequestActivity
 		startGetAccidents();
 	}
 
-	// ===========================================================================================
 	private void genList()
 	{
+		RecentAccidentsActivity.list.clear();
 		for (int i = 0; i < 6; ++i)
 		{
 			RecentAccidentsActivity.accidentList.add(0, new Accident(
@@ -93,15 +92,8 @@ public class RecentAccidentsActivity extends AbstractAidRequestActivity
 		}
 	}
 
-	// ===========================================================================================
-	/**
-	 * 启动线程更新列表
-	 * 
-	 * @param pathTemp
-	 */
 	public void updateList()
 	{
-		RecentAccidentsActivity.list.clear();
 		genList();
 		if (RecentAccidentsActivity.list.size() == 0)
 		{

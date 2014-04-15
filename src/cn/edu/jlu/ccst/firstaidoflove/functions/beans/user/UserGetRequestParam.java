@@ -5,7 +5,7 @@ package cn.edu.jlu.ccst.firstaidoflove.functions.beans.user;
 
 import android.os.Bundle;
 import cn.edu.jlu.ccst.firstaidoflove.functions.RequestParam;
-import cn.edu.jlu.ccst.firstaidoflove.util.AidException;
+import cn.edu.jlu.ccst.firstaidoflove.functions.beans.AidException;
 
 /**
  * 
@@ -15,7 +15,7 @@ import cn.edu.jlu.ccst.firstaidoflove.util.AidException;
  */
 public class UserGetRequestParam extends RequestParam
 {
-	private static final String	METHOD			= "user.getInfo";
+	private static final String	METHOD			= "get_user_info";
 	/**
 	 * 所有字段
 	 */

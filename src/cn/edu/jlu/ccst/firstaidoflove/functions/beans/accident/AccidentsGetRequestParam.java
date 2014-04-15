@@ -5,9 +5,9 @@ package cn.edu.jlu.ccst.firstaidoflove.functions.beans.accident;
 
 import android.os.Bundle;
 import cn.edu.jlu.ccst.firstaidoflove.functions.RequestParam;
+import cn.edu.jlu.ccst.firstaidoflove.functions.beans.AidException;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.login.Login;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.user.User;
-import cn.edu.jlu.ccst.firstaidoflove.util.AidException;
 
 /**
  * 
@@ -17,7 +17,7 @@ import cn.edu.jlu.ccst.firstaidoflove.util.AidException;
  */
 public class AccidentsGetRequestParam extends RequestParam
 {
-	private static final String	METHOD			= "user.getInfo";
+	private static final String	METHOD			= "get_accident";
 	/**
 	 * 所有字段
 	 */
@@ -44,9 +44,11 @@ public class AccidentsGetRequestParam extends RequestParam
 	 */
 	private String				fields			= AccidentsGetRequestParam.FIELD_DEFAULT;
 
-	public AccidentsGetRequestParam()
+	public AccidentsGetRequestParam(String uid, String pid)
 	{
 		super();
+		this.uid = uid;
+		this.pid = pid;
 	}
 
 	/**

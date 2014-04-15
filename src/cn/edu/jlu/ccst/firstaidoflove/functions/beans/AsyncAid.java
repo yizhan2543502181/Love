@@ -18,7 +18,6 @@ import cn.edu.jlu.ccst.firstaidoflove.functions.beans.user.UserGetResponseBean;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.user.UserSetHelper;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.user.UserSetRequestParam;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.user.UserSetResponseBean;
-import cn.edu.jlu.ccst.firstaidoflove.util.AidError;
 import cn.edu.jlu.ccst.firstaidoflove.util.Util;
 
 /**

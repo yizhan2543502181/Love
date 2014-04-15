@@ -8,7 +8,7 @@ import org.json.JSONObject;
 
 import android.util.Log;
 import cn.edu.jlu.ccst.firstaidoflove.functions.ResponseBean;
-import cn.edu.jlu.ccst.firstaidoflove.util.AidException;
+import cn.edu.jlu.ccst.firstaidoflove.functions.beans.AidException;
 
 /**
  * users.getInfo接口的封装<br>

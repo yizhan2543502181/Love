@@ -11,8 +11,8 @@ import android.util.Log;
 import cn.edu.jlu.ccst.firstaidoflove.activity.main.FragmentPageNowAccident;
 import cn.edu.jlu.ccst.firstaidoflove.activity.main.MainActivity;
 import cn.edu.jlu.ccst.firstaidoflove.functions.AccidentArriveListener;
+import cn.edu.jlu.ccst.firstaidoflove.functions.beans.AidError;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.accident.Accident;
-import cn.edu.jlu.ccst.firstaidoflove.util.AidError;
 import cn.edu.jlu.ccst.firstaidoflove.util.JPushUtil;
 import cn.jpush.android.api.JPushInterface;
 

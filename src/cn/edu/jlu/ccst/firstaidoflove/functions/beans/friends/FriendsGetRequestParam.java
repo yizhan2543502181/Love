@@ -5,7 +5,7 @@ package cn.edu.jlu.ccst.firstaidoflove.functions.beans.friends;
 
 import android.os.Bundle;
 import cn.edu.jlu.ccst.firstaidoflove.functions.RequestParam;
-import cn.edu.jlu.ccst.firstaidoflove.util.AidException;
+import cn.edu.jlu.ccst.firstaidoflove.functions.beans.AidException;
 
 /**
  * 

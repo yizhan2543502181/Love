@@ -5,7 +5,6 @@ import org.json.JSONObject;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
-import cn.edu.jlu.ccst.firstaidoflove.util.AidException;
 
 public class ResultCode implements Parcelable
 {

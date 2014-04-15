@@ -43,6 +43,8 @@ import android.webkit.CookieManager;
 import android.webkit.CookieSyncManager;
 import android.widget.Toast;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.Aid;
+import cn.edu.jlu.ccst.firstaidoflove.functions.beans.AidError;
+import cn.edu.jlu.ccst.firstaidoflove.functions.beans.AidException;
 
 /**
  * 工具支持

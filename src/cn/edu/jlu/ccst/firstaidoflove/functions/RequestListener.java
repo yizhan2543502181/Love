@@ -3,7 +3,7 @@
  */
 package cn.edu.jlu.ccst.firstaidoflove.functions;
 
-import cn.edu.jlu.ccst.firstaidoflove.util.AidError;
+import cn.edu.jlu.ccst.firstaidoflove.functions.beans.AidError;
 
 /**
  * 对人人 API请求结果监听。

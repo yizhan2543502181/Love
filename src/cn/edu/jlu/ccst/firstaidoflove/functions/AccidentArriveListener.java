@@ -3,8 +3,8 @@
  */
 package cn.edu.jlu.ccst.firstaidoflove.functions;
 
+import cn.edu.jlu.ccst.firstaidoflove.functions.beans.AidError;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.accident.Accident;
-import cn.edu.jlu.ccst.firstaidoflove.util.AidError;
 
 /**
  * @author Administrator

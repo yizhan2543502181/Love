@@ -7,7 +7,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
-import cn.edu.jlu.ccst.firstaidoflove.util.AidError;
+import cn.edu.jlu.ccst.firstaidoflove.functions.beans.AidError;
 
 /**
  * 对发布状态、新鲜事、照片等请求进行响应的listener的抽象类

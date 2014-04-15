@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.Window;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.Aid;
+import cn.edu.jlu.ccst.firstaidoflove.functions.beans.user.User;
 
 /**
  * 请求窗口的父类，其中包含了对Renren对象的初始化<br>
@@ -40,6 +41,7 @@ public class AbstractAidRequestActivity extends FragmentActivity
 	 * 用于发送请求的对象
 	 */
 	protected Aid				aid;
+	protected User				currentUser;
 	protected Intent			intent;
 	/**
 	 * 异步操作显示进度框
@@ -61,6 +63,7 @@ public class AbstractAidRequestActivity extends FragmentActivity
 	{
 		aid = Aid.getInstance();
 		aid.init(this);
+		currentUser = Aid.getUserInstance();
 	}
 
 	@Override

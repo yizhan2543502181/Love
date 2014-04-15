@@ -12,16 +12,24 @@ import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import cn.edu.jlu.ccst.firstaidoflove.R;
+import cn.edu.jlu.ccst.firstaidoflove.activity.main.LoginActivity;
 import cn.edu.jlu.ccst.firstaidoflove.functions.AbstractAidRequestActivity;
+import cn.edu.jlu.ccst.firstaidoflove.functions.AbstractRequestListener;
+import cn.edu.jlu.ccst.firstaidoflove.functions.beans.Aid;
+import cn.edu.jlu.ccst.firstaidoflove.functions.beans.AidError;
+import cn.edu.jlu.ccst.firstaidoflove.functions.beans.AsyncAid;
+import cn.edu.jlu.ccst.firstaidoflove.functions.beans.accident.Accident;
+import cn.edu.jlu.ccst.firstaidoflove.functions.beans.accident.AccidentsGetRequestParam;
+import cn.edu.jlu.ccst.firstaidoflove.functions.beans.accident.AccidentsGetResponseBean;
 import cn.edu.jlu.ccst.firstaidoflove.util.Util;
 
 /**
@@ -30,13 +38,13 @@ import cn.edu.jlu.ccst.firstaidoflove.util.Util;
  */
 public class RecentAccidentsActivity extends AbstractAidRequestActivity
 {
-	private TextView					noMessageText	= null;
-	private ProgressDialog				progressDialog	= null;
-	private ListView					listView;
-	private List<Map<String, Object>>	list			= new ArrayList<Map<String, Object>>();
-	private List<Boolean>				listIsImport	= new ArrayList<Boolean>();
+	private TextView							noMessageText	= null;
+	private ProgressDialog						progressDialog	= null;
+	private ListView							listView;
+	private static List<Accident>				accidentList	= new ArrayList<Accident>();
+	private static List<Map<String, Object>>	list			= new ArrayList<Map<String, Object>>();
 	@SuppressLint("UseValueOf")
-	private Integer						lock			= new Integer(0);
+	private static Integer						lock			= new Integer(0);
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -44,22 +52,9 @@ public class RecentAccidentsActivity extends AbstractAidRequestActivity
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.recent_accidents_activity_layout);
-		genList();
 		initView();
-	}
-
-	@Override
-	protected void onResume()
-	{
-		// TODO Auto-generated method stub
-		super.onResume();
-	}
-
-	@Override
-	protected void onRestart()
-	{
-		// TODO Auto-generated method stub
-		super.onRestart();
+		genList();
+		updateList();
 	}
 
 	private void initView()
@@ -67,18 +62,61 @@ public class RecentAccidentsActivity extends AbstractAidRequestActivity
 		noMessageText = (TextView) findViewById(R.id.recent_accidents_no_message_text);
 		listView = (ListView) findViewById(R.id.recent_accidents_list);
 		listView.setOnItemClickListener(itemClickListener);
-		listView.setOnItemLongClickListener(itemLongClickListener);
-		updateList();
+		startGetAccidents();
 	}
 
+	// ===========================================================================================
+	private void genList()
+	{
+		for (int i = 0; i < 6; ++i)
+		{
+			RecentAccidentsActivity.accidentList.add(0, new Accident(
+					currentUser.getPid(), currentUser.getPname(), 110.235,
+					35.3254, "2014.04.15", "糖尿病，高血压，骨折"));
+			Accident accident = RecentAccidentsActivity.accidentList.get(i);
+			RecentAccidentsActivity.addListItem("姓名：" + accident.getPname()
+					+ "\n时间：" + accident.getTime() + "\n事故地点：" + "经"
+					+ accident.getLongtitude() + "° " + "纬"
+					+ accident.getLatitude() + "° ");
+		}
+	}
+
+	private static void addListItem(String content)
+	{
+		Map<String, Object> map = null;
+		map = new HashMap<String, Object>();
+		map.put("list_item_icon", R.drawable.icon_home_sel);
+		map.put("list_item_text", content);
+		synchronized (RecentAccidentsActivity.lock)
+		{
+			RecentAccidentsActivity.list.add(0, map);
+		}
+	}
+
+	// ===========================================================================================
 	/**
 	 * 启动线程更新列表
 	 * 
 	 * @param pathTemp
 	 */
-	private void updateList()
+	public void updateList()
 	{
-		(new ListViewUpdateThread()).start();
+		RecentAccidentsActivity.list.clear();
+		genList();
+		if (RecentAccidentsActivity.list.size() == 0)
+		{
+			noMessageText.setVisibility(View.VISIBLE);
+		}
+		else
+		{
+			noMessageText.setVisibility(View.GONE);
+		}
+		final SimpleAdapter adapter = new SimpleAdapter(
+				RecentAccidentsActivity.this, RecentAccidentsActivity.list,
+				R.layout.list_item_layout, new String[] { "list_item_icon",
+						"list_item_text" }, new int[] { R.id.list_item_icon,
+						R.id.list_item_text });
+		listView.setAdapter(adapter);
 	}
 
 	/**
@@ -87,120 +125,133 @@ public class RecentAccidentsActivity extends AbstractAidRequestActivity
 	 * @author Administrator
 	 * 
 	 */
-	OnItemClickListener		itemClickListener		= new OnItemClickListener() {
-														@Override
-														public void onItemClick(
-																AdapterView<?> arg0,
-																View arg1,
-																int position,
-																long arg3)
-														{
-															// String name = ((HashMap<String, String>) arg0
-															// .getItemAtPosition(position)).get("list_item_text");
-															Intent intent = new Intent();
-															intent.setClass(
-																	RecentAccidentsActivity.this,
-																	AccidentInfoActivity.class);
-															startActivity(intent);
-														}
-													};
-	OnItemLongClickListener	itemLongClickListener	= new OnItemLongClickListener() {
-														@Override
-														public boolean onItemLongClick(
-																AdapterView<?> arg0,
-																View arg1,
-																final int position,
-																long arg3)
-														{
-															Util.showOptionWindow(
-																	RecentAccidentsActivity.this,
-																	"询问",
-																	"是否删除此条信息？",
-																	new Util.OnOptionListener() {
-																		@Override
-																		public void onOK()
-																		{
-																			synchronized (lock)
-																			{
-																				list.remove(position);
-																				listIsImport
-																						.remove(position);
-																			}
-																			updateList();
-																		}
+	OnItemClickListener	itemClickListener	= new OnItemClickListener() {
+												@Override
+												public void onItemClick(
+														AdapterView<?> arg0,
+														View arg1,
+														int position, long arg3)
+												{
+													Intent intent = new Intent();
+													Bundle bundle = new Bundle();
+													bundle.putParcelable(
+															Accident.ACCIDENT_LABLE,
+															RecentAccidentsActivity.accidentList
+																	.get(position));
+													intent.putExtras(bundle);
+													intent.setClass(
+															RecentAccidentsActivity.this,
+															AccidentInfoActivity.class);
+													startActivity(intent);
+												}
+											};
 
-																		@Override
-																		public void onCancel()
-																		{}
-																	});
-															return false;
-														}
-													};
-
-	/**
-	 * 产生新列表的方法
-	 * 
-	 * @param path
-	 * @return
-	 */
-	private void genList()
+	private void startGetAccidents()
 	{
-		for (int i = 0; i < 6; ++i)
+		if (null == aid || null == currentUser)
 		{
-			addListItem("\t姓名：李四" + "\n\t时间：2014.4.3 18:4" + i
-					+ "\n\t事故地点：和平广场" + i + "号");
+			Util.alert(getApplicationContext(), "用户信息异常，请重新登登录！");
+			intent.setClass(getApplicationContext(), LoginActivity.class);
+			startActivity(intent);
+			finish();
 		}
-	}
-
-	private void addListItem(String content)
-	{
-		Map<String, Object> map = null;
-		map = new HashMap<String, Object>();
-		map.put("list_item_icon", R.drawable.icon_home_sel);
-		map.put("list_item_text", content);
-		synchronized (lock)
+		AccidentsGetRequestParam param = new AccidentsGetRequestParam(
+				String.valueOf(aid.getCurrentUid()), String.valueOf(Aid
+						.getUserInstance().getPid()));
+		param.setUid(String.valueOf(aid.getCurrentUid()));
+		try
 		{
-			list.add(0, map);
-			listIsImport.add(true);
+			progressDialog = new ProgressDialog(RecentAccidentsActivity.this);
+			progressDialog.setTitle("提示");
+			progressDialog.setMessage("正在获取信息，请稍后...");
+			progressDialog.show();
+			AsyncAid aAid = new AsyncAid(aid);
+			// 对结果进行监听
+			aAid.getRecentAccidents(param, new AccidentsGetListener());
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
 		}
 	}
 
 	/**
-	 * 用于更新列表的线程类
+	 * 监听获取用户的基本信息
 	 * 
-	 * @param pathTemp
+	 * @author Administrator
+	 * 
 	 */
-	public class ListViewUpdateThread extends Thread
+	private class AccidentsGetListener extends
+			AbstractRequestListener<AccidentsGetResponseBean>
 	{
+		private Handler	handler	= new Handler();
+
 		@Override
-		public void run()
+		public void onError(AidError AidError)
 		{
-			runOnUiThread(new Runnable() {
+			handler.post(new Runnable() {
 				@Override
 				public void run()
 				{
-					progressDialog = new ProgressDialog(
-							RecentAccidentsActivity.this);
-					progressDialog.setMessage("正在加载...");
-					progressDialog.setTitle("请稍后...");
-					progressDialog.show();
-					if (list.size() == 0)
+					if (RecentAccidentsActivity.this != null)
 					{
-						noMessageText.setVisibility(View.VISIBLE);
+						if (progressDialog != null
+								&& progressDialog.isShowing())
+						{
+							progressDialog.dismiss();
+						}
+					}
+					Util.alert(RecentAccidentsActivity.this, "获取最近事故失败");
+				}
+			});
+		}
+
+		@Override
+		public void onFault(Throwable fault)
+		{
+			fault.toString();
+			handler.post(new Runnable() {
+				@Override
+				public void run()
+				{
+					if (RecentAccidentsActivity.this != null)
+					{
+						if (progressDialog != null
+								&& progressDialog.isShowing())
+						{
+							progressDialog.dismiss();
+						}
+						Util.alert(RecentAccidentsActivity.this, "获取最近事故失败");
 					}
 				}
 			});
-			final SimpleAdapter adapter = new SimpleAdapter(
-					RecentAccidentsActivity.this, list,
-					R.layout.list_item_layout, new String[] { "list_item_icon",
-							"list_item_text" }, new int[] {
-							R.id.list_item_icon, R.id.list_item_text });
-			runOnUiThread(new Runnable() {
+		}
+
+		@Override
+		public void onComplete(final AccidentsGetResponseBean bean)
+		{
+			handler.post(new Runnable() {
 				@Override
 				public void run()
 				{
-					listView.setAdapter(adapter);
-					progressDialog.cancel();
+					if (RecentAccidentsActivity.this != null)
+					{
+						if (progressDialog != null
+								&& progressDialog.isShowing())
+						{
+							progressDialog.dismiss();
+						}
+						if (null != bean.getAccidents())
+						{
+							RecentAccidentsActivity.accidentList = bean
+									.getAccidents();
+							updateList();
+						}
+						else
+						{
+							Util.alert(RecentAccidentsActivity.this, "获取最近事故失败");
+						}
+					}
 				}
 			});
 		}

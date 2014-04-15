@@ -5,8 +5,8 @@ import org.json.JSONObject;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
+import cn.edu.jlu.ccst.firstaidoflove.functions.beans.AidException;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.user.User;
-import cn.edu.jlu.ccst.firstaidoflove.util.AidException;
 
 /**
  * 用户实体类

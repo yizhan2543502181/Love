@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 import android.annotation.SuppressLint;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -22,8 +21,8 @@ import android.widget.TextView;
 import cn.edu.jlu.ccst.firstaidoflove.R;
 import cn.edu.jlu.ccst.firstaidoflove.activity.AccidentInfoActivity;
 import cn.edu.jlu.ccst.firstaidoflove.functions.AccidentArriveListener;
+import cn.edu.jlu.ccst.firstaidoflove.functions.beans.AidError;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.accident.Accident;
-import cn.edu.jlu.ccst.firstaidoflove.util.AidError;
 import cn.edu.jlu.ccst.firstaidoflove.util.Util;
 
 public class FragmentPageNowAccident extends Fragment
@@ -31,7 +30,6 @@ public class FragmentPageNowAccident extends Fragment
 	private static FragmentPageNowAccident		instance		= null;
 	private View								layout;
 	private TextView							noMessageText	= null;
-	private ProgressDialog						progressDialog	= null;
 	private ListView							listView;
 	private static List<Accident>				accidentList	= new ArrayList<Accident>();
 	private static List<Map<String, Object>>	list			= new ArrayList<Map<String, Object>>();
@@ -93,7 +91,19 @@ public class FragmentPageNowAccident extends Fragment
 				}
 			}
 		}
-		(new ListViewUpdateThread()).start();
+		if (FragmentPageNowAccident.list.size() == 0)
+		{
+			noMessageText.setVisibility(View.VISIBLE);
+		}
+		else
+		{
+			noMessageText.setVisibility(View.GONE);
+		}
+		final SimpleAdapter adapter = new SimpleAdapter(getActivity(),
+				FragmentPageNowAccident.list, R.layout.list_item_layout,
+				new String[] { "list_item_icon", "list_item_text" }, new int[] {
+						R.id.list_item_icon, R.id.list_item_text });
+		listView.setAdapter(adapter);
 	}
 
 	/**
@@ -216,56 +226,6 @@ public class FragmentPageNowAccident extends Fragment
 			FragmentPageNowAccident.accidentList.remove(position);
 			FragmentPageNowAccident.list.remove(position);
 			FragmentPageNowAccident.listIsImport.remove(position);
-		}
-	}
-
-	/**
-	 * 用于更新列表的线程类
-	 * 
-	 * @param pathTemp
-	 */
-	public class ListViewUpdateThread extends Thread
-	{
-		@Override
-		public void run()
-		{
-			if (null != getActivity())
-			{
-				getActivity().runOnUiThread(new Runnable() {
-					@Override
-					public void run()
-					{
-						progressDialog = new ProgressDialog(getActivity());
-						progressDialog.setMessage("正在加载...");
-						progressDialog.setTitle("请稍后...");
-						progressDialog.show();
-						if (FragmentPageNowAccident.list.size() == 0)
-						{
-							noMessageText.setVisibility(View.VISIBLE);
-						}
-						else
-						{
-							noMessageText.setVisibility(View.GONE);
-						}
-					}
-				});
-				final SimpleAdapter adapter = new SimpleAdapter(getActivity(),
-						FragmentPageNowAccident.list,
-						R.layout.list_item_layout, new String[] {
-								"list_item_icon", "list_item_text" },
-						new int[] { R.id.list_item_icon, R.id.list_item_text });
-				getActivity().runOnUiThread(new Runnable() {
-					@Override
-					public void run()
-					{
-						if (null != FragmentPageNowAccident.getInstance())
-						{
-							listView.setAdapter(adapter);
-							progressDialog.cancel();
-						}
-					}
-				});
-			}
 		}
 	}
 }

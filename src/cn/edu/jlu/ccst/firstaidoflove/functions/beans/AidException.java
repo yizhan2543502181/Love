@@ -1,7 +1,7 @@
 /**
  * $id$ Copyright 2011-2012 Renren Inc. All rights reserved.
  */
-package cn.edu.jlu.ccst.firstaidoflove.util;
+package cn.edu.jlu.ccst.firstaidoflove.functions.beans;
 
 /**
  * 
@@ -10,7 +10,7 @@ package cn.edu.jlu.ccst.firstaidoflove.util;
  * @author hecao (he.cao@renre-inc.com)
  * 
  */
-public class MyException extends Exception
+public class AidException extends Exception
 {
 	private static final long serialVersionUID = 1L;
 	/**
@@ -19,12 +19,12 @@ public class MyException extends Exception
 	private int errorCode;
 	private String orgResponse;
 
-	public MyException(String errorMessage)
+	public AidException(String errorMessage)
 	{
 		super(errorMessage);
 	}
 
-	public MyException(int errorCode, String errorMessage,
+	public AidException(int errorCode, String errorMessage,
 			String orgResponse)
 	{
 		super(errorMessage);
@@ -32,7 +32,7 @@ public class MyException extends Exception
 		this.orgResponse = orgResponse;
 	}
 
-	public MyException(MyError error)
+	public AidException(AidError error)
 	{
 		super(error.getMessage());
 		this.errorCode = error.getErrorCode();

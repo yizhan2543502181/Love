@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import cn.edu.jlu.ccst.firstaidoflove.util.AidException;
+import cn.edu.jlu.ccst.firstaidoflove.functions.beans.AidException;
 
 /**
  * user数据的封装

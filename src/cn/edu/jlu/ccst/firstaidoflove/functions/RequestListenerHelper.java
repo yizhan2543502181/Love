@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.util.Log;
-import cn.edu.jlu.ccst.firstaidoflove.util.AidError;
+import cn.edu.jlu.ccst.firstaidoflove.functions.beans.AidError;
 import cn.edu.jlu.ccst.firstaidoflove.util.Util;
 
 /**

@@ -21,12 +21,12 @@ import cn.edu.jlu.ccst.firstaidoflove.activity.FindPasswordActivity;
 import cn.edu.jlu.ccst.firstaidoflove.functions.AbstractAidRequestActivity;
 import cn.edu.jlu.ccst.firstaidoflove.functions.AbstractRequestListener;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.Aid;
+import cn.edu.jlu.ccst.firstaidoflove.functions.beans.AidError;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.AsyncAid;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.login.Login;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.login.LoginRequestParam;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.login.LoginResponseBean;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.user.User;
-import cn.edu.jlu.ccst.firstaidoflove.util.AidError;
 import cn.edu.jlu.ccst.firstaidoflove.util.Util;
 
 public class LoginActivity extends AbstractAidRequestActivity implements

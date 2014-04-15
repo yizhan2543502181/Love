@@ -13,10 +13,10 @@ import cn.edu.jlu.ccst.firstaidoflove.activity.main.LoginActivity;
 import cn.edu.jlu.ccst.firstaidoflove.functions.AbstractAidRequestActivity;
 import cn.edu.jlu.ccst.firstaidoflove.functions.AbstractRequestListener;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.Aid;
+import cn.edu.jlu.ccst.firstaidoflove.functions.beans.AidError;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.AsyncAid;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.user.UserGetRequestParam;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.user.UserGetResponseBean;
-import cn.edu.jlu.ccst.firstaidoflove.util.AidError;
 import cn.edu.jlu.ccst.firstaidoflove.util.Util;
 
 /**
@@ -105,7 +105,7 @@ public class PersonalInfoActivity extends AbstractAidRequestActivity
 
 	private void startGetUser()
 	{
-		if (null == aid)
+		if (null == aid || null == currentUser)
 		{
 			Util.alert(getApplicationContext(), "用户信息异常，请重新登登录！");
 			intent.setClass(getApplicationContext(), LoginActivity.class);
@@ -142,7 +142,7 @@ public class PersonalInfoActivity extends AbstractAidRequestActivity
 	private class UserGetListener extends
 			AbstractRequestListener<UserGetResponseBean>
 	{
-		private Handler	handler;
+		private Handler	handler	= new Handler();
 
 		@Override
 		public void onError(AidError AidError)
@@ -153,7 +153,7 @@ public class PersonalInfoActivity extends AbstractAidRequestActivity
 				{
 					if (PersonalInfoActivity.this != null)
 					{
-						if ((progressDialog != null)
+						if (progressDialog != null
 								&& progressDialog.isShowing())
 						{
 							progressDialog.dismiss();
@@ -174,7 +174,7 @@ public class PersonalInfoActivity extends AbstractAidRequestActivity
 				{
 					if (PersonalInfoActivity.this != null)
 					{
-						if ((progressDialog != null)
+						if (progressDialog != null
 								&& progressDialog.isShowing())
 						{
 							progressDialog.dismiss();
@@ -194,7 +194,7 @@ public class PersonalInfoActivity extends AbstractAidRequestActivity
 				{
 					if (PersonalInfoActivity.this != null)
 					{
-						if ((progressDialog != null)
+						if (progressDialog != null
 								&& progressDialog.isShowing())
 						{
 							progressDialog.dismiss();

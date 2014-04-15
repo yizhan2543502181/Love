@@ -16,11 +16,11 @@ import cn.edu.jlu.ccst.firstaidoflove.activity.main.LoginActivity;
 import cn.edu.jlu.ccst.firstaidoflove.functions.AbstractAidRequestActivity;
 import cn.edu.jlu.ccst.firstaidoflove.functions.AbstractRequestListener;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.Aid;
+import cn.edu.jlu.ccst.firstaidoflove.functions.beans.AidError;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.AsyncAid;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.user.User;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.user.UserSetRequestParam;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.user.UserSetResponseBean;
-import cn.edu.jlu.ccst.firstaidoflove.util.AidError;
 import cn.edu.jlu.ccst.firstaidoflove.util.Util;
 
 /**
@@ -120,8 +120,27 @@ public class PersonalInfoModifyActivity extends AbstractAidRequestActivity
 		// =====================================================================================================
 		// 此处设置User
 		// 当然要考虑异常，比如年龄输入的不是数字等等
+		int age = -1;
+		try
+		{
+			age = Integer.parseInt(ageText.getText().toString());
+		}
+		catch (Exception e)
+		{}
+		user.setAge(age);
+		user.setHomeAddress(homeAddressText.getText().toString());
+		user.setHomePhoneNum(homePhoneNumText.getText().toString());
+		user.setJob(jobText.getText().toString());
+		user.setMobilePhoneNum(mobilePhoneNumText.getText().toString());
+		user.setPid(Aid.getUserInstance().getPid());
+		user.setPname(patientText.getText().toString());
+		user.setRelationship(relationshipText.getText().toString());
+		user.setSex(sexText.getText().toString());
+		user.setUid(Aid.getUserInstance().getUid());
+		user.setUname(Aid.getUserInstance().getUname());
+		user.setWorkAddress(workAddressText.getText().toString());
+		user.setWorkPhoneNum(workPhoneNumText.getText().toString());
 		// =====================================================================================================
-		user.setAge(Integer.parseInt(ageText.getText().toString()));
 		UserSetRequestParam param = new UserSetRequestParam();
 		param.setFields(UserSetRequestParam.FIELDS_ALL);
 		param.setUser(user);
@@ -143,7 +162,7 @@ public class PersonalInfoModifyActivity extends AbstractAidRequestActivity
 	}
 
 	/**
-	 * 监听获取用户的基本信息
+	 * 监听设置用户的基本信息
 	 * 
 	 * @author Administrator
 	 * 
@@ -151,7 +170,7 @@ public class PersonalInfoModifyActivity extends AbstractAidRequestActivity
 	private class UserSetListener extends
 			AbstractRequestListener<UserSetResponseBean>
 	{
-		private Handler	handler;
+		private Handler	handler	= new Handler();
 
 		@Override
 		public void onError(AidError AidError)

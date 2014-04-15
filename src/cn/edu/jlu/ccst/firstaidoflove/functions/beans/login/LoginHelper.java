@@ -8,8 +8,8 @@ import java.util.concurrent.Executor;
 import android.os.Bundle;
 import cn.edu.jlu.ccst.firstaidoflove.functions.AbstractRequestListener;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.Aid;
-import cn.edu.jlu.ccst.firstaidoflove.util.AidError;
-import cn.edu.jlu.ccst.firstaidoflove.util.AidException;
+import cn.edu.jlu.ccst.firstaidoflove.functions.beans.AidError;
+import cn.edu.jlu.ccst.firstaidoflove.functions.beans.AidException;
 import cn.edu.jlu.ccst.firstaidoflove.util.Util;
 
 /**

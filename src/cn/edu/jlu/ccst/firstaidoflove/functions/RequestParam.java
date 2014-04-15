@@ -5,8 +5,8 @@ package cn.edu.jlu.ccst.firstaidoflove.functions;
 
 import android.os.Bundle;
 import android.text.TextUtils;
-import cn.edu.jlu.ccst.firstaidoflove.util.AidError;
-import cn.edu.jlu.ccst.firstaidoflove.util.AidException;
+import cn.edu.jlu.ccst.firstaidoflove.functions.beans.AidError;
+import cn.edu.jlu.ccst.firstaidoflove.functions.beans.AidException;
 
 /**
  * 

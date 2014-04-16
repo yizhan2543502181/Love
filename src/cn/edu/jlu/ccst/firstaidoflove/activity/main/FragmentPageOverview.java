@@ -331,7 +331,7 @@ public class FragmentPageOverview extends Fragment implements OnClickListener
 					});
 			break;
 		case R.id.overview_location_text:
-			startLocate();
+			startParseLocation();
 			break;
 		default:
 			break;

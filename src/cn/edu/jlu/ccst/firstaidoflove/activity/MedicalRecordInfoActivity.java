@@ -6,9 +6,9 @@ package cn.edu.jlu.ccst.firstaidoflove.activity;
 import android.os.Bundle;
 import android.view.Window;
 import android.widget.TextView;
+import cn.edu.jlu.ccst.firstaidoflove.AbstractAidRequestActivity;
 import cn.edu.jlu.ccst.firstaidoflove.R;
-import cn.edu.jlu.ccst.firstaidoflove.functions.AbstractAidRequestActivity;
-import cn.edu.jlu.ccst.firstaidoflove.functions.beans.medicalHistory.MedicalRecord;
+import cn.edu.jlu.ccst.firstaidoflove.functions.beans.medicalRecord.MedicalRecord;
 import cn.edu.jlu.ccst.firstaidoflove.util.Constant;
 
 /**
@@ -34,9 +34,9 @@ public class MedicalRecordInfoActivity extends AbstractAidRequestActivity
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		Bundle bundle = intent.getExtras();
-		if (bundle != null && bundle.containsKey(Constant.MEDICAL_RECORD_LABLE))
+		if (bundle != null && bundle.containsKey(Constant.MEDICAL_RECORD_LABEL))
 		{
-			medicalRecord = bundle.getParcelable(Constant.MEDICAL_RECORD_LABLE);
+			medicalRecord = bundle.getParcelable(Constant.MEDICAL_RECORD_LABEL);
 		}
 		setContentView(R.layout.medical_record_info_activity_layout);
 		initView();

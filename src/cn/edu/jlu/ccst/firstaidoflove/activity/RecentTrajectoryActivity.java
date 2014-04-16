@@ -20,10 +20,10 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
+import cn.edu.jlu.ccst.firstaidoflove.AbstractAidRequestActivity;
 import cn.edu.jlu.ccst.firstaidoflove.AidApplication;
 import cn.edu.jlu.ccst.firstaidoflove.R;
 import cn.edu.jlu.ccst.firstaidoflove.activity.main.LoginActivity;
-import cn.edu.jlu.ccst.firstaidoflove.functions.AbstractAidRequestActivity;
 import cn.edu.jlu.ccst.firstaidoflove.functions.AbstractRequestListener;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.Aid;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.AidError;
@@ -111,7 +111,7 @@ public class RecentTrajectoryActivity extends AbstractAidRequestActivity
 					35.3254 + i / 10.0, "2014.04.15"));
 			Trajectory trajectory = trajectoryList.get(i);
 			addListItem("姓名：" + trajectory.getPname() + "\n时间："
-					+ trajectory.getTime() + "\n事故地点：" + "经"
+					+ trajectory.getTime() + "\n位置：" + "经"
 					+ trajectory.getLongtitude() + "° " + "纬"
 					+ trajectory.getLatitude() + "° ");
 		}
@@ -237,7 +237,7 @@ public class RecentTrajectoryActivity extends AbstractAidRequestActivity
 	{
 		if (null == aid || null == currentUser)
 		{
-			Util.alert(getApplicationContext(), "用户信息异常，请重新登登录！");
+			Util.alert(getApplicationContext(), "用户信息异常，请重新登录！");
 			intent.setClass(getApplicationContext(), LoginActivity.class);
 			startActivity(intent);
 			finish();
@@ -249,8 +249,7 @@ public class RecentTrajectoryActivity extends AbstractAidRequestActivity
 		try
 		{
 			progressDialog = new ProgressDialog(RecentTrajectoryActivity.this);
-			progressDialog.setTitle("提示");
-			progressDialog.setMessage("正在获取信息，请稍后...");
+			progressDialog.setMessage("正在获取轨迹，请稍后...");
 			progressDialog.show();
 			AsyncAid aAid = new AsyncAid(aid);
 			// 对结果进行监听
@@ -263,7 +262,7 @@ public class RecentTrajectoryActivity extends AbstractAidRequestActivity
 	}
 
 	/**
-	 * 监听获取用户的基本信息
+	 * 监听获取最近运动轨迹
 	 * 
 	 * @author Administrator
 	 * 
@@ -288,7 +287,7 @@ public class RecentTrajectoryActivity extends AbstractAidRequestActivity
 							progressDialog.dismiss();
 						}
 					}
-					Util.alert(RecentTrajectoryActivity.this, "获取最近事故失败");
+					Util.alert(RecentTrajectoryActivity.this, "获取最近轨迹失败");
 				}
 			});
 		}
@@ -308,7 +307,7 @@ public class RecentTrajectoryActivity extends AbstractAidRequestActivity
 						{
 							progressDialog.dismiss();
 						}
-						Util.alert(RecentTrajectoryActivity.this, "获取最近事故失败");
+						Util.alert(RecentTrajectoryActivity.this, "获取最近轨迹失败");
 					}
 				}
 			});
@@ -336,7 +335,7 @@ public class RecentTrajectoryActivity extends AbstractAidRequestActivity
 						else
 						{
 							Util.alert(RecentTrajectoryActivity.this,
-									"获取最近事故失败");
+									"获取最近轨迹失败");
 						}
 					}
 				}

@@ -4,8 +4,10 @@ import java.util.concurrent.Executors;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,10 +18,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 import cn.edu.jlu.ccst.firstaidoflove.AidApplication;
 import cn.edu.jlu.ccst.firstaidoflove.R;
+import cn.edu.jlu.ccst.firstaidoflove.functions.AbstractRequestListener;
 import cn.edu.jlu.ccst.firstaidoflove.functions.RequestListener;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.Aid;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.AidError;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.AsyncAid;
+import cn.edu.jlu.ccst.firstaidoflove.functions.beans.login.Login;
+import cn.edu.jlu.ccst.firstaidoflove.functions.beans.trajectory.Trajectory;
+import cn.edu.jlu.ccst.firstaidoflove.functions.beans.trajectory.TrajectoryGetRequestParam;
+import cn.edu.jlu.ccst.firstaidoflove.functions.beans.trajectory.TrajectoryGetResponseBean;
+import cn.edu.jlu.ccst.firstaidoflove.functions.beans.user.User;
 import cn.edu.jlu.ccst.firstaidoflove.util.Util;
 import cn.edu.jlu.ccst.firstaidoflove.util.Util.OnOptionListener;
 import cn.jpush.android.api.JPushInterface;
@@ -42,16 +50,19 @@ import com.baidu.platform.comapi.basestruct.GeoPoint;
 
 public class FragmentPageOverview extends Fragment implements OnClickListener
 {
-	private TextView		userNameText	= null;
-	private TextView		patientNameText	= null;
-	private TextView		locationText	= null;
-	private MapView			mMapView		= null;
-	private Button			logout_btn		= null;
+	private TextView			userNameText	= null;
+	private TextView			patientNameText	= null;
+	private TextView			locationText	= null;
+	private MapView				mMapView		= null;
+	private Button				logout_btn		= null;
 	// 搜索相关
-	private MKSearch		mSearch			= null; // 搜索模块，也可去掉地图模块独立使用
-	private static GeoPoint	point			= null;
-	private static String	location		= null;
-	private ProgressDialog	progressDialog	= null;
+	private MKSearch			mSearch			= null;			// 搜索模块，也可去掉地图模块独立使用
+	public static Trajectory	trajectory		= null;
+	private static GeoPoint		point			= null;
+	private static String		location		= null;
+	private ProgressDialog		progressDialog	= null;
+	private Login				login			= null;
+	private static final String	errorMessage	= "获取位置失败,点此重新获取";
 
 	@Override
 	public void onCreate(Bundle savedInstanceState)
@@ -102,10 +113,17 @@ public class FragmentPageOverview extends Fragment implements OnClickListener
 		mMapView.getController().setZoomGesturesEnabled(true);
 		mMapView.getController().setRotationGesturesEnabled(false);
 		mMapView.getController().setScrollGesturesEnabled(true);
-		if (null != FragmentPageOverview.point)
+		if (null != FragmentPageOverview.point
+				&& null != FragmentPageOverview.location
+				&& !FragmentPageOverview.location
+						.equals(FragmentPageOverview.errorMessage))
 		{
 			moveToSpecialPoint(FragmentPageOverview.point,
 					FragmentPageOverview.location);
+		}
+		else if (null != FragmentPageOverview.trajectory)
+		{
+			startParseLocation();
 		}
 		else
 		{
@@ -144,36 +162,122 @@ public class FragmentPageOverview extends Fragment implements OnClickListener
 
 	private void startLocate()
 	{
-		Executors.newFixedThreadPool(2).execute(new Runnable() {
-			@Override
-			public void run()
-			{
-				try
+		Aid aid = Aid.getInstance();
+		User currentUser = Aid.getUserInstance();
+		Intent intent = new Intent();
+		if (null == aid || null == currentUser)
+		{
+			Util.alert(getActivity().getApplicationContext(), "用户信息异常，请重新登登录！");
+			intent.setClass(getActivity().getApplicationContext(),
+					LoginActivity.class);
+			startActivity(intent);
+			getActivity().finish();
+		}
+		TrajectoryGetRequestParam param = new TrajectoryGetRequestParam(
+				String.valueOf(aid.getCurrentUid()), String.valueOf(Aid
+						.getUserInstance().getPid()));
+		param.setUid(String.valueOf(aid.getCurrentUid()));
+		try
+		{
+			progressDialog = new ProgressDialog(getActivity());
+			progressDialog.setMessage("正在获取最后一次位置，请稍后...");
+			progressDialog.show();
+			AsyncAid aAid = new AsyncAid(aid);
+			// 对结果进行监听
+			aAid.getRecentTrajectory(param, new TrajectoryGetListener());
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * 监听获取最近一次位置
+	 * 
+	 * @author Administrator
+	 * 
+	 */
+	private class TrajectoryGetListener extends
+			AbstractRequestListener<TrajectoryGetResponseBean>
+	{
+		private Handler	handler	= new Handler();
+
+		@Override
+		public void onError(AidError AidError)
+		{
+			handler.post(new Runnable() {
+				@Override
+				public void run()
 				{
-					if (null != getActivity())
+					if (getActivity() != null)
 					{
-						getActivity().runOnUiThread(new Runnable() {
-							@Override
-							public void run()
-							{
-								progressDialog = new ProgressDialog(
-										getActivity());
-								progressDialog.setMessage("正在获取监护对象最近一次位置...");
-								progressDialog.show();
-							}
-						});
+						if (progressDialog != null
+								&& progressDialog.isShowing())
+						{
+							progressDialog.dismiss();
+						}
+						FragmentPageOverview.location = FragmentPageOverview.errorMessage;
+						locationText.setText(FragmentPageOverview.location);
 					}
-					FragmentPageOverview.point = new GeoPoint(
-							(int) (39.915 * 1e6), (int) (116.404 * 1e6));
-					// 反Geo搜索
-					mSearch.reverseGeocode(FragmentPageOverview.point);
+					Util.alert(getActivity(), "获取最近一次位置失败！");
 				}
-				catch (Exception e)
+			});
+		}
+
+		@Override
+		public void onFault(Throwable fault)
+		{
+			fault.toString();
+			handler.post(new Runnable() {
+				@Override
+				public void run()
 				{
-					Util.logger("aid exception " + e.getMessage());
+					if (getActivity() != null)
+					{
+						if (progressDialog != null
+								&& progressDialog.isShowing())
+						{
+							progressDialog.dismiss();
+						}
+						FragmentPageOverview.location = FragmentPageOverview.errorMessage;
+						locationText.setText(FragmentPageOverview.location);
+						Util.alert(getActivity(), "获取最近一次位置失败！");
+					}
 				}
-			}
-		});
+			});
+		}
+
+		@Override
+		public void onComplete(final TrajectoryGetResponseBean bean)
+		{
+			handler.post(new Runnable() {
+				@Override
+				public void run()
+				{
+					if (getActivity() != null)
+					{
+						if (progressDialog != null
+								&& progressDialog.isShowing())
+						{
+							progressDialog.dismiss();
+						}
+						if (null != bean.getTrajectory())
+						{
+							FragmentPageOverview.trajectory = bean
+									.getTrajectory();
+							startParseLocation();
+						}
+						else
+						{
+							FragmentPageOverview.location = FragmentPageOverview.errorMessage;
+							locationText.setText(FragmentPageOverview.location);
+							Util.alert(getActivity(), "获取最近一次位置失败！");
+						}
+					}
+				}
+			});
+		}
 	}
 
 	@Override
@@ -224,6 +328,51 @@ public class FragmentPageOverview extends Fragment implements OnClickListener
 		}
 	}
 
+	private void startParseLocation()
+	{
+		Executors.newFixedThreadPool(2).execute(new Runnable() {
+			@Override
+			public void run()
+			{
+				try
+				{
+					if (null != getActivity())
+					{
+						getActivity().runOnUiThread(new Runnable() {
+							@Override
+							public void run()
+							{
+								FragmentPageOverview.location = "经"
+										+ FragmentPageOverview.trajectory
+												.getLongtitude()
+										+ "°,纬"
+										+ FragmentPageOverview.trajectory
+												.getLatitude() + "°";
+								locationText
+										.setText(FragmentPageOverview.location);
+								progressDialog = new ProgressDialog(
+										getActivity());
+								progressDialog.setMessage("正在解析位置...");
+								progressDialog.show();
+							}
+						});
+					}
+					FragmentPageOverview.point = new GeoPoint(
+							(int) (FragmentPageOverview.trajectory
+									.getLatitude() * 1e6),
+							(int) (FragmentPageOverview.trajectory
+									.getLongtitude() * 1e6));
+					// 反Geo搜索
+					mSearch.reverseGeocode(FragmentPageOverview.point);
+				}
+				catch (Exception e)
+				{
+					Util.logger("aid exception " + e.getMessage());
+				}
+			}
+		});
+	}
+
 	class BaiduSearchListener implements MKSearchListener
 	{
 		@Override
@@ -244,7 +393,7 @@ public class FragmentPageOverview extends Fragment implements OnClickListener
 			}
 			if (error != 0)
 			{
-				FragmentPageOverview.location = "位置获取失败,点此重新获取";
+				FragmentPageOverview.location = "解析位置失败,点此重新解析";
 				locationText.setText(FragmentPageOverview.location);
 				String str = String.format("错误号：%d", error);
 				Toast.makeText(getActivity(), str, Toast.LENGTH_LONG).show();

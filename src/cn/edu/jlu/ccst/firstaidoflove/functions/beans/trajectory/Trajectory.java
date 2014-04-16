@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.AidException;
+import cn.edu.jlu.ccst.firstaidoflove.functions.beans.login.Login;
 import cn.edu.jlu.ccst.firstaidoflove.util.Constant;
 
 /**
@@ -66,6 +67,16 @@ public class Trajectory implements Parcelable
 		this.longtitude = longtitude;
 		this.latitude = latitude;
 		this.time = time;
+	}
+
+	public Trajectory(Login login)
+	{
+		super();
+		pid = login.getPid();
+		pname = login.getPname();
+		longtitude = login.getLon();
+		latitude = login.getLat();
+		time = null;
 	}
 
 	/*

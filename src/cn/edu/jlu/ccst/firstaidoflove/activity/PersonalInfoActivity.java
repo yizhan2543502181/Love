@@ -8,9 +8,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.Window;
 import android.widget.TextView;
+import cn.edu.jlu.ccst.firstaidoflove.AbstractAidRequestActivity;
 import cn.edu.jlu.ccst.firstaidoflove.R;
 import cn.edu.jlu.ccst.firstaidoflove.activity.main.LoginActivity;
-import cn.edu.jlu.ccst.firstaidoflove.functions.AbstractAidRequestActivity;
 import cn.edu.jlu.ccst.firstaidoflove.functions.AbstractRequestListener;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.Aid;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.AidError;
@@ -119,7 +119,6 @@ public class PersonalInfoActivity extends AbstractAidRequestActivity
 		try
 		{
 			progressDialog = new ProgressDialog(PersonalInfoActivity.this);
-			progressDialog.setTitle("提示");
 			progressDialog.setMessage("正在获取信息，请稍后...");
 			progressDialog.show();
 			AsyncAid aAid = new AsyncAid(aid);

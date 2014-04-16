@@ -20,9 +20,9 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
+import cn.edu.jlu.ccst.firstaidoflove.AbstractAidRequestActivity;
 import cn.edu.jlu.ccst.firstaidoflove.R;
 import cn.edu.jlu.ccst.firstaidoflove.activity.main.LoginActivity;
-import cn.edu.jlu.ccst.firstaidoflove.functions.AbstractAidRequestActivity;
 import cn.edu.jlu.ccst.firstaidoflove.functions.AbstractRequestListener;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.Aid;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.AidError;
@@ -127,7 +127,7 @@ public class RecentAccidentsActivity extends AbstractAidRequestActivity
 													Intent intent = new Intent();
 													Bundle bundle = new Bundle();
 													bundle.putParcelable(
-															Constant.ACCIDENT_LABLE,
+															Constant.ACCIDENT_LABEL,
 															accidentList
 																	.get(position));
 													intent.putExtras(bundle);
@@ -154,7 +154,6 @@ public class RecentAccidentsActivity extends AbstractAidRequestActivity
 		try
 		{
 			progressDialog = new ProgressDialog(RecentAccidentsActivity.this);
-			progressDialog.setTitle("提示");
 			progressDialog.setMessage("正在获取信息，请稍后...");
 			progressDialog.show();
 			AsyncAid aAid = new AsyncAid(aid);

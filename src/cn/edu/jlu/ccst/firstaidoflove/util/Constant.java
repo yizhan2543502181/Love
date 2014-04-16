@@ -4,7 +4,7 @@ public class Constant
 {
 	public static final String	VERSION								= "1.0";
 	public static final String	LOG_TAG								= "AID";
-	public static final String	AID_LABEL							= "AID";
+	public static final String	AID_LABEL							= "aid_label";
 	public static final String	RESTSERVER_URL						= "http://localhost:7777/service.do";
 	public static final String	SHARE_LOGIN_NAME					= "SHARE_LOGIN_NAME";
 	public static final String	SHARE_LOGIN_PASSWORD				= "SHARE_LOGIN_PASSWORD";
@@ -36,17 +36,18 @@ public class Constant
 	public static final int		ERROR_RENREN_INIT_ERROR				= -10;
 	public static String		KEY_RESULT_CODE						= "result_code";
 	// "pid":"46465165","pname":"小李","longitude":"23.4587","latitude":"65.2365","time":"2014.04.08 23:56:23"
-	public static final String	ACCIDENT_LABLE						= "accident";
+	public static final String	ACCIDENT_LABEL						= "accident_label";
 	public static final String	KEY_MEDICAL_HISTORY					= "medical_history";
+	public static final String	LOGIN_LABEL							= "login_label";
 	public static final String	KEY_LON								= "longitude";
 	public static final String	KEY_LAT								= "latitude";
 	public static final String	LOGIN_NAME							= "login_name";
 	public static final String	LOGIN_PASSWORD						= "login_password";
-	public static final String	MEDICAL_RECORD_LABLE				= "medical_record";
+	public static final String	MEDICAL_RECORD_LABEL				= "medical_record_label";
 	public static final String	KEY_TIME							= "time";
 	public static final String	KEY_MEDICAL_RECORD					= "medical_record";
 	// "pid":"46465165","pname":"小李","longitude":"23.4587","latitude":"65.2365","time":"2014.04.08 23:56:23"
-	public static final String	TRAJECTORY_LABLE					= "trajectory";
+	public static final String	TRAJECTORY_LABEL					= "trajectory_label";
 	public static final String	KEY_UID								= "uid";
 	public static final String	KEY_UNAME							= "uname";
 	public static final String	KEY_PID								= "pid";

@@ -20,16 +20,16 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
+import cn.edu.jlu.ccst.firstaidoflove.AbstractAidRequestActivity;
 import cn.edu.jlu.ccst.firstaidoflove.R;
 import cn.edu.jlu.ccst.firstaidoflove.activity.main.LoginActivity;
-import cn.edu.jlu.ccst.firstaidoflove.functions.AbstractAidRequestActivity;
 import cn.edu.jlu.ccst.firstaidoflove.functions.AbstractRequestListener;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.Aid;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.AidError;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.AsyncAid;
-import cn.edu.jlu.ccst.firstaidoflove.functions.beans.medicalHistory.MedicalRecord;
-import cn.edu.jlu.ccst.firstaidoflove.functions.beans.medicalHistory.MedicalRecordsGetRequestParam;
-import cn.edu.jlu.ccst.firstaidoflove.functions.beans.medicalHistory.MedicalRecordsGetResponseBean;
+import cn.edu.jlu.ccst.firstaidoflove.functions.beans.medicalRecord.MedicalRecord;
+import cn.edu.jlu.ccst.firstaidoflove.functions.beans.medicalRecord.MedicalRecordsGetRequestParam;
+import cn.edu.jlu.ccst.firstaidoflove.functions.beans.medicalRecord.MedicalRecordsGetResponseBean;
 import cn.edu.jlu.ccst.firstaidoflove.util.Constant;
 import cn.edu.jlu.ccst.firstaidoflove.util.Util;
 
@@ -126,7 +126,7 @@ public class MedicalRecordsActivity extends AbstractAidRequestActivity
 													Intent intent = new Intent();
 													Bundle bundle = new Bundle();
 													bundle.putParcelable(
-															Constant.MEDICAL_RECORD_LABLE,
+															Constant.MEDICAL_RECORD_LABEL,
 															medicalRecordList
 																	.get(position));
 													intent.putExtras(bundle);
@@ -153,7 +153,6 @@ public class MedicalRecordsActivity extends AbstractAidRequestActivity
 		try
 		{
 			progressDialog = new ProgressDialog(MedicalRecordsActivity.this);
-			progressDialog.setTitle("提示");
 			progressDialog.setMessage("正在获取信息，请稍后...");
 			progressDialog.show();
 			AsyncAid aAid = new AsyncAid(aid);

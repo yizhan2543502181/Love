@@ -90,19 +90,19 @@
         </meta-data>
         -->
         <!-- 宿舍_x86_32_android -->
-        <meta-data
+        <!-- <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="xsSZ90mQC9VsFP0Hp6xC44h8" >
-        </meta-data>
+        </meta-data> -->
         <!-- 507_x86_64_android -->
 
 
-        <!--
+        
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="FTwyeMnSrBaGzbFHe1EpNzn3" >
         </meta-data>
-        -->
+        
 
 
         <!-- Required  . Enable it you can get statistics data with channel -->

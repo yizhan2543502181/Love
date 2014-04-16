@@ -11,9 +11,9 @@ import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import cn.edu.jlu.ccst.firstaidoflove.AbstractAidRequestActivity;
 import cn.edu.jlu.ccst.firstaidoflove.R;
 import cn.edu.jlu.ccst.firstaidoflove.activity.main.LoginActivity;
-import cn.edu.jlu.ccst.firstaidoflove.functions.AbstractAidRequestActivity;
 import cn.edu.jlu.ccst.firstaidoflove.functions.AbstractRequestListener;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.Aid;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.AidError;
@@ -147,7 +147,6 @@ public class PersonalInfoModifyActivity extends AbstractAidRequestActivity
 		try
 		{
 			progressDialog = new ProgressDialog(PersonalInfoModifyActivity.this);
-			progressDialog.setTitle("提示");
 			progressDialog.setMessage("正在更新，请稍后...");
 			progressDialog.show();
 			AsyncAid aAid = new AsyncAid(aid);

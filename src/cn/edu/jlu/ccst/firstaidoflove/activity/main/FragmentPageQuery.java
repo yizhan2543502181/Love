@@ -80,11 +80,11 @@ public class FragmentPageQuery extends Fragment
 				long arg3// The row id of the item that was clicked
 		)
 		{
-			intent = getActivity().getIntent();
+			intent = new Intent();
 			// 在本例中arg2=arg3
 			@SuppressWarnings("unchecked")
-			HashMap<String, Object> item = (HashMap<String, Object>) (arg0
-					.getItemAtPosition(arg2));
+			HashMap<String, Object> item = (HashMap<String, Object>) arg0
+					.getItemAtPosition(arg2);
 			switch (arg2)
 			{
 			case 0:

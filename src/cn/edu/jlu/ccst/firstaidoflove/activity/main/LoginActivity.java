@@ -16,9 +16,9 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+import cn.edu.jlu.ccst.firstaidoflove.AbstractAidRequestActivity;
 import cn.edu.jlu.ccst.firstaidoflove.R;
 import cn.edu.jlu.ccst.firstaidoflove.activity.FindPasswordActivity;
-import cn.edu.jlu.ccst.firstaidoflove.functions.AbstractAidRequestActivity;
 import cn.edu.jlu.ccst.firstaidoflove.functions.AbstractRequestListener;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.Aid;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.AidError;
@@ -26,6 +26,7 @@ import cn.edu.jlu.ccst.firstaidoflove.functions.beans.AsyncAid;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.login.Login;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.login.LoginRequestParam;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.login.LoginResponseBean;
+import cn.edu.jlu.ccst.firstaidoflove.functions.beans.trajectory.Trajectory;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.user.User;
 import cn.edu.jlu.ccst.firstaidoflove.util.Constant;
 import cn.edu.jlu.ccst.firstaidoflove.util.Util;
@@ -90,7 +91,7 @@ public class LoginActivity extends AbstractAidRequestActivity implements
 		Set<String> set = new HashSet<String>();
 		set.add(Constant.SHARE_SESSION_KEY);
 		Bundle bundle = Util.getSharePreferences(LoginActivity.this, set);
-		return (null == bundle.getString(Constant.SHARE_SESSION_KEY))
+		return null == bundle.getString(Constant.SHARE_SESSION_KEY)
 				|| bundle.getString(Constant.SHARE_SESSION_KEY).equals("") ? null
 				: bundle.getString(Constant.SHARE_SESSION_KEY);
 	}
@@ -121,11 +122,11 @@ public class LoginActivity extends AbstractAidRequestActivity implements
 		userName = bundle.getString(Constant.SHARE_LOGIN_NAME);
 		password = bundle.getString(Constant.SHARE_LOGIN_PASSWORD);
 		Log.d(toString(), "userName=" + userName + " password=" + password);
-		if ((null != userName) && !"".equals(userName.trim()))
+		if (null != userName && !"".equals(userName.trim()))
 		{
 			userNameEdit.setText(userName);
 		}
-		if ((null != password) && !"".equals(password))
+		if (null != password && !"".equals(password))
 		{
 			passwordEdit.setText(password);
 			rememberMeCheck.setChecked(true);
@@ -266,7 +267,7 @@ public class LoginActivity extends AbstractAidRequestActivity implements
 				{
 					if (LoginActivity.this != null)
 					{
-						if ((progressDialog != null)
+						if (progressDialog != null
 								&& progressDialog.isShowing())
 						{
 							progressDialog.dismiss();
@@ -287,12 +288,12 @@ public class LoginActivity extends AbstractAidRequestActivity implements
 				{
 					if (LoginActivity.this != null)
 					{
-						if ((progressDialog != null)
+						if (progressDialog != null
 								&& progressDialog.isShowing())
 						{
 							progressDialog.setMessage("登录成功，正在跳转...");
 						}
-						Util.alert(context, "登录失败，请重新登录！");
+						// Util.alert(context, "登录失败，请重新登录！");
 						afterLogin();
 					}
 				}
@@ -308,7 +309,7 @@ public class LoginActivity extends AbstractAidRequestActivity implements
 				{
 					if (LoginActivity.this != null)
 					{
-						if ((progressDialog != null)
+						if (progressDialog != null
 								&& progressDialog.isShowing())
 						{
 							progressDialog.setMessage("登录成功，正在跳转...");
@@ -325,6 +326,8 @@ public class LoginActivity extends AbstractAidRequestActivity implements
 							Aid.initInstance();
 							Aid.setUser(user);
 							Aid.getInstance().savePersistSession();
+							FragmentPageOverview.trajectory = new Trajectory(
+									loginInstance);
 							intent.setClass(LoginActivity.this,
 									MainActivity.class);
 							startActivity(intent);
@@ -348,6 +351,9 @@ public class LoginActivity extends AbstractAidRequestActivity implements
 		user.setPid(3333333);
 		user.setPname("老刘");
 		Aid.setUser(user);
+		Login login = new Login(user.getUname(), user.getUid(),
+				user.getPname(), user.getPid(), 115.235987, 39.1258468);
+		FragmentPageOverview.trajectory = new Trajectory(login);
 		intent.setClass(LoginActivity.this, MainActivity.class);
 		startActivity(intent);
 	}

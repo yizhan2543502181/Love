@@ -12,9 +12,9 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
 import android.widget.Toast;
+import cn.edu.jlu.ccst.firstaidoflove.AbstractAidRequestActivity;
 import cn.edu.jlu.ccst.firstaidoflove.AidApplication;
 import cn.edu.jlu.ccst.firstaidoflove.R;
-import cn.edu.jlu.ccst.firstaidoflove.functions.AbstractAidRequestActivity;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.accident.Accident;
 import cn.edu.jlu.ccst.firstaidoflove.util.Constant;
 import cn.edu.jlu.ccst.firstaidoflove.util.Util;
@@ -57,9 +57,9 @@ public class AccidentInfoActivity extends AbstractAidRequestActivity implements
 	{
 		super.onCreate(savedInstanceState);
 		Bundle bundle = intent.getExtras();
-		if (bundle != null && bundle.containsKey(Constant.ACCIDENT_LABLE))
+		if (bundle != null && bundle.containsKey(Constant.ACCIDENT_LABEL))
 		{
-			accident = bundle.getParcelable(Constant.ACCIDENT_LABLE);
+			accident = bundle.getParcelable(Constant.ACCIDENT_LABEL);
 		}
 		setContentView(R.layout.accident_info_activity_layout);
 		baiduMapInit();

@@ -12,12 +12,15 @@ import cn.edu.jlu.ccst.firstaidoflove.functions.beans.accident.AccidentsGetRespo
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.login.LoginHelper;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.login.LoginRequestParam;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.login.LoginResponseBean;
-import cn.edu.jlu.ccst.firstaidoflove.functions.beans.medicalHistory.MedicalRecordsGetHelper;
-import cn.edu.jlu.ccst.firstaidoflove.functions.beans.medicalHistory.MedicalRecordsGetRequestParam;
-import cn.edu.jlu.ccst.firstaidoflove.functions.beans.medicalHistory.MedicalRecordsGetResponseBean;
+import cn.edu.jlu.ccst.firstaidoflove.functions.beans.medicalRecord.MedicalRecordsGetHelper;
+import cn.edu.jlu.ccst.firstaidoflove.functions.beans.medicalRecord.MedicalRecordsGetRequestParam;
+import cn.edu.jlu.ccst.firstaidoflove.functions.beans.medicalRecord.MedicalRecordsGetResponseBean;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.trajectory.TrajectoriesGetHelper;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.trajectory.TrajectoriesGetRequestParam;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.trajectory.TrajectoriesGetResponseBean;
+import cn.edu.jlu.ccst.firstaidoflove.functions.beans.trajectory.TrajectoryGetHelper;
+import cn.edu.jlu.ccst.firstaidoflove.functions.beans.trajectory.TrajectoryGetRequestParam;
+import cn.edu.jlu.ccst.firstaidoflove.functions.beans.trajectory.TrajectoryGetResponseBean;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.user.UserGetHelper;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.user.UserGetRequestParam;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.user.UserGetResponseBean;
@@ -131,10 +134,9 @@ public class AsyncAid
 	}
 
 	/**
-	 * 异步登录
+	 * 登录
 	 * 
-	 * @param name
-	 * @param password
+	 * @param param
 	 * @param listener
 	 */
 	public void login(LoginRequestParam param,
@@ -144,14 +146,10 @@ public class AsyncAid
 	}
 
 	/**
-	 * users.getInfo接口<br>
-	 * http://wiki.dev.aid.com/wiki/Users.getInfo
-	 * 
-	 * @see Aid.getUsersInfo
+	 * 获取用户的个人信息
 	 * 
 	 * @param param
-	 *            请求参数
-	 * @see Aid.getUsersInfo
+	 * @param listener
 	 */
 	public void getUserInfo(UserGetRequestParam param,
 			AbstractRequestListener<UserGetResponseBean> listener)
@@ -159,18 +157,36 @@ public class AsyncAid
 		new UserGetHelper(aid).asyncGetUsersInfo(pool, param, listener);
 	}
 
+	/**
+	 * 设置用户的个人信息
+	 * 
+	 * @param param
+	 * @param listener
+	 */
 	public void setUserInfo(UserSetRequestParam param,
 			AbstractRequestListener<UserSetResponseBean> listener)
 	{
 		new UserSetHelper(aid).asyncsetUsersInfo(pool, param, listener);
 	}
 
+	/**
+	 * 获取最近的事故
+	 * 
+	 * @param param
+	 * @param listener
+	 */
 	public void getRecentAccidents(AccidentsGetRequestParam param,
 			AbstractRequestListener<AccidentsGetResponseBean> listener)
 	{
 		new AccidentsGetHelper(aid).asyncGetAccidents(pool, param, listener);
 	}
 
+	/**
+	 * 获取最近的运动轨迹
+	 * 
+	 * @param param
+	 * @param listener
+	 */
 	public void getRecentTrajectories(TrajectoriesGetRequestParam param,
 			AbstractRequestListener<TrajectoriesGetResponseBean> listener)
 	{
@@ -178,10 +194,28 @@ public class AsyncAid
 				listener);
 	}
 
+	/**
+	 * 获取最近的病历
+	 * 
+	 * @param param
+	 * @param listener
+	 */
 	public void getRecentMedicalRecords(MedicalRecordsGetRequestParam param,
 			AbstractRequestListener<MedicalRecordsGetResponseBean> listener)
 	{
 		new MedicalRecordsGetHelper(aid).asyncGetMedicalRecords(pool, param,
 				listener);
+	}
+
+	/**
+	 * 获取最近一次位置
+	 * 
+	 * @param param
+	 * @param listener
+	 */
+	public void getRecentTrajectory(TrajectoryGetRequestParam param,
+			AbstractRequestListener<TrajectoryGetResponseBean> listener)
+	{
+		new TrajectoryGetHelper(aid).asyncGetTrajectory(pool, param, listener);
 	}
 }

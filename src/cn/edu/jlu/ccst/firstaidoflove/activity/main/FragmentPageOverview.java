@@ -123,6 +123,10 @@ public class FragmentPageOverview extends Fragment implements OnClickListener
 		}
 		else if (null != FragmentPageOverview.trajectory)
 		{
+			FragmentPageOverview.point = new GeoPoint(
+					(int) (FragmentPageOverview.trajectory.getLatitude() * 1e6),
+					(int) (FragmentPageOverview.trajectory.getLongtitude() * 1e6));
+			moveToSpecialPoint(FragmentPageOverview.point, null);
 			startParseLocation();
 		}
 		else
@@ -266,6 +270,12 @@ public class FragmentPageOverview extends Fragment implements OnClickListener
 						{
 							FragmentPageOverview.trajectory = bean
 									.getTrajectory();
+							FragmentPageOverview.point = new GeoPoint(
+									(int) (FragmentPageOverview.trajectory
+											.getLatitude() * 1e6),
+									(int) (FragmentPageOverview.trajectory
+											.getLongtitude() * 1e6));
+							moveToSpecialPoint(FragmentPageOverview.point, null);
 							startParseLocation();
 						}
 						else
@@ -342,14 +352,6 @@ public class FragmentPageOverview extends Fragment implements OnClickListener
 							@Override
 							public void run()
 							{
-								FragmentPageOverview.location = "经"
-										+ FragmentPageOverview.trajectory
-												.getLongtitude()
-										+ "°,纬"
-										+ FragmentPageOverview.trajectory
-												.getLatitude() + "°";
-								locationText
-										.setText(FragmentPageOverview.location);
 								progressDialog = new ProgressDialog(
 										getActivity());
 								progressDialog.setMessage("正在解析位置...");
@@ -357,11 +359,6 @@ public class FragmentPageOverview extends Fragment implements OnClickListener
 							}
 						});
 					}
-					FragmentPageOverview.point = new GeoPoint(
-							(int) (FragmentPageOverview.trajectory
-									.getLatitude() * 1e6),
-							(int) (FragmentPageOverview.trajectory
-									.getLongtitude() * 1e6));
 					// 反Geo搜索
 					mSearch.reverseGeocode(FragmentPageOverview.point);
 				}

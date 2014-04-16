@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.util.Log;
 import cn.edu.jlu.ccst.firstaidoflove.util.Constant;
+import cn.edu.jlu.ccst.firstaidoflove.util.Util;
 
 import com.baidu.mapapi.BMapManager;
 import com.baidu.mapapi.MKGeneralListener;
@@ -53,10 +54,20 @@ public class AidApplication extends Application
 		{
 			if (iError == MKEvent.ERROR_NETWORK_CONNECT)
 			{
+				if (null != AidApplication.getInstance()
+						&& null != AidApplication.getInstance()
+								.getApplicationContext())
+				{
+					Util.alert(AidApplication.getInstance()
+							.getApplicationContext(), "获取地图数据异常，请重试！");
+				}
 				Log.e(Constant.AID_LABEL, "您的网络出错啦！");
 			}
 			else if (iError == MKEvent.ERROR_NETWORK_DATA)
 			{
+				Util.alert(
+						AidApplication.getInstance().getApplicationContext(),
+						"获取地图数据异常，请重试！");
 				Log.e(Constant.AID_LABEL, "百度地图获取数据异常，请重试!");
 			}
 			// ...

@@ -72,7 +72,7 @@ public class RecentAccidentsActivity extends AbstractAidRequestActivity
 		{
 			accidentList.add(0,
 					new Accident(currentUser.getPid(), currentUser.getPname(),
-							110.235, 35.3254, "2014.04.15", "糖尿病，高血压，骨折"));
+							116.391729, 39.944713, "2014.04.15", "糖尿病，高血压，骨折"));
 			Accident accident = accidentList.get(i);
 			addListItem("姓名：" + accident.getPname() + "\n时间："
 					+ accident.getTime() + "\n事故地点：" + "经"

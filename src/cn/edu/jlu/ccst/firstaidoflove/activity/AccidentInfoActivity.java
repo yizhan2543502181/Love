@@ -42,15 +42,16 @@ import com.baidu.platform.comapi.basestruct.GeoPoint;
 public class AccidentInfoActivity extends AbstractAidRequestActivity implements
 		OnClickListener
 {
-	private TextView	locationText			= null;
-	private TextView	patientNameText			= null;
-	private TextView	patientMedicalHistory	= null;
-	private MapView		mMapView				= null;
+	private TextView		locationText			= null;
+	private TextView		patientNameText			= null;
+	private TextView		patientMedicalHistory	= null;
+	private MapView			mMapView				= null;
 	// 搜索相关
-	private MKSearch	mSearch					= null; // 搜索模块，也可去掉地图模块独立使用
-	private GeoPoint	point					= null;
-	private String		location				= null;
-	private Accident	accident				= null;
+	private MKSearch		mSearch					= null;				// 搜索模块，也可去掉地图模块独立使用
+	private GeoPoint		point					= null;
+	private String			location				= null;
+	private Accident		accident				= null;
+	private final String	errorMessage			= "解析位置失败，请返回重新打开此页面！";
 
 	@Override
 	public void onCreate(Bundle savedInstanceState)
@@ -132,7 +133,7 @@ public class AccidentInfoActivity extends AbstractAidRequestActivity implements
 		mMapView.getController().setZoomGesturesEnabled(true);
 		mMapView.getController().setRotationGesturesEnabled(false);
 		mMapView.getController().setScrollGesturesEnabled(true);
-		if (null != point)
+		if (null != point && null != location && !location.equals(errorMessage))
 		{
 			moveToSpecialPoint(point, location);
 		}
@@ -162,7 +163,7 @@ public class AccidentInfoActivity extends AbstractAidRequestActivity implements
 											progressDialog = new ProgressDialog(
 													AccidentInfoActivity.this);
 											progressDialog
-													.setMessage("正在获取事故位置...");
+													.setMessage("正在解析事故位置...");
 											progressDialog.show();
 										}
 									});
@@ -184,9 +185,8 @@ public class AccidentInfoActivity extends AbstractAidRequestActivity implements
 										{
 											Util.alert(
 													AccidentInfoActivity.this,
-													"获取位置失败，请返回重新打开此页面！");
-											locationText
-													.setText("位置获取失败,点此重新获取");
+													errorMessage);
+											locationText.setText(errorMessage);
 										}
 									});
 						}
@@ -206,7 +206,15 @@ public class AccidentInfoActivity extends AbstractAidRequestActivity implements
 		switch (v.getId())
 		{
 		case R.id.accident_info_location_text:
-			startLocate();
+			if (null != point && null != location
+					&& !location.equals(errorMessage))
+			{
+				moveToSpecialPoint(point, location);
+			}
+			else
+			{
+				startLocate();
+			}
 			break;
 		default:
 			break;
@@ -233,7 +241,7 @@ public class AccidentInfoActivity extends AbstractAidRequestActivity implements
 			}
 			if (error != 0)
 			{
-				location = "位置获取失败,点此重新获取";
+				location = errorMessage;
 				locationText.setText(location);
 				String str = String.format("错误号：%d", error);
 				Toast.makeText(AccidentInfoActivity.this, str,
@@ -256,8 +264,8 @@ public class AccidentInfoActivity extends AbstractAidRequestActivity implements
 				// 反地理编码：通过坐标点检索详细地址及周边poi
 				String strInfo = res.strAddr;
 				location = strInfo;
-				location = location == null ? "位置获取失败,点此重新获取" : location;
-				locationText.setText(location + "附近(点击重新获取)");
+				location = location == null ? errorMessage : location;
+				locationText.setText(location + "附近");
 			}
 			moveToSpecialPoint(res.geoPt, location);
 		}

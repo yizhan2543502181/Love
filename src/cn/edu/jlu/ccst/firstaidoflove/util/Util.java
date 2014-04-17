@@ -53,12 +53,9 @@ import cn.edu.jlu.ccst.firstaidoflove.functions.beans.AidException;
  */
 public final class Util
 {
-	public static final String	LOG_TAG		= "AID";
-	public static final String	USER_AGENT	= "1.0";
-
 	public static void logger(String message)
 	{
-		Log.i(Util.LOG_TAG, message);
+		Log.i(Constant.LOG_TAG, message);
 	}
 
 	/**
@@ -157,16 +154,17 @@ public final class Util
 		String response = "";
 		try
 		{
-			Log.d(Util.LOG_TAG, method + " URL: " + url);
+			Log.d(Constant.LOG_TAG, method + " URL: " + url);
 			HttpURLConnection conn = (HttpURLConnection) new URL(url)
 					.openConnection();
-			conn.setRequestProperty("User-Agent", Util.USER_AGENT);
+			conn.setRequestProperty("User-Agent", Constant.VERSION);
 			if (!method.equals("GET"))
 			{
 				conn.setRequestMethod("POST");
 				conn.setDoOutput(true);
-				conn.getOutputStream().write(
-						Util.encodeUrl(params).getBytes("UTF-8"));
+				String requestParams = Util.encodeUrl(params);
+				Util.logger(requestParams);
+				conn.getOutputStream().write(requestParams.getBytes("UTF-8"));
 			}
 			InputStream is = null;
 			int responseCode = conn.getResponseCode();
@@ -179,6 +177,8 @@ public final class Util
 				is = conn.getErrorStream();
 			}
 			response = Util.read(is);
+			response = new String(response.getBytes());
+			Util.logger(response);
 		}
 		catch (Exception e)
 		{
@@ -196,10 +196,10 @@ public final class Util
 		}
 		try
 		{
-			Log.d(Util.LOG_TAG, method + " URL: " + url);
+			Log.d(Constant.LOG_TAG, method + " URL: " + url);
 			HttpURLConnection conn = (HttpURLConnection) new URL(url)
 					.openConnection();
-			conn.setRequestProperty("User-Agent", Util.USER_AGENT);
+			conn.setRequestProperty("User-Agent", Constant.VERSION);
 			if (!method.equals("GET"))
 			{
 				conn.setRequestMethod("POST");
@@ -211,7 +211,7 @@ public final class Util
 		}
 		catch (Exception e)
 		{
-			Log.e(Util.LOG_TAG, e.getMessage());
+			Log.e(Constant.LOG_TAG, e.getMessage());
 			throw new RuntimeException(e.getMessage(), e);
 		}
 	}
@@ -246,7 +246,7 @@ public final class Util
 		}
 		catch (Exception e)
 		{
-			Log.e(Util.LOG_TAG, e.getMessage());
+			Log.e(Constant.LOG_TAG, e.getMessage());
 			throw new RuntimeException(e.getMessage(), e);
 		}
 	}
@@ -392,7 +392,7 @@ public final class Util
 					}
 					break;
 				}
-				if ((errorCode > -1) && (errorMsg != null))
+				if (errorCode > -1 && errorMsg != null)
 				{
 					error = new AidError(errorCode, errorMsg, xmlResponse);
 					break;
@@ -495,7 +495,7 @@ public final class Util
 
 	public static String md5(String string)
 	{
-		if ((string == null) || (string.trim().length() < 1))
+		if (string == null || string.trim().length() < 1)
 		{
 			return null;
 		}
@@ -546,8 +546,8 @@ public final class Util
 				ConnectivityManager.TYPE_MOBILE).getState();
 		State wifiState = connManager.getNetworkInfo(
 				ConnectivityManager.TYPE_WIFI).getState();
-		if ((mobileState == State.DISCONNECTED)
-				&& (wifiState == State.DISCONNECTED))
+		if (mobileState == State.DISCONNECTED
+				&& wifiState == State.DISCONNECTED)
 		{
 			return false;
 		}
@@ -852,7 +852,7 @@ public final class Util
 		}
 		catch (Exception e)
 		{
-			Log.e(Util.LOG_TAG, e.getMessage());
+			Log.e(Constant.LOG_TAG, e.getMessage());
 		}
 		return imei;
 	}

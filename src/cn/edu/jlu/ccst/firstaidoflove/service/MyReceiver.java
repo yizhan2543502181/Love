@@ -49,8 +49,19 @@ public class MyReceiver extends BroadcastReceiver
 		else if (JPushInterface.ACTION_NOTIFICATION_RECEIVED.equals(intent
 				.getAction()))
 		{
-			MyReceiver.dealMessage(bundle.getString("cn.jpush.android.ALERT"),
-					FragmentPageNowAccident.accidentArriveListener);
+			String extraMessage = bundle.getString("cn.jpush.android.EXTRA");
+			if (null != extraMessage && !extraMessage.equals("{}")
+					&& !extraMessage.equals(""))
+			{
+				MyReceiver.dealMessage(extraMessage,
+						FragmentPageNowAccident.accidentArriveListener);
+			}
+			else
+			{
+				MyReceiver.dealMessage(
+						bundle.getString("cn.jpush.android.ALERT"),
+						FragmentPageNowAccident.accidentArriveListener);
+			}
 			Log.d(MyReceiver.TAG, "[MyReceiver] 接收到推送下来的通知");
 			int notifactionId = bundle
 					.getInt(JPushInterface.EXTRA_NOTIFICATION_ID);
@@ -137,7 +148,7 @@ public class MyReceiver extends BroadcastReceiver
 				try
 				{
 					JSONObject extraJson = new JSONObject(extras);
-					if ((null != extraJson) && (extraJson.length() > 0))
+					if (null != extraJson && extraJson.length() > 0)
 					{
 						msgIntent.putExtra(MainActivity.KEY_EXTRAS, extras);
 					}

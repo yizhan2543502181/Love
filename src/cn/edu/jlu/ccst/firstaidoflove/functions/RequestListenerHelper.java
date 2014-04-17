@@ -8,7 +8,7 @@ import java.util.List;
 
 import android.util.Log;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.AidError;
-import cn.edu.jlu.ccst.firstaidoflove.util.Util;
+import cn.edu.jlu.ccst.firstaidoflove.util.Constant;
 
 /**
  * AsyncRenren的方法只能接受一个RequestListener; 通过RequestListenerHelper可以在AsyncRenren方法中加入多个监听器；提供RequestListener缺省实现。
@@ -67,14 +67,14 @@ public class RequestListenerHelper implements RequestListener
 		@Override
 		public void onComplete(String response)
 		{
-			Log.i(Util.LOG_TAG, "DefaultRequestListener.onComplete response:"
+			Log.i(Constant.LOG_TAG, "DefaultRequestListener.onComplete response:"
 					+ response);
 		}
 
 		@Override
 		public void onAidError(AidError renrenError)
 		{
-			Log.w(Util.LOG_TAG,
+			Log.w(Constant.LOG_TAG,
 					"DefaultRequestListener.onRenrenError renrenError:"
 							+ renrenError);
 		}
@@ -82,7 +82,7 @@ public class RequestListenerHelper implements RequestListener
 		@Override
 		public void onFault(Throwable fault)
 		{
-			Log.w(Util.LOG_TAG, "DefaultRequestListener.onFault fault:" + fault);
+			Log.w(Constant.LOG_TAG, "DefaultRequestListener.onFault fault:" + fault);
 		}
 	}
 }

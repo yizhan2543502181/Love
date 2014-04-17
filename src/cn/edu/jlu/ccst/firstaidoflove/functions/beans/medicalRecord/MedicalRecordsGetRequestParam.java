@@ -36,7 +36,9 @@ public class MedicalRecordsGetRequestParam extends RequestParam
 														+ ","
 														+ Constant.KEY_BLOOD_SUGAR
 														+ ","
-														+ Constant.KEY_HEART_RATE;
+														+ Constant.KEY_HEART_RATE
+														+ ","
+														+ Constant.KEY_RECORD_OTHER;
 	/**
 	 * 默认字段<br>
 	 * 不添加fields参数也按此字段返回

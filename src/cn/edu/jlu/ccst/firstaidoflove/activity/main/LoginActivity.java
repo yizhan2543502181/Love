@@ -228,8 +228,8 @@ public class LoginActivity extends AbstractAidRequestActivity implements
 			saveUserName();
 			clearSharePassword();
 		}
-		aid = new Aid();
-		aid.setUid((long) 2222222);
+		// aid = new Aid();
+		// aid.setUid((long) 2222222);
 		progressDialog = new ProgressDialog(LoginActivity.this);
 		progressDialog.setMessage("正在登录，请稍后...");
 		progressDialog.show();
@@ -291,10 +291,10 @@ public class LoginActivity extends AbstractAidRequestActivity implements
 						if (progressDialog != null
 								&& progressDialog.isShowing())
 						{
-							progressDialog.setMessage("登录成功，正在跳转...");
+							progressDialog.dismiss();;
 						}
-						// Util.alert(context, "登录失败，请重新登录！");
-						afterLogin();
+						Util.alert(context, "登录失败，请重新登录！");
+						// afterLogin();
 					}
 				}
 			});
@@ -352,7 +352,7 @@ public class LoginActivity extends AbstractAidRequestActivity implements
 		user.setPname("老刘");
 		Aid.setUser(user);
 		Login login = new Login(user.getUname(), user.getUid(),
-				user.getPname(), user.getPid(), 115.235987, 39.1258468);
+				user.getPname(), user.getPid(), 116.391729, 39.944713);
 		FragmentPageOverview.trajectory = new Trajectory(login);
 		intent.setClass(LoginActivity.this, MainActivity.class);
 		startActivity(intent);

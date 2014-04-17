@@ -71,7 +71,7 @@ public class MedicalRecord implements Parcelable
 		bloodPressure = object.optString(Constant.KEY_BLOOD_PRESSURE);
 		bloodSugar = object.optString(Constant.KEY_BLOOD_SUGAR);
 		heartRate = object.optString(Constant.KEY_HEART_RATE);
-		recordOther = object.optString(Constant.KEY_HEART_RECORD_OTHER);
+		recordOther = object.optString(Constant.KEY_RECORD_OTHER);
 		return this;
 	}
 
@@ -232,7 +232,7 @@ public class MedicalRecord implements Parcelable
 		}
 		if (null != recordOther)
 		{
-			bundle.putString(Constant.KEY_HEART_RECORD_OTHER, recordOther);
+			bundle.putString(Constant.KEY_RECORD_OTHER, recordOther);
 		}
 		dest.writeBundle(bundle);
 	}
@@ -301,9 +301,9 @@ public class MedicalRecord implements Parcelable
 		{
 			heartRate = bundle.getString(Constant.KEY_HEART_RATE);
 		}
-		if (bundle.containsKey(Constant.KEY_HEART_RECORD_OTHER))
+		if (bundle.containsKey(Constant.KEY_RECORD_OTHER))
 		{
-			recordOther = bundle.getString(Constant.KEY_HEART_RECORD_OTHER);
+			recordOther = bundle.getString(Constant.KEY_RECORD_OTHER);
 		}
 	}
 }

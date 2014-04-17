@@ -62,7 +62,7 @@ public class FragmentPageOverview extends Fragment implements OnClickListener
 	private static String		location		= null;
 	private ProgressDialog		progressDialog	= null;
 	private Login				login			= null;
-	private static final String	errorMessage	= "获取位置失败,点此重新获取";
+	private final String		errorMessage	= "获取位置失败,点此重新获取";
 
 	@Override
 	public void onCreate(Bundle savedInstanceState)
@@ -115,8 +115,7 @@ public class FragmentPageOverview extends Fragment implements OnClickListener
 		mMapView.getController().setScrollGesturesEnabled(true);
 		if (null != FragmentPageOverview.point
 				&& null != FragmentPageOverview.location
-				&& !FragmentPageOverview.location
-						.equals(FragmentPageOverview.errorMessage))
+				&& !FragmentPageOverview.location.equals(errorMessage))
 		{
 			moveToSpecialPoint(FragmentPageOverview.point,
 					FragmentPageOverview.location);
@@ -222,7 +221,7 @@ public class FragmentPageOverview extends Fragment implements OnClickListener
 						{
 							progressDialog.dismiss();
 						}
-						FragmentPageOverview.location = FragmentPageOverview.errorMessage;
+						FragmentPageOverview.location = errorMessage;
 						locationText.setText(FragmentPageOverview.location);
 					}
 					Util.alert(getActivity(), "获取最近一次位置失败！");
@@ -245,7 +244,7 @@ public class FragmentPageOverview extends Fragment implements OnClickListener
 						{
 							progressDialog.dismiss();
 						}
-						FragmentPageOverview.location = FragmentPageOverview.errorMessage;
+						FragmentPageOverview.location = errorMessage;
 						locationText.setText(FragmentPageOverview.location);
 						Util.alert(getActivity(), "获取最近一次位置失败！");
 					}
@@ -281,7 +280,7 @@ public class FragmentPageOverview extends Fragment implements OnClickListener
 						}
 						else
 						{
-							FragmentPageOverview.location = FragmentPageOverview.errorMessage;
+							FragmentPageOverview.location = errorMessage;
 							locationText.setText(FragmentPageOverview.location);
 							Util.alert(getActivity(), "获取最近一次位置失败！");
 						}

@@ -417,8 +417,11 @@ public class MainActivity extends AbstractAidRequestActivity
 																			}
 																			if (!temp)
 																			{
-																				setAlias();
-																				setTag();
+																				if (Util.isNetworkConnected(getApplicationContext()))
+																				{
+																					setAlias();
+																					setTag();
+																				}
 																			}
 																			try
 																			{

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
@@ -103,12 +104,16 @@ public class RecentTrajectoryActivity extends AbstractAidRequestActivity
 
 	private void genList()
 	{
+		Random random = new Random();
 		list.clear();
 		for (int i = 0; i < 6; ++i)
 		{
-			trajectoryList.add(0, new Trajectory(currentUser.getPid(),
-					currentUser.getPname(), 110.235 + i / 10.0,
-					35.3254 + i / 10.0, "2014.04.15"));
+			trajectoryList.add(
+					0,
+					new Trajectory(currentUser.getPid(),
+							currentUser.getPname(), 116.391729 + random
+									.nextFloat() / 10.0, 39.944713 + random
+									.nextFloat() / 10.0, "2014.04.15"));
 			Trajectory trajectory = trajectoryList.get(i);
 			addListItem("姓名：" + trajectory.getPname() + "\n时间："
 					+ trajectory.getTime() + "\n位置：" + "经"

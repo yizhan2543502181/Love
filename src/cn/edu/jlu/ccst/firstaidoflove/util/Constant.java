@@ -5,7 +5,7 @@ public class Constant
 	public static final String	VERSION								= "1.0";
 	public static final String	LOG_TAG								= "AID";
 	public static final String	AID_LABEL							= "aid_label";
-	public static final String	RESTSERVER_URL						= "http://localhost:7777/service.do";
+	public static final String	RESTSERVER_URL						= "http://49.140.90.202:8088/medical/index.php";
 	public static final String	SHARE_LOGIN_NAME					= "SHARE_LOGIN_NAME";
 	public static final String	SHARE_LOGIN_PASSWORD				= "SHARE_LOGIN_PASSWORD";
 	public static final String	SHARE_CONFIG						= "SHARE_CONFIG";
@@ -65,5 +65,5 @@ public class Constant
 	public static final String	KEY_BLOOD_PRESSURE					= "blood_pressure";
 	public static final String	KEY_BLOOD_SUGAR						= "blood_sugar";
 	public static final String	KEY_HEART_RATE						= "heart_rate";
-	public static final String	KEY_HEART_RECORD_OTHER				= "record_other";
+	public static final String	KEY_RECORD_OTHER					= "record_other";
 }

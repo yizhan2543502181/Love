@@ -171,7 +171,8 @@ public class FragmentPageOverview extends Fragment implements OnClickListener
 		Intent intent = new Intent();
 		if (null == aid || null == currentUser)
 		{
-			Util.alert(getActivity().getApplicationContext(), "用户信息异常，请重新登登录！");
+			Util.alert(getActivity().getApplicationContext(), "用户信息异常，请重新登录！");
+			intent = new Intent();
 			intent.setClass(getActivity().getApplicationContext(),
 					LoginActivity.class);
 			startActivity(intent);

@@ -100,11 +100,7 @@ public class MainActivity extends AbstractAidRequestActivity
 			MainActivity.mTabHost.getTabWidget().getChildAt(i)
 					.setBackgroundResource(R.drawable.selector_tab_background);
 		}
-		Bundle bundle = null;
-		if (null != intent)
-		{
-			bundle = intent.getExtras();
-		}
+		Bundle bundle = intent.getExtras();
 		if (null != bundle && null != bundle.getString("JPush"))
 		{// 假如是推送消息的话
 			MainActivity.mTabHost.setCurrentTab(2);

@@ -124,7 +124,7 @@ public class RecentAccidentsActivity extends AbstractAidRequestActivity
 														View arg1,
 														int position, long arg3)
 												{
-													Intent intent = new Intent();
+													intent = new Intent();
 													Bundle bundle = new Bundle();
 													bundle.putParcelable(
 															Constant.ACCIDENT_LABEL,
@@ -142,7 +142,8 @@ public class RecentAccidentsActivity extends AbstractAidRequestActivity
 	{
 		if (null == aid || null == currentUser)
 		{
-			Util.alert(getApplicationContext(), "用户信息异常，请重新登登录！");
+			Util.alert(getApplicationContext(), "用户信息异常，请重新登录！");
+			intent = new Intent();
 			intent.setClass(getApplicationContext(), LoginActivity.class);
 			startActivity(intent);
 			finish();

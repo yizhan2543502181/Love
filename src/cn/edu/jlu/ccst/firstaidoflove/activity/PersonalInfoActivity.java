@@ -4,6 +4,7 @@
 package cn.edu.jlu.ccst.firstaidoflove.activity;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Window;
@@ -107,7 +108,8 @@ public class PersonalInfoActivity extends AbstractAidRequestActivity
 	{
 		if (null == aid || null == currentUser)
 		{
-			Util.alert(getApplicationContext(), "用户信息异常，请重新登登录！");
+			Util.alert(getApplicationContext(), "用户信息异常，请重新登录！");
+			intent = new Intent();
 			intent.setClass(getApplicationContext(), LoginActivity.class);
 			startActivity(intent);
 			finish();

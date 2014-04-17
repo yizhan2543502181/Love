@@ -53,6 +53,10 @@ public class AbstractAidRequestActivity extends FragmentActivity
 	{
 		super.onCreate(savedInstanceState);
 		intent = getIntent();
+		if (null == intent)
+		{
+			intent = new Intent();
+		}
 		initAid();
 	}
 
@@ -101,11 +105,5 @@ public class AbstractAidRequestActivity extends FragmentActivity
 		{
 			progressDialog.dismiss();
 		}
-	}
-
-	@Override
-	public Intent getIntent()
-	{
-		return intent;
 	}
 }

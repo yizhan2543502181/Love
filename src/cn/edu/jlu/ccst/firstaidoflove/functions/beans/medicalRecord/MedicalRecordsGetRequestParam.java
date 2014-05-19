@@ -6,6 +6,7 @@ package cn.edu.jlu.ccst.firstaidoflove.functions.beans.medicalRecord;
 import android.os.Bundle;
 import cn.edu.jlu.ccst.firstaidoflove.functions.RequestParam;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.AidException;
+import cn.edu.jlu.ccst.firstaidoflove.functions.beans.accident.AccidentsGetRequestParam;
 import cn.edu.jlu.ccst.firstaidoflove.util.Constant;
 
 /**
@@ -16,46 +17,29 @@ import cn.edu.jlu.ccst.firstaidoflove.util.Constant;
  */
 public class MedicalRecordsGetRequestParam extends RequestParam
 {
-	private static final String	METHOD			= "get_medicalRecords";
+	private static final String	METHOD	      = "get_medicalRecords";
 	/**
 	 * 所有字段
 	 */
-	public static final String	FIELDS_ALL		= Constant.KEY_PID
-														+ ","
-														+ Constant.KEY_PNAME
-														+ ","
-														+ Constant.KEY_SEX
-														+ ","
-														+ Constant.KEY_AGE
-														+ ","
-														+ Constant.KEY_RESULT
-														+ ","
-														+ Constant.KEY_TIME
-														+ ","
-														+ Constant.KEY_BLOOD_PRESSURE
-														+ ","
-														+ Constant.KEY_BLOOD_SUGAR
-														+ ","
-														+ Constant.KEY_HEART_RATE
-														+ ","
-														+ Constant.KEY_RECORD_OTHER;
+	public static final String	FIELDS_ALL	  = Constant.KEY_UID + ","
+	                                                  + Constant.KEY_PID;
 	/**
 	 * 默认字段<br>
 	 * 不添加fields参数也按此字段返回
 	 */
-	public static final String	FIELD_DEFAULT	= MedicalRecordsGetRequestParam.FIELDS_ALL;
+	public static final String	FIELD_DEFAULT	= AccidentsGetRequestParam.FIELDS_ALL;
 	/**
 	 * 用户
 	 */
-	private String				uid;
+	private String	            uid;
 	/**
 	 * 需要获取的监护对象的id
 	 */
-	private String				pid;
+	private String	            pid;
 	/**
 	 * 需要获取的字段
 	 */
-	private String				fields			= MedicalRecordsGetRequestParam.FIELD_DEFAULT;
+	private String	            fields	      = MedicalRecordsGetRequestParam.FIELD_DEFAULT;
 
 	public MedicalRecordsGetRequestParam(String uid, String pid)
 	{

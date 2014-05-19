@@ -16,36 +16,11 @@ import cn.edu.jlu.ccst.firstaidoflove.util.Constant;
  */
 public class UserGetRequestParam extends RequestParam
 {
-	private static final String	METHOD			= "get_user_info";
+	private static final String	METHOD	      = "get_user_info";
 	/**
 	 * 所有字段
 	 */
-	public static final String	FIELDS_ALL		= Constant.KEY_UID
-														+ ","
-														+ Constant.KEY_UNAME
-														+ ","
-														+ Constant.KEY_PID
-														+ ","
-														+ Constant.KEY_PNAME
-														+ ","
-														+ Constant.KEY_SEX
-														+ ","
-														+ Constant.KEY_AGE
-														+ ","
-														+ Constant.KEY_JOB
-														+ ","
-														+ Constant.KEY_RELATIONSHIP
-														+ ","
-														+ Constant.KEY_HOME_ADDRESS
-														+ ","
-														+ Constant.KEY_WORK_ADDRESS
-														+ ","
-														+ Constant.KEY_MOBILE_PHONE_NUM
-														+ ","
-														+ Constant.KEY_HOME_PHONE_NUM
-														+ ","
-														+ Constant.KEY_WORK_PHONE_NUM
-														+ ",";
+	public static final String	FIELDS_ALL	  = Constant.KEY_UID;
 	/**
 	 * 默认字段<br>
 	 * 不添加fields参数也按此字段返回
@@ -54,11 +29,11 @@ public class UserGetRequestParam extends RequestParam
 	/**
 	 * 需要获取的用户uid的数组
 	 */
-	private String				uid;
+	private String	            uid;
 	/**
 	 * 需要获取的字段
 	 */
-	private String				fields			= UserGetRequestParam.FIELD_DEFAULT;
+	private String	            fields	      = UserGetRequestParam.FIELD_DEFAULT;
 
 	/**
 	 * 构造一个users.getInfo接口请求参数
@@ -136,7 +111,7 @@ public class UserGetRequestParam extends RequestParam
 		}
 		if (uid != null)
 		{
-			parameters.putString("uid", uid);
+			parameters.putString(Constant.KEY_UID, uid);
 		}
 		return parameters;
 	}

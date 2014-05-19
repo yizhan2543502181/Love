@@ -47,15 +47,16 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int login_background_bg=0x7f02000f;
         public static final int login_background_bg_press=0x7f020010;
         public static final int logo=0x7f020011;
-        public static final int maintab_item_bg=0x7f020012;
-        public static final int maintab_toolbar_bg=0x7f020013;
-        public static final int selector_normal=0x7f020014;
-        public static final int selector_ok_cancel=0x7f020015;
-        public static final int selector_tab_background=0x7f020016;
-        public static final int tab_home_btn=0x7f020017;
-        public static final int tab_message_btn=0x7f020018;
-        public static final int tab_more_btn=0x7f020019;
-        public static final int tab_square_btn=0x7f02001a;
+        public static final int main_tab_bg=0x7f020012;
+        public static final int maintab_item_bg=0x7f020013;
+        public static final int maintab_toolbar_bg=0x7f020014;
+        public static final int selector_normal=0x7f020015;
+        public static final int selector_ok_cancel=0x7f020016;
+        public static final int selector_tab_background=0x7f020017;
+        public static final int tab_home_btn=0x7f020018;
+        public static final int tab_message_btn=0x7f020019;
+        public static final int tab_more_btn=0x7f02001a;
+        public static final int tab_square_btn=0x7f02001b;
     }
     public static final class id {
         public static final int accident_info_baidumap=0x7f080003;

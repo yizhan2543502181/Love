@@ -16,21 +16,12 @@ import cn.edu.jlu.ccst.firstaidoflove.util.Constant;
  */
 public class AccidentsGetRequestParam extends RequestParam
 {
-	private static final String	METHOD			= "get_accidents";
+	private static final String	METHOD	      = "get_accidents";
 	/**
 	 * 所有字段
 	 */
-	public static final String	FIELDS_ALL		= Constant.KEY_PID
-														+ ","
-														+ Constant.KEY_PNAME
-														+ ","
-														+ Constant.KEY_LON
-														+ ","
-														+ Constant.KEY_LAT
-														+ ","
-														+ Constant.KEY_TIME
-														+ ","
-														+ Constant.KEY_MEDICAL_HISTORY;
+	public static final String	FIELDS_ALL	  = Constant.KEY_UID + ","
+	                                                  + Constant.KEY_PID;
 	/**
 	 * 默认字段<br>
 	 * 不添加fields参数也按此字段返回
@@ -39,15 +30,15 @@ public class AccidentsGetRequestParam extends RequestParam
 	/**
 	 * 用户
 	 */
-	private String				uid;
+	private String	            uid;
 	/**
 	 * 需要获取的监护对象的id
 	 */
-	private String				pid;
+	private String	            pid;
 	/**
 	 * 需要获取的字段
 	 */
-	private String				fields			= AccidentsGetRequestParam.FIELD_DEFAULT;
+	private String	            fields	      = AccidentsGetRequestParam.FIELD_DEFAULT;
 
 	public AccidentsGetRequestParam(String uid, String pid)
 	{

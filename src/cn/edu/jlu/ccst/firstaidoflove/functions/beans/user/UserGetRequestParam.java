@@ -1,5 +1,5 @@
 /**
- * $id$ Copyright 2011-2012 Aid Inc. All rights reserved.
+ * $id$ Copyright 2014 Aid Inc. All rights reserved.
  */
 package cn.edu.jlu.ccst.firstaidoflove.functions.beans.user;
 
@@ -104,10 +104,10 @@ public class UserGetRequestParam extends RequestParam
 	public Bundle getParams() throws AidException
 	{
 		Bundle parameters = new Bundle();
-		parameters.putString("method", UserGetRequestParam.METHOD);
+		parameters.putString(Constant.KEY_METHOD, UserGetRequestParam.METHOD);
 		if (fields != null)
 		{
-			parameters.putString("fields", fields);
+			parameters.putString(Constant.KEY_FIELDS, fields);
 		}
 		if (uid != null)
 		{

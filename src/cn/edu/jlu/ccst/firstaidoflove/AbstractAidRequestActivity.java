@@ -1,5 +1,5 @@
 /**
- * $id$ Copyright 2011-2012 Aid Inc. All rights reserved.
+ * $id$ Copyright 2014 Aid Inc. All rights reserved.
  */
 package cn.edu.jlu.ccst.firstaidoflove;
 
@@ -68,6 +68,13 @@ public class AbstractAidRequestActivity extends FragmentActivity
 		aid = Aid.getInstance();
 		aid.init(this);
 		currentUser = Aid.getUserInstance();
+	}
+
+	@Override
+	protected void onResume()
+	{
+		super.onResume();
+		initAid();
 	}
 
 	@Override

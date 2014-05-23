@@ -15,6 +15,9 @@ import cn.edu.jlu.ccst.firstaidoflove.functions.beans.login.LoginResponseBean;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.medicalRecord.MedicalRecordsGetHelper;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.medicalRecord.MedicalRecordsGetRequestParam;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.medicalRecord.MedicalRecordsGetResponseBean;
+import cn.edu.jlu.ccst.firstaidoflove.functions.beans.password.PasswordSetHelper;
+import cn.edu.jlu.ccst.firstaidoflove.functions.beans.password.PasswordSetRequestParam;
+import cn.edu.jlu.ccst.firstaidoflove.functions.beans.password.PasswordSetResponseBean;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.trajectory.TrajectoriesGetHelper;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.trajectory.TrajectoriesGetRequestParam;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.trajectory.TrajectoriesGetResponseBean;
@@ -30,15 +33,6 @@ import cn.edu.jlu.ccst.firstaidoflove.functions.beans.user.UserSetResponseBean;
 import cn.edu.jlu.ccst.firstaidoflove.util.Constant;
 import cn.edu.jlu.ccst.firstaidoflove.util.Util;
 
-/**
- * 对人人的请求封装成异步。注意：使用该类调用人人接口时，不能在Listener中直接更新UI控件。
- * 
- * @see Aid
- * @see RequestListener
- * 
- * @author yong.li@opi-corp.com
- * 
- */
 public class AsyncAid
 {
 	private Aid			aid;
@@ -77,9 +71,9 @@ public class AsyncAid
 	}
 
 	/**
-	 * 调用 人人 APIs，服务器的响应是JSON串。
+	 * 调用 爱的监护者 APIs，服务器的响应是JSON串。
 	 * 
-	 * 人人 APIs 详细信息见 http://wiki.dev.aid.com/wiki/API
+	 * 爱的监护者 APIs 详细信息见 http://wiki.dev.aid.com/wiki/API
 	 * 
 	 * @param parameters
 	 *            注意监听器中不在主线程中执行，所以不能在监听器中直接更新UI代码。
@@ -91,9 +85,9 @@ public class AsyncAid
 	}
 
 	/**
-	 * 调用 人人 APIs。
+	 * 调用 爱的监护者 APIs。
 	 * 
-	 * 人人 APIs 详细信息见 http://wiki.dev.aid.com/wiki/API
+	 * 爱的监护者 APIs 详细信息见 http://wiki.dev.aid.com/wiki/API
 	 * 
 	 * @param parameters
 	 * @param listener
@@ -217,5 +211,17 @@ public class AsyncAid
 			AbstractRequestListener<TrajectoryGetResponseBean> listener)
 	{
 		new TrajectoryGetHelper(aid).asyncGetTrajectory(pool, param, listener);
+	}
+
+	/**
+	 * 获取最近一次位置
+	 * 
+	 * @param param
+	 * @param listener
+	 */
+	public void setPassword(PasswordSetRequestParam param,
+			AbstractRequestListener<PasswordSetResponseBean> listener)
+	{
+		new PasswordSetHelper(aid).asyncSetPassword(pool, param, listener);
 	}
 }

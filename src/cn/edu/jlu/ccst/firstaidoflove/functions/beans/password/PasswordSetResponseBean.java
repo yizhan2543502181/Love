@@ -1,5 +1,5 @@
 /**
- * $id$ Copyright 2011-2012 Renren Inc. All rights reserved.
+ * $id$ Copyright 2014 Renren Inc. All rights reserved.
  */
 package cn.edu.jlu.ccst.firstaidoflove.functions.beans.password;
 
@@ -19,8 +19,6 @@ import cn.edu.jlu.ccst.firstaidoflove.functions.beans.ResultCode;
  */
 public class PasswordSetResponseBean extends ResponseBean
 {
-	public static int	SUCCESS	= 0;
-	public static int	FAILED	= 1;
 	/**
 	 * ResultCode
 	 */
@@ -68,6 +66,6 @@ public class PasswordSetResponseBean extends ResponseBean
 	@Override
 	public String toString()
 	{
-		return "ResultCodeSetResponseBean [resultCode=" + resultCode + "]";
+		return "PasswordSetResponseBean [resultCode=" + resultCode + "]";
 	}
 }

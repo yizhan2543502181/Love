@@ -1,5 +1,5 @@
 /**
- * $id$ Copyright 2011-2012 Aid Inc. All rights reserved.
+ * $id$ Copyright 2014 Aid Inc. All rights reserved.
  */
 package cn.edu.jlu.ccst.firstaidoflove.functions.beans.password;
 
@@ -16,7 +16,7 @@ import cn.edu.jlu.ccst.firstaidoflove.util.Util;
 
 /**
  * 
- * @author hecao (he.cao@aid-inc.com) patients.getInfo接口 助手类
+ * @author hecao (he.cao@aid-inc.com) password.getInfo接口 助手类
  * 
  */
 public class PasswordSetHelper
@@ -32,18 +32,18 @@ public class PasswordSetHelper
 	}
 
 	/**
-	 * 同步调用patients.getInfo接口<br>
+	 * 同步调用password.getInfo接口<br>
 	 * 
 	 * @param param
 	 *            请求对象
 	 * @return 返回{@link LoginResponseBean}对象
 	 * @throws AidException
 	 */
-	public PasswordSetResponseBean setPatientsInfo(PasswordSetRequestParam param)
-	        throws AidException, Throwable
+	public PasswordSetResponseBean setPassword(PasswordSetRequestParam param)
+			throws AidException, Throwable
 	{
 		Bundle parameters = param.getParams();
-		PasswordSetResponseBean patientsBean = null;
+		PasswordSetResponseBean passwordBean = null;
 		try
 		{
 			String response = aid.requestJSON(parameters);
@@ -55,20 +55,20 @@ public class PasswordSetHelper
 			{
 				Util.logger("null response");
 				throw new AidException(Constant.ERROR_CODE_UNKNOWN_ERROR,
-				        "null response", "null response");
+						"null response", "null response");
 			}
-			patientsBean = new PasswordSetResponseBean(response);
+			passwordBean = new PasswordSetResponseBean(response);
 		}
 		catch (RuntimeException re)
 		{
 			Util.logger("runtime exception " + re.getMessage());
 			throw new Throwable(re);
 		}
-		return patientsBean;
+		return passwordBean;
 	}
 
 	/**
-	 * 异步方法调用patients.getInfo接口<br>
+	 * 异步方法调用password.getInfo接口<br>
 	 * 
 	 * @param pool
 	 *            线程池
@@ -77,9 +77,9 @@ public class PasswordSetHelper
 	 * @param listener
 	 *            回调
 	 */
-	public void asyncsetPatientsInfo(Executor pool,
-	        final PasswordSetRequestParam param,
-	        final AbstractRequestListener<PasswordSetResponseBean> listener)
+	public void asyncSetPassword(Executor pool,
+			final PasswordSetRequestParam param,
+			final AbstractRequestListener<PasswordSetResponseBean> listener)
 	{
 		pool.execute(new Runnable() {
 			@Override
@@ -87,10 +87,10 @@ public class PasswordSetHelper
 			{
 				try
 				{
-					PasswordSetResponseBean patientsBean = setPatientsInfo(param);
+					PasswordSetResponseBean passwordBean = setPassword(param);
 					if (listener != null)
 					{
-						listener.onComplete(patientsBean);
+						listener.onComplete(passwordBean);
 					}
 				}
 				catch (AidException e)

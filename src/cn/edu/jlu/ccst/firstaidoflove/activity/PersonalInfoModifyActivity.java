@@ -14,7 +14,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import cn.edu.jlu.ccst.firstaidoflove.AbstractAidRequestActivity;
 import cn.edu.jlu.ccst.firstaidoflove.R;
-import cn.edu.jlu.ccst.firstaidoflove.activity.main.LoginActivity;
 import cn.edu.jlu.ccst.firstaidoflove.functions.AbstractRequestListener;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.Aid;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.AidError;

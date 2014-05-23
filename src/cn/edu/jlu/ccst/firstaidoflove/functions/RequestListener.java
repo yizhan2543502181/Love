@@ -1,12 +1,12 @@
 /**
- * $id$ Copyright 2011-2012 Renren Inc. All rights reserved.
+ * $id$ Copyright 2014 Renren Inc. All rights reserved.
  */
 package cn.edu.jlu.ccst.firstaidoflove.functions;
 
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.AidError;
 
 /**
- * 对人人 API请求结果监听。
+ * 对爱的监护者 API请求结果监听。
  * 
  * 不要在该接口的方法中更新UI，一般来说这些代码不是在UI线程（主线程）中运行的。
  * 

@@ -16,6 +16,7 @@ import cn.edu.jlu.ccst.firstaidoflove.util.Constant;
  */
 public class MedicalRecord implements Parcelable
 {
+	private long	mid				= -1;
 	/**
 	 * 监护对象的id
 	 */
@@ -36,14 +37,14 @@ public class MedicalRecord implements Parcelable
 	public MedicalRecord()
 	{
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	public MedicalRecord(long pid, String pname, String sex, int age,
+	public MedicalRecord(long mid, long pid, String pname, String sex, int age,
 			String result, String time, String bloodPressure,
 			String bloodSugar, String heartRate, String recordOther)
 	{
 		super();
+		this.mid = mid;
 		this.pid = pid;
 		this.pname = pname;
 		this.sex = sex;
@@ -62,6 +63,7 @@ public class MedicalRecord implements Parcelable
 		{
 			return null;
 		}
+		mid = object.optLong(Constant.KEY_MID);
 		pid = object.optLong(Constant.KEY_PID);
 		pname = object.optString(Constant.KEY_PNAME);
 		sex = object.optString(Constant.KEY_SEX);
@@ -73,6 +75,16 @@ public class MedicalRecord implements Parcelable
 		heartRate = object.optString(Constant.KEY_HEART_RATE);
 		recordOther = object.optString(Constant.KEY_RECORD_OTHER);
 		return this;
+	}
+
+	public long getMid()
+	{
+		return mid;
+	}
+
+	public void setMid(long mid)
+	{
+		this.mid = mid;
 	}
 
 	public long getPid()
@@ -194,6 +206,10 @@ public class MedicalRecord implements Parcelable
 	public void writeToParcel(Parcel dest, int flags)
 	{
 		Bundle bundle = new Bundle();
+		if (-1 != mid)
+		{
+			bundle.putLong(Constant.KEY_MID, mid);
+		}
 		if (-1 != pid)
 		{
 			bundle.putLong(Constant.KEY_PID, pid);
@@ -265,6 +281,10 @@ public class MedicalRecord implements Parcelable
 	public MedicalRecord(Parcel in) throws AidException
 	{
 		Bundle bundle = in.readBundle();
+		if (bundle.containsKey(Constant.KEY_MID))
+		{
+			mid = bundle.getLong(Constant.KEY_MID);
+		}
 		if (bundle.containsKey(Constant.KEY_PID))
 		{
 			pid = bundle.getLong(Constant.KEY_PID);

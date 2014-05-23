@@ -22,7 +22,6 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import cn.edu.jlu.ccst.firstaidoflove.AbstractAidRequestActivity;
 import cn.edu.jlu.ccst.firstaidoflove.R;
-import cn.edu.jlu.ccst.firstaidoflove.activity.main.LoginActivity;
 import cn.edu.jlu.ccst.firstaidoflove.functions.AbstractRequestListener;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.Aid;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.AidError;
@@ -70,7 +69,7 @@ public class MedicalRecordsActivity extends AbstractAidRequestActivity
 		list.clear();
 		for (int i = 0; i < 6; ++i)
 		{
-			medicalRecordList.add(0, new MedicalRecord(currentUser.getPid(),
+			medicalRecordList.add(0, new MedicalRecord(i, currentUser.getPid(),
 					currentUser.getPname(), "男", 58, "高血压", "2014.04.15",
 					"100-170", "24ug", "89", "无"));
 			MedicalRecord medicalRecord = medicalRecordList.get(i);
@@ -139,7 +138,7 @@ public class MedicalRecordsActivity extends AbstractAidRequestActivity
 
 	private void startGetMedicalRecords()
 	{
-		if (null == aid || null == currentUser)
+		if ((null == aid) || (null == currentUser))
 		{
 			Util.alert(getApplicationContext(), "用户信息异常，请重新登录！");
 			intent = new Intent();
@@ -186,7 +185,7 @@ public class MedicalRecordsActivity extends AbstractAidRequestActivity
 				{
 					if (MedicalRecordsActivity.this != null)
 					{
-						if (progressDialog != null
+						if ((progressDialog != null)
 								&& progressDialog.isShowing())
 						{
 							progressDialog.dismiss();
@@ -207,7 +206,7 @@ public class MedicalRecordsActivity extends AbstractAidRequestActivity
 				{
 					if (MedicalRecordsActivity.this != null)
 					{
-						if (progressDialog != null
+						if ((progressDialog != null)
 								&& progressDialog.isShowing())
 						{
 							progressDialog.dismiss();
@@ -227,7 +226,7 @@ public class MedicalRecordsActivity extends AbstractAidRequestActivity
 				{
 					if (MedicalRecordsActivity.this != null)
 					{
-						if (progressDialog != null
+						if ((progressDialog != null)
 								&& progressDialog.isShowing())
 						{
 							progressDialog.dismiss();

@@ -17,7 +17,7 @@ import cn.edu.jlu.ccst.firstaidoflove.util.Util;
 public class Aid implements Parcelable
 {
 	private static Aid				instance	= null;
-	private static String			sessionKey	= "1111111111111111111";
+	private String					sessionKey	= "1111111111111111111";
 	private static User				user		= null;
 	private Context					context		= null;
 	@SuppressLint("UseValueOf")
@@ -82,7 +82,7 @@ public class Aid implements Parcelable
 	}
 
 	/**
-	 * 调用 人人 APIs
+	 * 调用 爱的监护者 APIs
 	 * 
 	 * @param parameters
 	 * @return 返回结果为Json格式
@@ -97,13 +97,13 @@ public class Aid implements Parcelable
 		parameters.putString("format", format);
 		if (isSessionKeyValid())
 		{
-			parameters.putString("session_key", Aid.sessionKey);
+			parameters.putString("session_key", sessionKey);
 		}
 		prepareParams(parameters);
 		logRequest(parameters);
 		String response = Util.openUrl(Constant.RESTSERVER_URL, "POST",
 				parameters);
-		logResponse(parameters.getString("method"), response);
+		logResponse(parameters.getString(Constant.KEY_METHOD), response);
 		return response;
 	}
 
@@ -138,7 +138,7 @@ public class Aid implements Parcelable
 	{
 		if (params != null)
 		{
-			String method = params.getString("method");
+			String method = params.getString(Constant.KEY_METHOD);
 			if (method != null)
 			{
 				StringBuffer sb = new StringBuffer();
@@ -160,7 +160,7 @@ public class Aid implements Parcelable
 	 */
 	private void logResponse(String method, String response)
 	{
-		if (method != null && response != null)
+		if ((method != null) && (response != null))
 		{
 			StringBuffer sb = new StringBuffer();
 			sb.append("method=").append(method).append("&").append(response);
@@ -171,9 +171,9 @@ public class Aid implements Parcelable
 	public Aid(Parcel in)
 	{
 		Bundle bundle = in.readBundle();
-		if (null != bundle && bundle.containsKey(Constant.SHARE_SESSION_KEY))
+		if ((null != bundle) && bundle.containsKey(Constant.SHARE_SESSION_KEY))
 		{
-			Aid.sessionKey = bundle.getString(Constant.SHARE_SESSION_KEY);
+			sessionKey = bundle.getString(Constant.SHARE_SESSION_KEY);
 		}
 		Aid.user = User.CREATOR.createFromParcel(in);
 	}
@@ -188,9 +188,9 @@ public class Aid implements Parcelable
 	public void writeToParcel(Parcel dest, int flags)
 	{
 		Bundle bundle = new Bundle();
-		if (Aid.sessionKey != null)
+		if (sessionKey != null)
 		{
-			bundle.putString(Constant.SHARE_SESSION_KEY, Aid.sessionKey);
+			bundle.putString(Constant.SHARE_SESSION_KEY, sessionKey);
 		}
 		bundle.writeToParcel(dest, flags);
 		Aid.user.writeToParcel(dest, flags);
@@ -235,7 +235,7 @@ public class Aid implements Parcelable
 		synchronized (Aid.lock)
 		{
 			Aid.user = null;
-			Aid.sessionKey = "";
+			sessionKey = "";
 		}
 	}
 
@@ -243,38 +243,7 @@ public class Aid implements Parcelable
 	{
 		Editor editor = context.getSharedPreferences(Constant.SHARE_CONFIG,
 				Context.MODE_PRIVATE).edit();
-		editor.putString(Constant.SHARE_SESSION_KEY, Aid.sessionKey);
+		editor.putString(Constant.SHARE_SESSION_KEY, sessionKey);
 		editor.commit();
-	}
-
-	private String parseContentType(String fileName)
-	{
-		String contentType = "image/jpg";
-		fileName = fileName.toLowerCase();
-		if (fileName.endsWith(".jpg"))
-		{
-			contentType = "image/jpg";
-		}
-		else if (fileName.endsWith(".png"))
-		{
-			contentType = "image/png";
-		}
-		else if (fileName.endsWith(".jpeg"))
-		{
-			contentType = "image/jpeg";
-		}
-		else if (fileName.endsWith(".gif"))
-		{
-			contentType = "image/gif";
-		}
-		else if (fileName.endsWith(".bmp"))
-		{
-			contentType = "image/bmp";
-		}
-		else
-		{
-			throw new RuntimeException("不支持的文件类型'" + fileName + "'(或没有文件扩展名)");
-		}
-		return contentType;
 	}
 }

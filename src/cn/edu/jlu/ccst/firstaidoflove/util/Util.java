@@ -157,6 +157,7 @@ public final class Util
 			Log.d(Constant.LOG_TAG, method + " URL: " + url);
 			HttpURLConnection conn = (HttpURLConnection) new URL(url)
 					.openConnection();
+			conn.setConnectTimeout(10);
 			conn.setRequestProperty("User-Agent", Constant.VERSION);
 			if (!method.equals("GET"))
 			{
@@ -392,7 +393,7 @@ public final class Util
 					}
 					break;
 				}
-				if (errorCode > -1 && errorMsg != null)
+				if ((errorCode > -1) && (errorMsg != null))
 				{
 					error = new AidError(errorCode, errorMsg, xmlResponse);
 					break;
@@ -495,7 +496,7 @@ public final class Util
 
 	public static String md5(String string)
 	{
-		if (string == null || string.trim().length() < 1)
+		if ((string == null) || (string.trim().length() < 1))
 		{
 			return null;
 		}
@@ -546,8 +547,8 @@ public final class Util
 				ConnectivityManager.TYPE_MOBILE).getState();
 		State wifiState = connManager.getNetworkInfo(
 				ConnectivityManager.TYPE_WIFI).getState();
-		if (mobileState == State.DISCONNECTED
-				&& wifiState == State.DISCONNECTED)
+		if ((mobileState == State.DISCONNECTED)
+				&& (wifiState == State.DISCONNECTED))
 		{
 			return false;
 		}
@@ -855,5 +856,36 @@ public final class Util
 			Log.e(Constant.LOG_TAG, e.getMessage());
 		}
 		return imei;
+	}
+
+	public static String parseContentType(String fileName)
+	{
+		String contentType = "image/jpg";
+		fileName = fileName.toLowerCase();
+		if (fileName.endsWith(".jpg"))
+		{
+			contentType = "image/jpg";
+		}
+		else if (fileName.endsWith(".png"))
+		{
+			contentType = "image/png";
+		}
+		else if (fileName.endsWith(".jpeg"))
+		{
+			contentType = "image/jpeg";
+		}
+		else if (fileName.endsWith(".gif"))
+		{
+			contentType = "image/gif";
+		}
+		else if (fileName.endsWith(".bmp"))
+		{
+			contentType = "image/bmp";
+		}
+		else
+		{
+			throw new RuntimeException("不支持的文件类型'" + fileName + "'(或没有文件扩展名)");
+		}
+		return contentType;
 	}
 }

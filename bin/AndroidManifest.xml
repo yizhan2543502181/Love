@@ -95,37 +95,37 @@
             android:value="PQIj3HLxHHmMO9DO28mOVfC8" >
         </meta-data>
         <!-- 507_x86_64_android -->
-
-
-        
-        <!-- <meta-data
+        <!--
+        <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="FTwyeMnSrBaGzbFHe1EpNzn3" >
-        </meta-data> -->
-        
+        </meta-data>
+        -->
 
 
         <!-- Required  . Enable it you can get statistics data with channel -->
         <meta-data
             android:name="JPUSH_CHANNEL"
             android:value="developer-default" />
-        <!-- <meta-data
+        <!--
+             <meta-data
             android:name="JPUSH_APPKEY"
-            android:value="efc668058bfbb6039d42caeb" /> -->
-            <meta-data
+            android:value="efc668058bfbb6039d42caeb" />
+        -->
+        <meta-data
             android:name="JPUSH_APPKEY"
             android:value="7a8c7d0c90296251cb6a4d74" />
+
         <!-- 值来自开发者平台取得的AppKey -->
-
-
         <!--
         尹隆账号申请的key 
         <meta-data
             android:name="JPUSH_APPKEY"
-            android:value="626ed657382f8cd3b0c5027e" />
+            android:value="626ed657382f8cd3b0c5027e" />
         -->
+
         <activity
-            android:name=".activity.main.LoginActivity"
+            android:name=".activity.LoginActivity"
             android:configChanges="keyboardHidden|orientation"
             android:label="@string/app_name"
             android:theme="@style/FullscreenTheme" >
@@ -208,7 +208,7 @@
         </activity>
         <!-- 主界面 -->
         <activity
-            android:name=".activity.main.MainActivity"
+            android:name=".activity.MainActivity"
             android:configChanges="keyboardHidden|orientation" >
         </activity>
 

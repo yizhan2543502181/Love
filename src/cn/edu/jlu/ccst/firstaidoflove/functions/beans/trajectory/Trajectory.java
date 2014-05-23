@@ -17,6 +17,7 @@ import cn.edu.jlu.ccst.firstaidoflove.util.Constant;
  */
 public class Trajectory implements Parcelable
 {
+	private long	tid			= -1;
 	/**
 	 * 监护对象的id
 	 */
@@ -50,6 +51,7 @@ public class Trajectory implements Parcelable
 		{
 			return null;
 		}
+		tid = object.optLong(Constant.KEY_TID);
 		pid = object.optLong(Constant.KEY_PID);
 		pname = object.optString(Constant.KEY_PNAME);
 		longtitude = Double.parseDouble(object.optString(Constant.KEY_LON));
@@ -58,10 +60,11 @@ public class Trajectory implements Parcelable
 		return this;
 	}
 
-	public Trajectory(long pid, String pname, double longtitude,
+	public Trajectory(long tid, long pid, String pname, double longtitude,
 			double latitude, String time)
 	{
 		super();
+		this.tid = tid;
 		this.pid = pid;
 		this.pname = pname;
 		this.longtitude = longtitude;
@@ -79,17 +82,22 @@ public class Trajectory implements Parcelable
 		time = null;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString()
 	{
-		return "Accident [pid=" + pid + ", pname=" + pname + ", longtitude="
-				+ longtitude + ", latitude=" + latitude + ", time=" + time
-				+ "]";
+		return "Trajectory [tid=" + tid + ", pid=" + pid + ", pname=" + pname
+				+ ", longtitude=" + longtitude + ", latitude=" + latitude
+				+ ", time=" + time + "]";
+	}
+
+	public long getTid()
+	{
+		return tid;
+	}
+
+	public void setTid(long tid)
+	{
+		this.tid = tid;
 	}
 
 	/**
@@ -196,6 +204,10 @@ public class Trajectory implements Parcelable
 	public void writeToParcel(Parcel dest, int flags)
 	{
 		Bundle bundle = new Bundle();
+		if (-1 != tid)
+		{
+			bundle.putLong(Constant.KEY_TID, tid);
+		}
 		if (-1 != pid)
 		{
 			bundle.putLong(Constant.KEY_PID, pid);
@@ -239,6 +251,10 @@ public class Trajectory implements Parcelable
 	public Trajectory(Parcel in)
 	{
 		Bundle bundle = in.readBundle();
+		if (bundle.containsKey(Constant.KEY_TID))
+		{
+			tid = bundle.getLong(Constant.KEY_TID);
+		}
 		if (bundle.containsKey(Constant.KEY_PID))
 		{
 			pid = bundle.getLong(Constant.KEY_PID);

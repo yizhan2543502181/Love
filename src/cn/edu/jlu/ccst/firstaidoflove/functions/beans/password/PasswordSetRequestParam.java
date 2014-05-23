@@ -1,5 +1,5 @@
 /**
- * $id$ Copyright 2011-2012 Aid Inc. All rights reserved.
+ * $id$ Copyright 2014 Aid Inc. All rights reserved.
  */
 package cn.edu.jlu.ccst.firstaidoflove.functions.beans.password;
 
@@ -10,17 +10,21 @@ import cn.edu.jlu.ccst.firstaidoflove.util.Constant;
 
 /**
  * 
- * @author hecao (he.cao@aid-inc.com) patients.getInfo接口的请求参数
+ * @author yizhan (415939252@qq.com) passwrod设置接口的请求参数
  * 
  * 
  */
 public class PasswordSetRequestParam extends RequestParam
 {
-	private static final String	METHOD	      = "set_password";
+	private static final String	METHOD			= "set_password";
 	/**
 	 * 所有字段
 	 */
-	public static final String	FIELDS_ALL	  = Constant.KEY_UID;
+	public static final String	FIELDS_ALL		= Constant.KEY_UID
+														+ ","
+														+ Constant.KEY_OLD_PASSWORD
+														+ ","
+														+ Constant.KEY_NEW_PASSWORD;
 	/**
 	 * 默认字段<br>
 	 * 不添加fields参数也按此字段返回
@@ -29,69 +33,59 @@ public class PasswordSetRequestParam extends RequestParam
 	/**
 	 * 需要获取的字段
 	 */
-	private String	            fields	      = PasswordSetRequestParam.FIELD_DEFAULT;
-	private Password	            patient	      = null;
+	private String				fields			= PasswordSetRequestParam.FIELD_DEFAULT;
+	private Password			password		= null;
 
 	public PasswordSetRequestParam()
 	{
 		super();
 	}
 
-	public PasswordSetRequestParam(Password patient)
+	public PasswordSetRequestParam(Password password)
 	{
 		super();
-		this.patient = patient;
+		this.password = password;
 	}
 
-	public PasswordSetRequestParam(String fields, Password patient)
+	public PasswordSetRequestParam(String fields, Password password)
 	{
 		super();
 		this.fields = fields;
-		this.patient = patient;
+		this.password = password;
 	}
 
-	/**
-	 * 获取fields
-	 * 
-	 * @return
-	 */
 	public String getFields()
 	{
 		return fields;
 	}
 
-	/**
-	 * 设置fields
-	 * 
-	 * @param fields
-	 */
 	public void setFields(String fields)
 	{
 		this.fields = fields;
 	}
 
-	public Password getPatient()
+	public Password getPassword()
 	{
-		return patient;
+		return password;
 	}
 
-	public void setPatient(Password patient)
+	public void setPassword(Password password)
 	{
-		this.patient = patient;
+		this.password = password;
 	}
 
 	@Override
 	public Bundle getParams() throws AidException
 	{
 		Bundle parameters = new Bundle();
-		parameters.putString("method", PasswordSetRequestParam.METHOD);
+		parameters.putString(Constant.KEY_METHOD, PasswordSetRequestParam.METHOD);
 		if (fields != null)
 		{
-			parameters.putString("fields", fields);
+			parameters.putString(Constant.KEY_FIELDS, fields);
 		}
-		if (null != patient)
+		if (null != password)
 		{
-			parameters.putString("values", patient.toString2());
+			parameters.putString(Constant.KEY_VALUES, password.toString2());
 		}
 		return parameters;
 	}

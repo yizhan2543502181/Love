@@ -16,6 +16,7 @@ import cn.edu.jlu.ccst.firstaidoflove.util.Constant;
  */
 public class Accident implements Parcelable
 {
+	private long	aid				= -1;
 	/**
 	 * 监护对象的id
 	 */
@@ -53,6 +54,7 @@ public class Accident implements Parcelable
 		{
 			return null;
 		}
+		aid = object.optLong(Constant.KEY_AID);
 		pid = object.optLong(Constant.KEY_PID);
 		pname = object.optString(Constant.KEY_PNAME);
 		longtitude = Double.parseDouble(object.optString(Constant.KEY_LON));
@@ -62,10 +64,11 @@ public class Accident implements Parcelable
 		return this;
 	}
 
-	public Accident(long pid, String pname, double longtitude, double latitude,
-			String time, String medicalHistory)
+	public Accident(long aid, long pid, String pname, double longtitude,
+			double latitude, String time, String medicalHistory)
 	{
 		super();
+		this.aid = aid;
 		this.pid = pid;
 		this.pname = pname;
 		this.longtitude = longtitude;
@@ -74,17 +77,22 @@ public class Accident implements Parcelable
 		this.medicalHistory = medicalHistory;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString()
 	{
-		return "Accident [pid=" + pid + ", pname=" + pname + ", longtitude="
-				+ longtitude + ", latitude=" + latitude + ", time=" + time
-				+ ", medicalHistory=" + medicalHistory + "]";
+		return "Accident [aid=" + aid + ", pid=" + pid + ", pname=" + pname
+				+ ", longtitude=" + longtitude + ", latitude=" + latitude
+				+ ", time=" + time + ", medicalHistory=" + medicalHistory + "]";
+	}
+
+	public long getAid()
+	{
+		return aid;
+	}
+
+	public void setAid(long aid)
+	{
+		this.aid = aid;
 	}
 
 	/**
@@ -208,6 +216,10 @@ public class Accident implements Parcelable
 	public void writeToParcel(Parcel dest, int flags)
 	{
 		Bundle bundle = new Bundle();
+		if (-1 != aid)
+		{
+			bundle.putLong(Constant.KEY_AID, aid);
+		}
 		if (-1 != pid)
 		{
 			bundle.putLong(Constant.KEY_PID, pid);
@@ -255,6 +267,10 @@ public class Accident implements Parcelable
 	public Accident(Parcel in)
 	{
 		Bundle bundle = in.readBundle();
+		if (bundle.containsKey(Constant.KEY_AID))
+		{
+			aid = bundle.getLong(Constant.KEY_AID);
+		}
 		if (bundle.containsKey(Constant.KEY_PID))
 		{
 			pid = bundle.getLong(Constant.KEY_PID);

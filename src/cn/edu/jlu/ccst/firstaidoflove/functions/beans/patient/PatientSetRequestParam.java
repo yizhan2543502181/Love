@@ -1,5 +1,5 @@
 /**
- * $id$ Copyright 2011-2012 Aid Inc. All rights reserved.
+ * $id$ Copyright 2014 Aid Inc. All rights reserved.
  */
 package cn.edu.jlu.ccst.firstaidoflove.functions.beans.patient;
 
@@ -102,14 +102,14 @@ public class PatientSetRequestParam extends RequestParam
 	public Bundle getParams() throws AidException
 	{
 		Bundle parameters = new Bundle();
-		parameters.putString("method", PatientSetRequestParam.METHOD);
+		parameters.putString(Constant.KEY_METHOD, PatientSetRequestParam.METHOD);
 		if (fields != null)
 		{
-			parameters.putString("fields", fields);
+			parameters.putString(Constant.KEY_FIELDS, fields);
 		}
 		if (null != patient)
 		{
-			parameters.putString("values", patient.toString2());
+			parameters.putString(Constant.KEY_VALUES, patient.toString2());
 		}
 		return parameters;
 	}

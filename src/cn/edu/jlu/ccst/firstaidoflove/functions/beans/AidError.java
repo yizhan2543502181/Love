@@ -54,8 +54,8 @@ public class AidError extends RuntimeException
 	@Override
 	public String toString()
 	{
-		return "errorCode:" + errorCode + "\nerrorMessage:" + getMessage()
-				+ "\norgResponse:" + orgResponse;
+		return "AidError [errorCode=" + errorCode + ", orgResponse="
+				+ orgResponse + "]";
 	}
 
 	/**
@@ -74,10 +74,10 @@ public class AidError extends RuntimeException
 		{
 		// 登录失败
 		case 101:
-			errorMessage = "";
+			errorMessage = "用户名或密码不正确！";
 			break;
 		case 102:
-			errorMessage = "其他错误";
+			errorMessage = "网络出问题了！";
 			break;
 		default:
 			break;

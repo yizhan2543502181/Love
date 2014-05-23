@@ -1,5 +1,5 @@
 /**
- * $id$ Copyright 2011-2012 Aid Inc. All rights reserved.
+ * $id$ Copyright 2014 Aid Inc. All rights reserved.
  */
 package cn.edu.jlu.ccst.firstaidoflove.functions.beans.medicalRecord;
 
@@ -17,12 +17,12 @@ import cn.edu.jlu.ccst.firstaidoflove.util.Constant;
  */
 public class MedicalRecordsGetRequestParam extends RequestParam
 {
-	private static final String	METHOD	      = "get_medicalRecords";
+	private static final String	METHOD			= "get_medicalRecords";
 	/**
 	 * 所有字段
 	 */
-	public static final String	FIELDS_ALL	  = Constant.KEY_UID + ","
-	                                                  + Constant.KEY_PID;
+	public static final String	FIELDS_ALL		= Constant.KEY_UID + ","
+														+ Constant.KEY_PID;
 	/**
 	 * 默认字段<br>
 	 * 不添加fields参数也按此字段返回
@@ -31,15 +31,15 @@ public class MedicalRecordsGetRequestParam extends RequestParam
 	/**
 	 * 用户
 	 */
-	private String	            uid;
+	private String				uid;
 	/**
 	 * 需要获取的监护对象的id
 	 */
-	private String	            pid;
+	private String				pid;
 	/**
 	 * 需要获取的字段
 	 */
-	private String	            fields	      = MedicalRecordsGetRequestParam.FIELD_DEFAULT;
+	private String				fields			= MedicalRecordsGetRequestParam.FIELD_DEFAULT;
 
 	public MedicalRecordsGetRequestParam(String uid, String pid)
 	{
@@ -124,10 +124,11 @@ public class MedicalRecordsGetRequestParam extends RequestParam
 	public Bundle getParams() throws AidException
 	{
 		Bundle parameters = new Bundle();
-		parameters.putString("method", MedicalRecordsGetRequestParam.METHOD);
+		parameters.putString(Constant.KEY_METHOD,
+				MedicalRecordsGetRequestParam.METHOD);
 		if (fields != null)
 		{
-			parameters.putString("fields", fields);
+			parameters.putString(Constant.KEY_FIELDS, fields);
 		}
 		if (uid != null)
 		{

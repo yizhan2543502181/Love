@@ -1,5 +1,5 @@
 /**
- * $id$ Copyright 2011-2012 Aid Inc. All rights reserved.
+ * $id$ Copyright 2014 Aid Inc. All rights reserved.
  */
 package cn.edu.jlu.ccst.firstaidoflove.functions.beans.login;
 
@@ -17,12 +17,13 @@ import cn.edu.jlu.ccst.firstaidoflove.util.Constant;
  */
 public class LoginRequestParam extends RequestParam
 {
-	private static final String	METHOD	      = "login";
+	private static final String	METHOD			= "login";
 	/**
 	 * 所有字段
 	 */
-	public static final String	FIELDS_ALL	  = Constant.LOGIN_NAME + ","
-	                                                  + Constant.LOGIN_PASSWORD;
+	public static final String	FIELDS_ALL		= Constant.KEY_LOGIN_NAME
+														+ ","
+														+ Constant.KEY_LOGIN_PASSWORD;
 	/**
 	 * 默认字段<br>
 	 * 不添加fields参数也按此字段返回
@@ -31,15 +32,15 @@ public class LoginRequestParam extends RequestParam
 	/**
 	 * 登录的名字，如邮箱、手机号
 	 */
-	private String	            loginName	  = null;
+	private String				loginName		= null;
 	/**
 	 * 登录的密码
 	 */
-	private String	            loginPassword	= null;
+	private String				loginPassword	= null;
 	/**
 	 * 需要获取的字段
 	 */
-	private String	            fields	      = AccidentsGetRequestParam.FIELD_DEFAULT;
+	private String				fields			= AccidentsGetRequestParam.FIELD_DEFAULT;
 
 	public LoginRequestParam(String loginName, String loginPassword)
 	{
@@ -86,18 +87,18 @@ public class LoginRequestParam extends RequestParam
 	public Bundle getParams() throws AidException
 	{
 		Bundle parameters = new Bundle();
-		parameters.putString("method", LoginRequestParam.METHOD);
+		parameters.putString(Constant.KEY_METHOD, LoginRequestParam.METHOD);
 		if (fields != null)
 		{
-			parameters.putString("fields", fields);
+			parameters.putString(Constant.KEY_FIELDS, fields);
 		}
 		if (loginName != null)
 		{
-			parameters.putString(Constant.LOGIN_NAME, loginName);
+			parameters.putString(Constant.KEY_LOGIN_NAME, loginName);
 		}
 		if (loginPassword != null)
 		{
-			parameters.putString(Constant.LOGIN_PASSWORD, loginPassword);
+			parameters.putString(Constant.KEY_LOGIN_PASSWORD, loginPassword);
 		}
 		return parameters;
 	}

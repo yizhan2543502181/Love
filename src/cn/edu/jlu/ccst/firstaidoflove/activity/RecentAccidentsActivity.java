@@ -22,7 +22,6 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import cn.edu.jlu.ccst.firstaidoflove.AbstractAidRequestActivity;
 import cn.edu.jlu.ccst.firstaidoflove.R;
-import cn.edu.jlu.ccst.firstaidoflove.activity.main.LoginActivity;
 import cn.edu.jlu.ccst.firstaidoflove.functions.AbstractRequestListener;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.Aid;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.AidError;
@@ -70,9 +69,9 @@ public class RecentAccidentsActivity extends AbstractAidRequestActivity
 		list.clear();
 		for (int i = 0; i < 6; ++i)
 		{
-			accidentList.add(0,
-					new Accident(currentUser.getPid(), currentUser.getPname(),
-							116.391729, 39.944713, "2014.04.15", "糖尿病，高血压，骨折"));
+			accidentList.add(0, new Accident(i, currentUser.getPid(),
+					currentUser.getPname(), 116.391729, 39.944713,
+					"2014.04.15", "糖尿病，高血压，骨折"));
 			Accident accident = accidentList.get(i);
 			addListItem("姓名：" + accident.getPname() + "\n时间："
 					+ accident.getTime() + "\n事故地点：" + "经"
@@ -140,7 +139,7 @@ public class RecentAccidentsActivity extends AbstractAidRequestActivity
 
 	private void startGetAccidents()
 	{
-		if (null == aid || null == currentUser)
+		if ((null == aid) || (null == currentUser))
 		{
 			Util.alert(getApplicationContext(), "用户信息异常，请重新登录！");
 			intent = new Intent();
@@ -187,7 +186,7 @@ public class RecentAccidentsActivity extends AbstractAidRequestActivity
 				{
 					if (RecentAccidentsActivity.this != null)
 					{
-						if (progressDialog != null
+						if ((progressDialog != null)
 								&& progressDialog.isShowing())
 						{
 							progressDialog.dismiss();
@@ -208,7 +207,7 @@ public class RecentAccidentsActivity extends AbstractAidRequestActivity
 				{
 					if (RecentAccidentsActivity.this != null)
 					{
-						if (progressDialog != null
+						if ((progressDialog != null)
 								&& progressDialog.isShowing())
 						{
 							progressDialog.dismiss();
@@ -228,7 +227,7 @@ public class RecentAccidentsActivity extends AbstractAidRequestActivity
 				{
 					if (RecentAccidentsActivity.this != null)
 					{
-						if (progressDialog != null
+						if ((progressDialog != null)
 								&& progressDialog.isShowing())
 						{
 							progressDialog.dismiss();

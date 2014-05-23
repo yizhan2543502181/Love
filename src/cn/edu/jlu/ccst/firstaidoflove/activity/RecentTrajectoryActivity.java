@@ -24,7 +24,6 @@ import android.widget.TextView;
 import cn.edu.jlu.ccst.firstaidoflove.AbstractAidRequestActivity;
 import cn.edu.jlu.ccst.firstaidoflove.AidApplication;
 import cn.edu.jlu.ccst.firstaidoflove.R;
-import cn.edu.jlu.ccst.firstaidoflove.activity.main.LoginActivity;
 import cn.edu.jlu.ccst.firstaidoflove.functions.AbstractRequestListener;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.Aid;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.AidError;
@@ -108,12 +107,10 @@ public class RecentTrajectoryActivity extends AbstractAidRequestActivity
 		list.clear();
 		for (int i = 0; i < 6; ++i)
 		{
-			trajectoryList.add(
-					0,
-					new Trajectory(currentUser.getPid(),
-							currentUser.getPname(), 116.391729 + random
-									.nextFloat() / 10.0, 39.944713 + random
-									.nextFloat() / 10.0, "2014.04.15"));
+			trajectoryList.add(0, new Trajectory(i, currentUser.getPid(),
+					currentUser.getPname(),
+					116.391729 + (random.nextFloat() / 10.0),
+					39.944713 + (random.nextFloat() / 10.0), "2014.04.15"));
 			Trajectory trajectory = trajectoryList.get(i);
 			addListItem("姓名：" + trajectory.getPname() + "\n时间："
 					+ trajectory.getTime() + "\n位置：" + "经"
@@ -240,7 +237,7 @@ public class RecentTrajectoryActivity extends AbstractAidRequestActivity
 
 	private void startGetTrajectories()
 	{
-		if (null == aid || null == currentUser)
+		if ((null == aid) || (null == currentUser))
 		{
 			Util.alert(getApplicationContext(), "用户信息异常，请重新登录！");
 			intent.setClass(getApplicationContext(), LoginActivity.class);
@@ -286,7 +283,7 @@ public class RecentTrajectoryActivity extends AbstractAidRequestActivity
 				{
 					if (RecentTrajectoryActivity.this != null)
 					{
-						if (progressDialog != null
+						if ((progressDialog != null)
 								&& progressDialog.isShowing())
 						{
 							progressDialog.dismiss();
@@ -307,7 +304,7 @@ public class RecentTrajectoryActivity extends AbstractAidRequestActivity
 				{
 					if (RecentTrajectoryActivity.this != null)
 					{
-						if (progressDialog != null
+						if ((progressDialog != null)
 								&& progressDialog.isShowing())
 						{
 							progressDialog.dismiss();
@@ -327,7 +324,7 @@ public class RecentTrajectoryActivity extends AbstractAidRequestActivity
 				{
 					if (RecentTrajectoryActivity.this != null)
 					{
-						if (progressDialog != null
+						if ((progressDialog != null)
 								&& progressDialog.isShowing())
 						{
 							progressDialog.dismiss();

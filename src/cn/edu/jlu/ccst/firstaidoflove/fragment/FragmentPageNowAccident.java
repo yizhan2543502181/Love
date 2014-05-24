@@ -1,4 +1,4 @@
-package cn.edu.jlu.ccst.firstaidoflove.activity.fragment;
+package cn.edu.jlu.ccst.firstaidoflove.fragment;
 
 import java.util.ArrayList;
 import java.util.HashMap;

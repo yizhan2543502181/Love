@@ -1,4 +1,4 @@
-package cn.edu.jlu.ccst.firstaidoflove.activity.fragment;
+package cn.edu.jlu.ccst.firstaidoflove.fragment;
 
 import java.util.concurrent.Executors;
 
@@ -317,7 +317,7 @@ public class FragmentPageOverview extends Fragment implements OnClickListener
 								}
 
 								@Override
-								public void onAidError(AidError renrenError)
+								public void onAidError(AidError AidError)
 								{
 									getActivity().finish();
 								}

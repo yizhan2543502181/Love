@@ -1,5 +1,5 @@
 /**
- * $id$ Copyright 2014 Renren Inc. All rights reserved.
+ * $id$ Copyright 2014 Aid Inc. All rights reserved.
  */
 package cn.edu.jlu.ccst.firstaidoflove.functions;
 
@@ -12,7 +12,7 @@ import cn.edu.jlu.ccst.firstaidoflove.util.Constant;
  * 
  * 开放平台各Api接口请求参数的抽象类
  * 
- * @author Shaofeng Wang (shaofeng.wang@renren-inc.com)
+ * @author Shaofeng Wang (shaofeng.wang@Aid-inc.com)
  * 
  */
 public abstract class RequestParam

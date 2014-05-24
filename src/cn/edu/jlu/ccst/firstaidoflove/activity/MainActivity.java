@@ -28,10 +28,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 import cn.edu.jlu.ccst.firstaidoflove.AbstractAidRequestActivity;
 import cn.edu.jlu.ccst.firstaidoflove.R;
-import cn.edu.jlu.ccst.firstaidoflove.activity.fragment.FragmentPageModify;
-import cn.edu.jlu.ccst.firstaidoflove.activity.fragment.FragmentPageNowAccident;
-import cn.edu.jlu.ccst.firstaidoflove.activity.fragment.FragmentPageOverview;
-import cn.edu.jlu.ccst.firstaidoflove.activity.fragment.FragmentPageQuery;
+import cn.edu.jlu.ccst.firstaidoflove.fragment.FragmentPageModify;
+import cn.edu.jlu.ccst.firstaidoflove.fragment.FragmentPageNowAccident;
+import cn.edu.jlu.ccst.firstaidoflove.fragment.FragmentPageOverview;
+import cn.edu.jlu.ccst.firstaidoflove.fragment.FragmentPageQuery;
 import cn.edu.jlu.ccst.firstaidoflove.util.Constant;
 import cn.edu.jlu.ccst.firstaidoflove.util.JPushUtil;
 import cn.edu.jlu.ccst.firstaidoflove.util.Util;
@@ -218,7 +218,7 @@ public class MainActivity extends AbstractAidRequestActivity
 	// 下面是JPush的相关代码
 	// for receive customer msg from jpush server
 	private MessageReceiver		mMessageReceiver;
-	public static final String	MESSAGE_RECEIVED_ACTION	= "cn.edu.jlu.ccst.firstaidoflove.activity.fragment.MESSAGE_RECEIVED_ACTION";
+	public static final String	MESSAGE_RECEIVED_ACTION	= "cn.edu.jlu.ccst.firstaidoflove.fragment.MESSAGE_RECEIVED_ACTION";
 	public static final String	KEY_TITLE				= "title";
 	public static final String	KEY_MESSAGE				= "message";
 	public static final String	KEY_EXTRAS				= "extras";

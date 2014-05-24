@@ -1,4 +1,4 @@
-package cn.edu.jlu.ccst.firstaidoflove.functions.beans.trajectory;
+package cn.edu.jlu.ccst.firstaidoflove.functions.hotAddress;
 
 import org.json.JSONObject;
 
@@ -15,9 +15,9 @@ import cn.edu.jlu.ccst.firstaidoflove.util.Constant;
  * @author wangchangshuai 415939252@qq.com
  * 
  */
-public class Trajectory implements Parcelable
+public class HotAddress implements Parcelable
 {
-	private long	tid			= -1;
+	private long	hid			= -1;
 	/**
 	 * 监护对象的id
 	 */
@@ -39,12 +39,12 @@ public class Trajectory implements Parcelable
 	 */
 	private String	time		= null;
 
-	public Trajectory()
+	public HotAddress()
 	{
 		super();
 	}
 
-	public Trajectory parse(JSONObject object) throws AidException
+	public HotAddress parse(JSONObject object) throws AidException
 	{
 		if (object == null)
 		{
@@ -59,7 +59,7 @@ public class Trajectory implements Parcelable
 		return this;
 	}
 
-	public Trajectory(long tid, long pid, String pname, double longtitude,
+	public HotAddress(long tid, long pid, String pname, double longtitude,
 			double latitude, String time)
 	{
 		super();
@@ -71,7 +71,7 @@ public class Trajectory implements Parcelable
 		this.time = time;
 	}
 
-	public Trajectory(Login login)
+	public HotAddress(Login login)
 	{
 		super();
 		pid = login.getPid();
@@ -142,9 +142,9 @@ public class Trajectory implements Parcelable
 	/**
 	 * @return the creator
 	 */
-	public static Parcelable.Creator<Trajectory> getCreator()
+	public static Parcelable.Creator<HotAddress> getCreator()
 	{
-		return Trajectory.CREATOR;
+		return HotAddress.CREATOR;
 	}
 
 	/**
@@ -229,24 +229,24 @@ public class Trajectory implements Parcelable
 		dest.writeBundle(bundle);
 	}
 
-	public static final Parcelable.Creator<Trajectory>	CREATOR	= new Parcelable.Creator<Trajectory>() {
+	public static final Parcelable.Creator<HotAddress>	CREATOR	= new Parcelable.Creator<HotAddress>() {
 																	@Override
-																	public Trajectory createFromParcel(
+																	public HotAddress createFromParcel(
 																			Parcel in)
 																	{
-																		return new Trajectory(
+																		return new HotAddress(
 																				in);
 																	}
 
 																	@Override
-																	public Trajectory[] newArray(
+																	public HotAddress[] newArray(
 																			int size)
 																	{
-																		return new Trajectory[size];
+																		return new HotAddress[size];
 																	}
 																};
 
-	public Trajectory(Parcel in)
+	public HotAddress(Parcel in)
 	{
 		Bundle bundle = in.readBundle();
 		if (bundle.containsKey(Constant.KEY_TID))

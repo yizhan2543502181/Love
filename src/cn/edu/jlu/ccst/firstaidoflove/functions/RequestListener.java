@@ -1,5 +1,5 @@
 /**
- * $id$ Copyright 2014 Renren Inc. All rights reserved.
+ * $id$ Copyright 2014 Aid Inc. All rights reserved.
  */
 package cn.edu.jlu.ccst.firstaidoflove.functions;
 
@@ -18,16 +18,16 @@ public interface RequestListener
 	 * 当请求完成后调用
 	 * 
 	 * @param response
-	 *            服务器返回的结果，一般是JSON或XML串 (根据你调用的AsyncRenren.requestJSON还是AsyncRenren .requestXML)。
+	 *            服务器返回的结果，一般是JSON或XML串 (根据你调用的AsyncAid.requestJSON还是AsyncAid .requestXML)。
 	 */
 	public void onComplete(String response);
 
 	/**
 	 * 服务器返回了错误结果，已经正确的链接上了服务器但有错误如：缺少参数、sessionKey过期等。
 	 * 
-	 * @param renrenError
+	 * @param AidError
 	 */
-	public void onAidError(AidError renrenError);
+	public void onAidError(AidError AidError);
 
 	/**
 	 * 在请求期间发生了严重问题（如：网络故障、访问的地址不存在等）

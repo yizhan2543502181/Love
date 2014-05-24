@@ -18,7 +18,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import cn.edu.jlu.ccst.firstaidoflove.AbstractAidRequestActivity;
 import cn.edu.jlu.ccst.firstaidoflove.R;
-import cn.edu.jlu.ccst.firstaidoflove.activity.fragment.FragmentPageOverview;
+import cn.edu.jlu.ccst.firstaidoflove.fragment.FragmentPageOverview;
 import cn.edu.jlu.ccst.firstaidoflove.functions.AbstractRequestListener;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.Aid;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.AidError;

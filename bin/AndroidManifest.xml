@@ -3,7 +3,7 @@
     package="cn.edu.jlu.ccst.firstaidoflove"
     android:installLocation="preferExternal"
     android:versionCode="1"
-    android:versionName="1.0" >
+    android:versionName="1.0.0" >
 
     <uses-sdk
         android:minSdkVersion="8"
@@ -87,7 +87,7 @@
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="qgwTnD9quWNZ2tLDWoafC7GX" >
-        </meta-data>
+        </meta-data>
         -->
         <!-- 宿舍_x86_32_android -->
         <meta-data
@@ -99,7 +99,7 @@
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="FTwyeMnSrBaGzbFHe1EpNzn3" >
-        </meta-data>
+        </meta-data>
         -->
 
 
@@ -110,7 +110,7 @@
         <!--
              <meta-data
             android:name="JPUSH_APPKEY"
-            android:value="efc668058bfbb6039d42caeb" />
+            android:value="efc668058bfbb6039d42caeb" />
         -->
         <meta-data
             android:name="JPUSH_APPKEY"
@@ -121,7 +121,7 @@
         尹隆账号申请的key 
         <meta-data
             android:name="JPUSH_APPKEY"
-            android:value="626ed657382f8cd3b0c5027e" />
+            android:value="626ed657382f8cd3b0c5027e" />
         -->
 
         <activity

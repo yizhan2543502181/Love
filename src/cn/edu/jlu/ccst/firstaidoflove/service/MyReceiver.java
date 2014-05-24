@@ -9,7 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import cn.edu.jlu.ccst.firstaidoflove.activity.MainActivity;
-import cn.edu.jlu.ccst.firstaidoflove.activity.fragment.FragmentPageNowAccident;
+import cn.edu.jlu.ccst.firstaidoflove.fragment.FragmentPageNowAccident;
 import cn.edu.jlu.ccst.firstaidoflove.functions.AccidentArriveListener;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.AidError;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.accident.Accident;

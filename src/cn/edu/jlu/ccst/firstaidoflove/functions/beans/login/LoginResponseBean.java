@@ -1,5 +1,5 @@
 /**
- * $id$ Copyright 2014 Renren Inc. All rights reserved.
+ * $id$ Copyright 2014 Aid Inc. All rights reserved.
  */
 package cn.edu.jlu.ccst.firstaidoflove.functions.beans.login;
 
@@ -10,12 +10,6 @@ import android.util.Log;
 import cn.edu.jlu.ccst.firstaidoflove.functions.ResponseBean;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.AidException;
 
-/**
- * users.getInfo接口的封装<br>
- * 
- * @author hecao (he.cao@renren-inc.com)
- * 
- */
 public class LoginResponseBean extends ResponseBean
 {
 	private Login	login	= null;

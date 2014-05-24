@@ -1,7 +1,7 @@
 /**
  * $id$ Copyright 2014 Aid Inc. All rights reserved.
  */
-package cn.edu.jlu.ccst.firstaidoflove.functions.beans.accident;
+package cn.edu.jlu.ccst.firstaidoflove.functions.hotAddress;
 
 import java.util.ArrayList;
 
@@ -13,17 +13,17 @@ import cn.edu.jlu.ccst.firstaidoflove.functions.ResponseBean;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.AidException;
 
 /**
- * accidents.getInfo接口的封装<br>
+ * trajectories.getInfo接口的封装<br>
  * 
  * @author hecao (he.cao@Aid-inc.com)
  * 
  */
-public class AccidentsGetResponseBean extends ResponseBean
+public class TrajectoriesGetResponseBean extends ResponseBean
 {
 	/**
 	 * user数组
 	 */
-	private ArrayList<Accident>	accidents;
+	private ArrayList<HotAddress>	trajectories;
 
 	/**
 	 * 构造UsersGetInfoResponseBean对象
@@ -32,7 +32,7 @@ public class AccidentsGetResponseBean extends ResponseBean
 	 *            返回的数据 json格式
 	 * @throws AidException
 	 */
-	public AccidentsGetResponseBean(String response)
+	public TrajectoriesGetResponseBean(String response)
 	{
 		super(response);
 		if (response == null)
@@ -45,15 +45,15 @@ public class AccidentsGetResponseBean extends ResponseBean
 			Log.i("json", array.toString());
 			if (array != null)
 			{
-				accidents = new ArrayList<Accident>();
+				trajectories = new ArrayList<HotAddress>();
 				int size = array.length();
 				for (int i = 0; i < size; i++)
 				{
-					Accident info = new Accident();
+					HotAddress info = new HotAddress();
 					info.parse(array.optJSONObject(i));
 					if (info != null)
 					{
-						accidents.add(info);
+						trajectories.add(info);
 					}
 				}
 			}
@@ -68,18 +68,18 @@ public class AccidentsGetResponseBean extends ResponseBean
 		}
 	}
 
-	public ArrayList<Accident> getAccidents()
+	public ArrayList<HotAddress> getTrajectories()
 	{
-		return accidents;
+		return trajectories;
 	}
 
 	@Override
 	public String toString()
 	{
 		StringBuffer sb = new StringBuffer();
-		if (accidents != null)
+		if (trajectories != null)
 		{
-			for (Accident info : accidents)
+			for (HotAddress info : trajectories)
 			{
 				sb.append(info.toString()).append("\r\n");
 			}

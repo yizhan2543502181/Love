@@ -1,5 +1,5 @@
 /**
- * $id$ Copyright 2014 Renren Inc. All rights reserved.
+ * $id$ Copyright 2014 Aid Inc. All rights reserved.
  */
 package cn.edu.jlu.ccst.firstaidoflove.functions;
 
@@ -11,7 +11,7 @@ import cn.edu.jlu.ccst.firstaidoflove.functions.beans.AidError;
 import cn.edu.jlu.ccst.firstaidoflove.util.Constant;
 
 /**
- * AsyncRenren的方法只能接受一个RequestListener; 通过RequestListenerHelper可以在AsyncRenren方法中加入多个监听器；提供RequestListener缺省实现。
+ * AsyncAid的方法只能接受一个RequestListener; 通过RequestListenerHelper可以在AsyncAid方法中加入多个监听器；提供RequestListener缺省实现。
  * 
  * @author 李勇(yong.li@opi-corp.com) 2010-7-15
  */
@@ -39,11 +39,11 @@ public class RequestListenerHelper implements RequestListener
 	}
 
 	@Override
-	public void onAidError(AidError renrenError)
+	public void onAidError(AidError AidError)
 	{
 		for (RequestListener listener : listeners)
 		{
-			listener.onAidError(renrenError);
+			listener.onAidError(AidError);
 		}
 	}
 
@@ -72,11 +72,11 @@ public class RequestListenerHelper implements RequestListener
 		}
 
 		@Override
-		public void onAidError(AidError renrenError)
+		public void onAidError(AidError AidError)
 		{
 			Log.w(Constant.LOG_TAG,
-					"DefaultRequestListener.onRenrenError renrenError:"
-							+ renrenError);
+					"DefaultRequestListener.onAidError AidError:"
+							+ AidError);
 		}
 
 		@Override

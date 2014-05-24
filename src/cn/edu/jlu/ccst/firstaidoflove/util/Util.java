@@ -340,7 +340,7 @@ public final class Util
 	}
 
 	/**
-	 * 将服务器返回的错误JSON串，转化成RenrenError.
+	 * 将服务器返回的错误JSON串，转化成AidError.
 	 * 
 	 * @param JSON
 	 *            �? * @return
@@ -363,7 +363,7 @@ public final class Util
 	}
 
 	/**
-	 * 将服务器返回的错误XML串，转化成RenrenError.
+	 * 将服务器返回的错误XML串，转化成AidError.
 	 * 
 	 * @param JSON
 	 *            �? * @return
@@ -409,7 +409,7 @@ public final class Util
 	}
 
 	/**
-	 * 响应的内容是错误信息时，被转化成RenrenError，否则返回NULL
+	 * 响应的内容是错误信息时，被转化成AidError，否则返回NULL
 	 * 
 	 * @param response
 	 * @param responseFormat
@@ -604,7 +604,7 @@ public final class Util
 	/**
 	 * 二元选择的监听器
 	 * 
-	 * @author Shaofeng Wang (shaofeng.wang@renren-inc.com)
+	 * @author Shaofeng Wang (shaofeng.wang@Aid-inc.com)
 	 * 
 	 */
 	public static interface OnOptionListener

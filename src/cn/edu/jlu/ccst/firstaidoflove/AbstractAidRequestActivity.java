@@ -12,8 +12,8 @@ import cn.edu.jlu.ccst.firstaidoflove.functions.beans.Aid;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.user.User;
 
 /**
- * 请求窗口的父类，其中包含了对Renren对象的初始化<br>
- * 使用前，需要将Renren对象已Parcelable序列化方式传入intent中，例如
+ * 请求窗口的父类，其中包含了对Aid对象的初始化<br>
+ * 使用前，需要将Aid对象已Parcelable序列化方式传入intent中，例如
  * 
  * Intent intent = new Intent(xxxActivity, ARRActivity.class);<br>
  * Bundle bundle = new Bundle();<br>
@@ -27,10 +27,10 @@ import cn.edu.jlu.ccst.firstaidoflove.functions.beans.user.User;
  * intent.putExtra(Aid.AID_LABEL, this); activity.startActivity(intent);
  * 
  * <p>
- * 也可调用Renren提供的startRenrenRequestActivity方法，如：<br>
+ * 也可调用Aid提供的startAidRequestActivity方法，如：<br>
  * Intent intent = new Intent(xxxActivity, ARRActivity.class);<br>
- * aid.startRenrenRequestActivity(xxxActivity, intent);<br>
- * 该方法会辅助完整Renren以Parcel方式传入Activity的操作
+ * aid.startAidRequestActivity(xxxActivity, intent);<br>
+ * 该方法会辅助完整Aid以Parcel方式传入Activity的操作
  * 
  * @author Shaofeng Wang (shaofeng.wang@aid-inc.com)
  * 
@@ -61,7 +61,7 @@ public class AbstractAidRequestActivity extends FragmentActivity
 	}
 
 	/**
-	 * 初始化Renren对象
+	 * 初始化Aid对象
 	 */
 	private void initAid()
 	{

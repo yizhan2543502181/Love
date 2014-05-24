@@ -1,5 +1,5 @@
 /**
- * $id$ Copyright 2014 Renren Inc. All rights reserved.
+ * $id$ Copyright 2014 Aid Inc. All rights reserved.
  */
 package cn.edu.jlu.ccst.firstaidoflove.functions.beans.trajectory;
 
@@ -13,7 +13,7 @@ import cn.edu.jlu.ccst.firstaidoflove.functions.beans.AidException;
 /**
  * trajectory.getInfo接口的封装<br>
  * 
- * @author hecao (he.cao@renren-inc.com)
+ * @author hecao (he.cao@Aid-inc.com)
  * 
  */
 public class TrajectoryGetResponseBean extends ResponseBean

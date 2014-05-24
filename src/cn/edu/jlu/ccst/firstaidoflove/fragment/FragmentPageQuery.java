@@ -1,4 +1,4 @@
-package cn.edu.jlu.ccst.firstaidoflove.activity.fragment;
+package cn.edu.jlu.ccst.firstaidoflove.fragment;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,13 +14,19 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 import android.widget.SimpleAdapter;
 import cn.edu.jlu.ccst.firstaidoflove.R;
-import cn.edu.jlu.ccst.firstaidoflove.activity.ModifyPasswordActivity;
-import cn.edu.jlu.ccst.firstaidoflove.activity.PatientInfoModifyActivity;
-import cn.edu.jlu.ccst.firstaidoflove.activity.PersonalInfoModifyActivity;
+import cn.edu.jlu.ccst.firstaidoflove.activity.LocalesActivity;
+import cn.edu.jlu.ccst.firstaidoflove.activity.MedicalRecordsActivity;
+import cn.edu.jlu.ccst.firstaidoflove.activity.PatientInfoActivity;
+import cn.edu.jlu.ccst.firstaidoflove.activity.PersonalInfoActivity;
+import cn.edu.jlu.ccst.firstaidoflove.activity.RecentAccidentsActivity;
+import cn.edu.jlu.ccst.firstaidoflove.activity.RecentTrajectoryActivity;
+import cn.edu.jlu.ccst.firstaidoflove.util.Util;
 
-public class FragmentPageModify extends Fragment
+public class FragmentPageQuery extends Fragment
 {
-	private static final String functions[] = { "个人信息修改", "病人信息修改", "密码修改" };
+	private Intent				intent		= null;
+	private static final String	functions[]	= { "个人信息", "病人信息", "最近事故", "最近轨迹",
+			"病历查询", "热点查询", "交易记录"			};
 
 	@Override
 	public void onCreate(Bundle savedInstanceState)
@@ -33,18 +39,17 @@ public class FragmentPageModify extends Fragment
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState)
 	{
-		View layout = inflater.inflate(R.layout.modify_activity_layout, null);
+		View layout = inflater.inflate(R.layout.query_activity_layout, null);
 		init(layout);
 		return layout;
 	}
 
 	private void init(View layout)
 	{
-		GridView gridview = (GridView) layout
-				.findViewById(R.id.modify_gridview);
+		GridView gridview = (GridView) layout.findViewById(R.id.query_gridview);
 		// 生成动态数组，并且转入数据
 		ArrayList<HashMap<String, Object>> itemList = new ArrayList<HashMap<String, Object>>();
-		for (String function : FragmentPageModify.functions)
+		for (String function : FragmentPageQuery.functions)
 		{
 			HashMap<String, Object> map = new HashMap<String, Object>();
 			map.put("image", R.drawable.icon_square_sel);// 添加图像资源的ID
@@ -75,24 +80,39 @@ public class FragmentPageModify extends Fragment
 				long arg3// The row id of the item that was clicked
 		)
 		{
+			intent = new Intent();
 			// 在本例中arg2=arg3
 			@SuppressWarnings("unchecked")
-			HashMap<String, Object> item = (HashMap<String, Object>) (arg0
-					.getItemAtPosition(arg2));
-			Intent intent = new Intent();
+			HashMap<String, Object> item = (HashMap<String, Object>) arg0
+					.getItemAtPosition(arg2);
 			switch (arg2)
 			{
 			case 0:
-				intent.setClass(getActivity(), PersonalInfoModifyActivity.class);
+				intent.setClass(getActivity(), PersonalInfoActivity.class);
 				startActivity(intent);
 				break;
 			case 1:
-				intent.setClass(getActivity(), PatientInfoModifyActivity.class);
+				intent.setClass(getActivity(), PatientInfoActivity.class);
 				startActivity(intent);
 				break;
 			case 2:
-				intent.setClass(getActivity(), ModifyPasswordActivity.class);
+				intent.setClass(getActivity(), RecentAccidentsActivity.class);
 				startActivity(intent);
+				break;
+			case 3:
+				intent.setClass(getActivity(), RecentTrajectoryActivity.class);
+				startActivity(intent);
+				break;
+			case 4:
+				intent.setClass(getActivity(), MedicalRecordsActivity.class);
+				startActivity(intent);
+				break;
+			case 5:
+				intent.setClass(getActivity(), LocalesActivity.class);
+				startActivity(intent);
+				break;
+			case 6:
+				Util.showAlert(getActivity(), "提示", "暂未实现");
 				break;
 			default:
 				break;

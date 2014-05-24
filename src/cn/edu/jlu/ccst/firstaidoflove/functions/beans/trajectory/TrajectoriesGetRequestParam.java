@@ -31,17 +31,17 @@ public class TrajectoriesGetRequestParam extends RequestParam
 	/**
 	 * 用户
 	 */
-	private String				uid;
+	private long				uid;
 	/**
 	 * 需要获取的监护对象的id
 	 */
-	private String				pid;
+	private long				pid;
 	/**
 	 * 需要获取的字段
 	 */
 	private String				fields			= TrajectoriesGetRequestParam.FIELD_DEFAULT;
 
-	public TrajectoriesGetRequestParam(String uid, String pid)
+	public TrajectoriesGetRequestParam(long uid, long pid)
 	{
 		super();
 		this.uid = uid;
@@ -56,7 +56,7 @@ public class TrajectoriesGetRequestParam extends RequestParam
 	 * @param fields
 	 *            需要获取的字段
 	 */
-	public TrajectoriesGetRequestParam(String uid, String pid, String fields)
+	public TrajectoriesGetRequestParam(long uid, long pid, String fields)
 	{
 		this.uid = uid;
 		this.pid = pid;
@@ -68,7 +68,7 @@ public class TrajectoriesGetRequestParam extends RequestParam
 	 * 
 	 * @return
 	 */
-	public String getUid()
+	public long getUid()
 	{
 		return uid;
 	}
@@ -78,7 +78,7 @@ public class TrajectoriesGetRequestParam extends RequestParam
 	 * 
 	 * @param uids
 	 */
-	public void setUid(String uid)
+	public void setUid(long uid)
 	{
 		this.uid = uid;
 	}
@@ -86,7 +86,7 @@ public class TrajectoriesGetRequestParam extends RequestParam
 	/**
 	 * @return the pid
 	 */
-	public String getPid()
+	public long getPid()
 	{
 		return pid;
 	}
@@ -95,7 +95,7 @@ public class TrajectoriesGetRequestParam extends RequestParam
 	 * @param pid
 	 *            the pid to set
 	 */
-	public void setPid(String pid)
+	public void setPid(long pid)
 	{
 		this.pid = pid;
 	}
@@ -126,13 +126,13 @@ public class TrajectoriesGetRequestParam extends RequestParam
 		Bundle parameters = new Bundle();
 		parameters.putString(Constant.KEY_METHOD,
 				TrajectoriesGetRequestParam.METHOD);
-		if (uid != null)
+		if (uid != -1)
 		{
-			parameters.putString(Constant.KEY_UID, uid);
+			parameters.putLong(Constant.KEY_UID, uid);
 		}
-		if (pid != null)
+		if (pid != -1)
 		{
-			parameters.putString(Constant.KEY_PID, pid);
+			parameters.putLong(Constant.KEY_PID, pid);
 		}
 		return parameters;
 	}

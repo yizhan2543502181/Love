@@ -16,12 +16,12 @@ import cn.edu.jlu.ccst.firstaidoflove.util.Constant;
  */
 public class AccidentsGetRequestParam extends RequestParam
 {
-	private static final String	METHOD	      = "get_accidents";
+	private static final String	METHOD			= "get_accidents";
 	/**
 	 * 所有字段
 	 */
-	public static final String	FIELDS_ALL	  = Constant.KEY_UID + ","
-	                                                  + Constant.KEY_PID;
+	public static final String	FIELDS_ALL		= Constant.KEY_UID + ","
+														+ Constant.KEY_PID;
 	/**
 	 * 默认字段<br>
 	 * 不添加fields参数也按此字段返回
@@ -30,17 +30,17 @@ public class AccidentsGetRequestParam extends RequestParam
 	/**
 	 * 用户
 	 */
-	private String	            uid;
+	private long				uid;
 	/**
 	 * 需要获取的监护对象的id
 	 */
-	private String	            pid;
+	private long				pid;
 	/**
 	 * 需要获取的字段
 	 */
-	private String	            fields	      = AccidentsGetRequestParam.FIELD_DEFAULT;
+	private String				fields			= AccidentsGetRequestParam.FIELD_DEFAULT;
 
-	public AccidentsGetRequestParam(String uid, String pid)
+	public AccidentsGetRequestParam(long uid, long pid)
 	{
 		super();
 		this.uid = uid;
@@ -55,7 +55,7 @@ public class AccidentsGetRequestParam extends RequestParam
 	 * @param fields
 	 *            需要获取的字段
 	 */
-	public AccidentsGetRequestParam(String uid, String pid, String fields)
+	public AccidentsGetRequestParam(long uid, long pid, String fields)
 	{
 		this.uid = uid;
 		this.pid = pid;
@@ -67,7 +67,7 @@ public class AccidentsGetRequestParam extends RequestParam
 	 * 
 	 * @return
 	 */
-	public String getUid()
+	public long getUid()
 	{
 		return uid;
 	}
@@ -77,7 +77,7 @@ public class AccidentsGetRequestParam extends RequestParam
 	 * 
 	 * @param uids
 	 */
-	public void setUid(String uid)
+	public void setUid(long uid)
 	{
 		this.uid = uid;
 	}
@@ -85,7 +85,7 @@ public class AccidentsGetRequestParam extends RequestParam
 	/**
 	 * @return the pid
 	 */
-	public String getPid()
+	public long getPid()
 	{
 		return pid;
 	}
@@ -94,7 +94,7 @@ public class AccidentsGetRequestParam extends RequestParam
 	 * @param pid
 	 *            the pid to set
 	 */
-	public void setPid(String pid)
+	public void setPid(long pid)
 	{
 		this.pid = pid;
 	}
@@ -123,18 +123,15 @@ public class AccidentsGetRequestParam extends RequestParam
 	public Bundle getParams() throws AidException
 	{
 		Bundle parameters = new Bundle();
-		parameters.putString(Constant.KEY_METHOD, AccidentsGetRequestParam.METHOD);
-		if (fields != null)
+		parameters.putString(Constant.KEY_METHOD,
+				AccidentsGetRequestParam.METHOD);
+		if (uid != -1)
 		{
-			parameters.putString(Constant.KEY_FIELDS, fields);
+			parameters.putLong(Constant.KEY_UID, uid);
 		}
-		if (uid != null)
+		if (pid != -1)
 		{
-			parameters.putString(Constant.KEY_UID, uid);
-		}
-		if (pid != null)
-		{
-			parameters.putString(Constant.KEY_PID, pid);
+			parameters.putLong(Constant.KEY_PID, pid);
 		}
 		return parameters;
 	}

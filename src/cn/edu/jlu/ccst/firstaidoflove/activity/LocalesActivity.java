@@ -22,7 +22,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
-import cn.edu.jlu.ccst.firstaidoflove.AbstractAidRequestActivity;
+import cn.edu.jlu.ccst.firstaidoflove.BaseActivity;
 import cn.edu.jlu.ccst.firstaidoflove.R;
 import cn.edu.jlu.ccst.firstaidoflove.util.Util;
 
@@ -30,7 +30,7 @@ import cn.edu.jlu.ccst.firstaidoflove.util.Util;
  * @author Administrator
  * 
  */
-public class LocalesActivity extends AbstractAidRequestActivity implements
+public class LocalesActivity extends BaseActivity implements
 		OnClickListener
 {
 	private Button						addNewBtn		= null;

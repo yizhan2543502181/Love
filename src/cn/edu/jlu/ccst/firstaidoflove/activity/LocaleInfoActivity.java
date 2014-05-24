@@ -5,14 +5,14 @@ package cn.edu.jlu.ccst.firstaidoflove.activity;
 
 import android.os.Bundle;
 import android.view.Window;
-import cn.edu.jlu.ccst.firstaidoflove.AbstractAidRequestActivity;
+import cn.edu.jlu.ccst.firstaidoflove.BaseActivity;
 import cn.edu.jlu.ccst.firstaidoflove.R;
 
 /**
  * @author Administrator
  * 
  */
-public class LocaleInfoActivity extends AbstractAidRequestActivity
+public class LocaleInfoActivity extends BaseActivity
 {
 	@Override
 	protected void onCreate(Bundle savedInstanceState)

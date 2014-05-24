@@ -5,7 +5,6 @@ import java.util.HashMap;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 import android.widget.SimpleAdapter;
+import cn.edu.jlu.ccst.firstaidoflove.BaseFragment;
 import cn.edu.jlu.ccst.firstaidoflove.R;
 import cn.edu.jlu.ccst.firstaidoflove.activity.LocalesActivity;
 import cn.edu.jlu.ccst.firstaidoflove.activity.MedicalRecordsActivity;
@@ -22,7 +22,7 @@ import cn.edu.jlu.ccst.firstaidoflove.activity.RecentAccidentsActivity;
 import cn.edu.jlu.ccst.firstaidoflove.activity.RecentTrajectoryActivity;
 import cn.edu.jlu.ccst.firstaidoflove.util.Util;
 
-public class FragmentPage2 extends Fragment
+public class FragmentPage2 extends BaseFragment
 {
 	private Intent				intent		= null;
 	private static final String	functions[]	= { "个人信息", "病人信息", "最近事故", "最近轨迹",
@@ -31,7 +31,6 @@ public class FragmentPage2 extends Fragment
 	@Override
 	public void onCreate(Bundle savedInstanceState)
 	{
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 	}
 
@@ -82,9 +81,6 @@ public class FragmentPage2 extends Fragment
 		{
 			intent = new Intent();
 			// 在本例中arg2=arg3
-			@SuppressWarnings("unchecked")
-			HashMap<String, Object> item = (HashMap<String, Object>) arg0
-					.getItemAtPosition(arg2);
 			switch (arg2)
 			{
 			case 0:

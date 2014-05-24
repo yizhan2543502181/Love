@@ -5,7 +5,6 @@ import java.util.HashMap;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,14 +12,15 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 import android.widget.SimpleAdapter;
+import cn.edu.jlu.ccst.firstaidoflove.BaseFragment;
 import cn.edu.jlu.ccst.firstaidoflove.R;
 import cn.edu.jlu.ccst.firstaidoflove.activity.ModifyPasswordActivity;
 import cn.edu.jlu.ccst.firstaidoflove.activity.PatientInfoModifyActivity;
 import cn.edu.jlu.ccst.firstaidoflove.activity.PersonalInfoModifyActivity;
 
-public class FragmentPage4 extends Fragment
+public class FragmentPage4 extends BaseFragment
 {
-	private static final String functions[] = { "个人信息修改", "病人信息修改", "密码修改" };
+	private static final String	functions[]	= { "个人信息修改", "病人信息修改", "密码修改" };
 
 	@Override
 	public void onCreate(Bundle savedInstanceState)
@@ -76,9 +76,8 @@ public class FragmentPage4 extends Fragment
 		)
 		{
 			// 在本例中arg2=arg3
-			@SuppressWarnings("unchecked")
-			HashMap<String, Object> item = (HashMap<String, Object>) (arg0
-					.getItemAtPosition(arg2));
+			// HashMap<String, Object> item = (HashMap<String, Object>) arg0
+			// .getItemAtPosition(arg2);
 			Intent intent = new Intent();
 			switch (arg2)
 			{

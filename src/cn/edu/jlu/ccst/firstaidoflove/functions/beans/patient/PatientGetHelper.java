@@ -77,7 +77,7 @@ public class PatientGetHelper
 	 * @param listener
 	 *            回调
 	 */
-	public void asyncGetPatientsInfo(Executor pool,
+	public void asyncGetPatientInfo(Executor pool,
 	        final PatientGetRequestParam param,
 	        final AbstractRequestListener<PatientGetResponseBean> listener)
 	{

@@ -6,6 +6,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.Executors;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -26,12 +27,12 @@ import android.widget.ImageView;
 import android.widget.TabHost.TabSpec;
 import android.widget.TextView;
 import android.widget.Toast;
-import cn.edu.jlu.ccst.firstaidoflove.AbstractAidRequestActivity;
+import cn.edu.jlu.ccst.firstaidoflove.BaseActivity;
 import cn.edu.jlu.ccst.firstaidoflove.R;
-import cn.edu.jlu.ccst.firstaidoflove.fragment.FragmentPage4;
-import cn.edu.jlu.ccst.firstaidoflove.fragment.FragmentPageNow3;
 import cn.edu.jlu.ccst.firstaidoflove.fragment.FragmentPage1;
 import cn.edu.jlu.ccst.firstaidoflove.fragment.FragmentPage2;
+import cn.edu.jlu.ccst.firstaidoflove.fragment.FragmentPage4;
+import cn.edu.jlu.ccst.firstaidoflove.fragment.FragmentPage3;
 import cn.edu.jlu.ccst.firstaidoflove.util.Constant;
 import cn.edu.jlu.ccst.firstaidoflove.util.JPushUtil;
 import cn.edu.jlu.ccst.firstaidoflove.util.Util;
@@ -41,7 +42,8 @@ import cn.jpush.android.api.TagAliasCallback;
 /**
  * @author yangyu 功能描述：自定义TabHost
  */
-public class MainActivity extends AbstractAidRequestActivity
+@SuppressLint("HandlerLeak")
+public class MainActivity extends BaseActivity
 {
 	public static boolean			isForeground		= false;
 	private static final int		MENU_EXIT			= Menu.FIRST - 1;
@@ -51,9 +53,10 @@ public class MainActivity extends AbstractAidRequestActivity
 	// 定义一个布局
 	private LayoutInflater			layoutInflater;
 	// 定义数组来存放Fragment界面
+	@SuppressWarnings("rawtypes")
 	private Class					fragmentArray[]		= {
-			FragmentPage1.class, FragmentPage2.class,
-			FragmentPageNow3.class, FragmentPage4.class };
+			FragmentPage1.class, FragmentPage2.class, FragmentPage3.class,
+			FragmentPage4.class						};
 	// 定义数组来存放按钮图片
 	private int						mImageViewArray[]	= {
 			R.drawable.tab_home_btn, R.drawable.tab_square_btn,
@@ -67,7 +70,7 @@ public class MainActivity extends AbstractAidRequestActivity
 	// 用户类型便于以后分类推送
 	private String					UserTag				= "old,heart_disease,high_blood_pressure";
 	private static boolean			isSetAliasOk		= false;
-	private Integer					lock				= new Integer(0);
+	private Object					lock				= new Object();
 
 	@Override
 	public void onCreate(Bundle savedInstanceState)
@@ -206,7 +209,7 @@ public class MainActivity extends AbstractAidRequestActivity
 					MainActivity.isExit = false;
 				}
 			};
-			tExit.schedule(task, 1000);
+			tExit.schedule(task, 2000);
 		}
 		else
 		{
@@ -284,6 +287,7 @@ public class MainActivity extends AbstractAidRequestActivity
 	private static final int		MSG_SET_ALIAS				= 1001;
 	private static final int		MSG_SET_TAGS				= 1002;
 	private final Handler			mHandler					= new Handler() {
+																	@SuppressWarnings("unchecked")
 																	@Override
 																	public void handleMessage(
 																			android.os.Message msg)

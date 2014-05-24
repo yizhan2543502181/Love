@@ -12,7 +12,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
 import android.widget.Toast;
-import cn.edu.jlu.ccst.firstaidoflove.AbstractAidRequestActivity;
+import cn.edu.jlu.ccst.firstaidoflove.BaseActivity;
 import cn.edu.jlu.ccst.firstaidoflove.AidApplication;
 import cn.edu.jlu.ccst.firstaidoflove.R;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.accident.Accident;
@@ -39,7 +39,7 @@ import com.baidu.platform.comapi.basestruct.GeoPoint;
  * @author Administrator
  * 
  */
-public class AccidentInfoActivity extends AbstractAidRequestActivity implements
+public class AccidentInfoActivity extends BaseActivity implements
 		OnClickListener
 {
 	private TextView		locationText			= null;

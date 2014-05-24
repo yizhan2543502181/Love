@@ -76,7 +76,7 @@ public class UserGetHelper
 	 * @param listener
 	 *            回调
 	 */
-	public void asyncGetUsersInfo(Executor pool,
+	public void asyncGetUserInfo(Executor pool,
 			final UserGetRequestParam param,
 			final AbstractRequestListener<UserGetResponseBean> listener)
 	{

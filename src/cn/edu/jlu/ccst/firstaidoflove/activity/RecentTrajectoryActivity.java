@@ -21,11 +21,10 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
-import cn.edu.jlu.ccst.firstaidoflove.AbstractAidRequestActivity;
 import cn.edu.jlu.ccst.firstaidoflove.AidApplication;
+import cn.edu.jlu.ccst.firstaidoflove.BaseActivity;
 import cn.edu.jlu.ccst.firstaidoflove.R;
 import cn.edu.jlu.ccst.firstaidoflove.functions.AbstractRequestListener;
-import cn.edu.jlu.ccst.firstaidoflove.functions.beans.Aid;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.AidError;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.AsyncAid;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.trajectory.TrajectoriesGetRequestParam;
@@ -45,7 +44,7 @@ import com.baidu.platform.comapi.basestruct.GeoPoint;
  * @author Administrator
  * 
  */
-public class RecentTrajectoryActivity extends AbstractAidRequestActivity
+public class RecentTrajectoryActivity extends BaseActivity
 {
 	// 地图相关
 	MapView								mMapView		= null;								// 地图View
@@ -107,10 +106,12 @@ public class RecentTrajectoryActivity extends AbstractAidRequestActivity
 		list.clear();
 		for (int i = 0; i < 6; ++i)
 		{
-			trajectoryList.add(0, new Trajectory(i, currentUser.getPid(),
-					currentUser.getPname(),
-					116.391729 + (random.nextFloat() / 10.0),
-					39.944713 + (random.nextFloat() / 10.0), "2014.04.15"));
+			trajectoryList
+					.add(0,
+							new Trajectory(i, currentUser.getPid(), currentUser
+									.getPname(), 116.391729 + random
+									.nextFloat() / 10.0, 39.944713 + random
+									.nextFloat() / 10.0, "2014.04.15"));
 			Trajectory trajectory = trajectoryList.get(i);
 			addListItem("姓名：" + trajectory.getPname() + "\n时间："
 					+ trajectory.getTime() + "\n位置：" + "经"
@@ -237,17 +238,8 @@ public class RecentTrajectoryActivity extends AbstractAidRequestActivity
 
 	private void startGetTrajectories()
 	{
-		if ((null == aid) || (null == currentUser))
-		{
-			Util.alert(getApplicationContext(), "用户信息异常，请重新登录！");
-			intent.setClass(getApplicationContext(), LoginActivity.class);
-			startActivity(intent);
-			finish();
-		}
 		TrajectoriesGetRequestParam param = new TrajectoriesGetRequestParam(
-				String.valueOf(aid.getCurrentUid()), String.valueOf(Aid
-						.getUserInstance().getPid()));
-		param.setUid(String.valueOf(aid.getCurrentUid()));
+				currentUser.getUid(), currentUser.getPid());
 		try
 		{
 			progressDialog = new ProgressDialog(RecentTrajectoryActivity.this);
@@ -283,7 +275,7 @@ public class RecentTrajectoryActivity extends AbstractAidRequestActivity
 				{
 					if (RecentTrajectoryActivity.this != null)
 					{
-						if ((progressDialog != null)
+						if (progressDialog != null
 								&& progressDialog.isShowing())
 						{
 							progressDialog.dismiss();
@@ -304,7 +296,7 @@ public class RecentTrajectoryActivity extends AbstractAidRequestActivity
 				{
 					if (RecentTrajectoryActivity.this != null)
 					{
-						if ((progressDialog != null)
+						if (progressDialog != null
 								&& progressDialog.isShowing())
 						{
 							progressDialog.dismiss();
@@ -324,7 +316,7 @@ public class RecentTrajectoryActivity extends AbstractAidRequestActivity
 				{
 					if (RecentTrajectoryActivity.this != null)
 					{
-						if ((progressDialog != null)
+						if (progressDialog != null
 								&& progressDialog.isShowing())
 						{
 							progressDialog.dismiss();

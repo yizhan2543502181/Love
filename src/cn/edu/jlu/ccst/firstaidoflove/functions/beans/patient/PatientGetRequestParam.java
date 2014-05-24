@@ -31,11 +31,11 @@ public class PatientGetRequestParam extends RequestParam
 	/**
 	 * 需要获取的用户uid的数组
 	 */
-	private String				uid;
+	private long				uid;
 	/**
 	 * 监护对象的id
 	 */
-	private String				pid;
+	private long				pid;
 	/**
 	 * 需要获取的字段
 	 */
@@ -47,7 +47,7 @@ public class PatientGetRequestParam extends RequestParam
 	 * @param uids
 	 *            需要获取的用户uid的数组
 	 */
-	public PatientGetRequestParam(String uid, String pid)
+	public PatientGetRequestParam(long uid, long pid)
 	{
 		this.uid = uid;
 		this.pid = pid;
@@ -61,7 +61,7 @@ public class PatientGetRequestParam extends RequestParam
 	 * @param fields
 	 *            需要获取的字段
 	 */
-	public PatientGetRequestParam(String uid, String pid, String fields)
+	public PatientGetRequestParam(long uid, long pid, String fields)
 	{
 		this.uid = uid;
 		this.pid = pid;
@@ -73,7 +73,7 @@ public class PatientGetRequestParam extends RequestParam
 	 * 
 	 * @return
 	 */
-	public String getUid()
+	public long getUid()
 	{
 		return uid;
 	}
@@ -83,17 +83,17 @@ public class PatientGetRequestParam extends RequestParam
 	 * 
 	 * @param uids
 	 */
-	public void setUid(String uid)
+	public void setUid(long uid)
 	{
 		this.uid = uid;
 	}
 
-	public String getPid()
+	public long getPid()
 	{
 		return pid;
 	}
 
-	public void setPid(String pid)
+	public void setPid(long pid)
 	{
 		this.pid = pid;
 	}
@@ -124,13 +124,13 @@ public class PatientGetRequestParam extends RequestParam
 		Bundle parameters = new Bundle();
 		parameters
 				.putString(Constant.KEY_METHOD, PatientGetRequestParam.METHOD);
-		if (uid != null)
+		if (uid != -1)
 		{
-			parameters.putString(Constant.KEY_UID, uid);
+			parameters.putLong(Constant.KEY_UID, uid);
 		}
-		if (uid != null)
+		if (uid != -1)
 		{
-			parameters.putString(Constant.KEY_PID, pid);
+			parameters.putLong(Constant.KEY_PID, pid);
 		}
 		return parameters;
 	}

@@ -37,10 +37,6 @@ public class LoginRequestParam extends RequestParam
 	 * 登录的密码
 	 */
 	private String				loginPassword	= null;
-	/**
-	 * 需要获取的字段
-	 */
-	private String				fields			= AccidentsGetRequestParam.FIELD_DEFAULT;
 
 	public LoginRequestParam(String loginName, String loginPassword)
 	{

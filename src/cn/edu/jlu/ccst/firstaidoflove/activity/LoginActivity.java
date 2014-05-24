@@ -16,7 +16,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
-import cn.edu.jlu.ccst.firstaidoflove.AbstractAidRequestActivity;
+import cn.edu.jlu.ccst.firstaidoflove.BaseActivity;
 import cn.edu.jlu.ccst.firstaidoflove.R;
 import cn.edu.jlu.ccst.firstaidoflove.fragment.FragmentPage1;
 import cn.edu.jlu.ccst.firstaidoflove.functions.AbstractRequestListener;
@@ -31,8 +31,7 @@ import cn.edu.jlu.ccst.firstaidoflove.functions.beans.user.User;
 import cn.edu.jlu.ccst.firstaidoflove.util.Constant;
 import cn.edu.jlu.ccst.firstaidoflove.util.Util;
 
-public class LoginActivity extends AbstractAidRequestActivity implements
-		OnClickListener
+public class LoginActivity extends BaseActivity implements OnClickListener
 {
 	private static LoginActivity	instance			= null;
 	private String					userName			= null;
@@ -69,31 +68,17 @@ public class LoginActivity extends AbstractAidRequestActivity implements
 	public void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		if (null != Aid.getUserInstance())
+		if (null != currentUser)
 		{
 			intent = new Intent();
 			intent.setClass(LoginActivity.this, MainActivity.class);
 			startActivity(intent);
 			finish();
 		}
-		if (null != getSession())
-		{
-			// 此处就直接跳转到首页
-		}
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.login_activity_layout);
 		findViewsById();
 		initViewBySharPreferences();
-	}
-
-	private String getSession()
-	{
-		Set<String> set = new HashSet<String>();
-		set.add(Constant.SHARE_SESSION_KEY);
-		Bundle bundle = Util.getSharePreferences(LoginActivity.this, set);
-		return (null == bundle.getString(Constant.SHARE_SESSION_KEY))
-				|| bundle.getString(Constant.SHARE_SESSION_KEY).equals("") ? null
-				: bundle.getString(Constant.SHARE_SESSION_KEY);
 	}
 
 	/** 初始化注册View组件 */
@@ -102,6 +87,7 @@ public class LoginActivity extends AbstractAidRequestActivity implements
 		userNameEdit = (EditText) findViewById(R.id.login_user_name_edit);
 		passwordEdit = (EditText) findViewById(R.id.login_password_edit);
 		rememberMeCheck = (CheckBox) findViewById(R.id.login_remeber_me_checkbox);
+		rememberMeCheck.setChecked(true);
 		loginBtn = (Button) findViewById(R.id.login_btn);
 		findPasswordText = (TextView) findViewById(R.id.login_forget_password_text);
 		loginBtn.setOnClickListener(this);
@@ -122,11 +108,11 @@ public class LoginActivity extends AbstractAidRequestActivity implements
 		userName = bundle.getString(Constant.SHARE_LOGIN_NAME);
 		password = bundle.getString(Constant.SHARE_LOGIN_PASSWORD);
 		Log.d(toString(), "userName=" + userName + " password=" + password);
-		if ((null != userName) && !"".equals(userName.trim()))
+		if (null != userName && !"".equals(userName.trim()))
 		{
 			userNameEdit.setText(userName);
 		}
-		if ((null != password) && !"".equals(password))
+		if (null != password && !"".equals(password))
 		{
 			passwordEdit.setText(password);
 			rememberMeCheck.setChecked(true);
@@ -267,7 +253,7 @@ public class LoginActivity extends AbstractAidRequestActivity implements
 				{
 					if (LoginActivity.this != null)
 					{
-						if ((progressDialog != null)
+						if (progressDialog != null
 								&& progressDialog.isShowing())
 						{
 							progressDialog.dismiss();
@@ -288,7 +274,7 @@ public class LoginActivity extends AbstractAidRequestActivity implements
 				{
 					if (LoginActivity.this != null)
 					{
-						if ((progressDialog != null)
+						if (progressDialog != null
 								&& progressDialog.isShowing())
 						{
 							progressDialog.dismiss();;
@@ -309,7 +295,7 @@ public class LoginActivity extends AbstractAidRequestActivity implements
 				{
 					if (LoginActivity.this != null)
 					{
-						if ((progressDialog != null)
+						if (progressDialog != null
 								&& progressDialog.isShowing())
 						{
 							progressDialog.setMessage("登录成功，正在跳转...");
@@ -323,14 +309,14 @@ public class LoginActivity extends AbstractAidRequestActivity implements
 							user.setUname(loginInstance.getUname());
 							user.setPid(loginInstance.getPid());
 							user.setPname(loginInstance.getPname());
-							Aid.initInstance();
-							Aid.setUser(user);
-							Aid.getInstance().savePersistSession();
+							Aid.init(LoginActivity.this);
+							Aid.saveUser(user);
 							FragmentPage1.trajectory = new Trajectory(
 									loginInstance);
 							intent.setClass(LoginActivity.this,
 									MainActivity.class);
 							startActivity(intent);
+							finish();
 						}
 						else
 						{
@@ -350,11 +336,13 @@ public class LoginActivity extends AbstractAidRequestActivity implements
 		user.setUname("王昌帅");
 		user.setPid(3333333);
 		user.setPname("老刘");
-		Aid.setUser(user);
+		Aid.init(LoginActivity.this);
+		Aid.saveUser(user);
 		Login login = new Login(user.getUname(), user.getUid(),
 				user.getPname(), user.getPid(), 116.391729, 39.944713);
 		FragmentPage1.trajectory = new Trajectory(login);
 		intent.setClass(LoginActivity.this, MainActivity.class);
 		startActivity(intent);
+		finish();
 	}
 }

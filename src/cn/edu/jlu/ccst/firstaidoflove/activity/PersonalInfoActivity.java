@@ -4,12 +4,11 @@
 package cn.edu.jlu.ccst.firstaidoflove.activity;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Window;
 import android.widget.TextView;
-import cn.edu.jlu.ccst.firstaidoflove.AbstractAidRequestActivity;
+import cn.edu.jlu.ccst.firstaidoflove.BaseActivity;
 import cn.edu.jlu.ccst.firstaidoflove.R;
 import cn.edu.jlu.ccst.firstaidoflove.functions.AbstractRequestListener;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.Aid;
@@ -23,7 +22,7 @@ import cn.edu.jlu.ccst.firstaidoflove.util.Util;
  * @author Administrator
  * 
  */
-public class PersonalInfoActivity extends AbstractAidRequestActivity
+public class PersonalInfoActivity extends BaseActivity
 {
 	private TextView	nameText			= null;
 	private TextView	patientText			= null;
@@ -49,70 +48,48 @@ public class PersonalInfoActivity extends AbstractAidRequestActivity
 
 	private void initView()
 	{
-		nameText = (TextView) findViewById(R.id.personal_info_name);
-		patientText = (TextView) findViewById(R.id.personal_info_patient_name);
-		sexText = (TextView) findViewById(R.id.personal_info_sex);
-		ageText = (TextView) findViewById(R.id.personal_info_age);
-		jobText = (TextView) findViewById(R.id.personal_info_job);
-		relationshipText = (TextView) findViewById(R.id.personal_info_relationship);
-		homeAddressText = (TextView) findViewById(R.id.personal_info_home_address);
-		workAddressText = (TextView) findViewById(R.id.personal_info_work_address);
-		mobilePhoneNumText = (TextView) findViewById(R.id.personal_info_mobile_phone_num);
-		homePhoneNumText = (TextView) findViewById(R.id.personal_info_home_phone_num);
-		workPhoneNumText = (TextView) findViewById(R.id.personal_info_work_phone_num);
-		if (null != Aid.getUserInstance())
-		{
-			setText();
-		}
-		else
-		{
-			startGetUser();
-		}
+		nameText = (TextView) findViewById(R.id.name);
+		patientText = (TextView) findViewById(R.id.patient_name);
+		sexText = (TextView) findViewById(R.id.sex);
+		ageText = (TextView) findViewById(R.id.age);
+		jobText = (TextView) findViewById(R.id.job);
+		relationshipText = (TextView) findViewById(R.id.relationship);
+		homeAddressText = (TextView) findViewById(R.id.home_address);
+		workAddressText = (TextView) findViewById(R.id.work_address);
+		mobilePhoneNumText = (TextView) findViewById(R.id.mobile_phone_num);
+		homePhoneNumText = (TextView) findViewById(R.id.home_phone_num);
+		workPhoneNumText = (TextView) findViewById(R.id.work_phone_num);
+		startGetUser();
 	}
 
 	private void setText()
 	{
-		nameText.setText(Aid.getUserInstance().getUname() == null ? "" : Aid
-				.getUserInstance().getUname());
-		patientText.setText(Aid.getUserInstance().getPname() == null ? "" : Aid
-				.getUserInstance().getPname());
-		sexText.setText(Aid.getUserInstance().getSex() == null ? "" : Aid
-				.getUserInstance().getSex());
-		ageText.setText(String
-				.valueOf(Aid.getUserInstance().getAge() == -1 ? "" : Aid
-						.getUserInstance().getAge()));
-		jobText.setText(Aid.getUserInstance().getJob() == null ? "" : Aid
-				.getUserInstance().getJob());
-		relationshipText
-				.setText(Aid.getUserInstance().getRelationship() == null ? ""
-						: Aid.getUserInstance().getRelationship());
-		homeAddressText
-				.setText(Aid.getUserInstance().getHomeAddress() == null ? ""
-						: Aid.getUserInstance().getHomeAddress());
-		workAddressText
-				.setText(Aid.getUserInstance().getWorkAddress() == null ? ""
-						: Aid.getUserInstance().getWorkAddress());
-		mobilePhoneNumText
-				.setText(Aid.getUserInstance().getMobilePhoneNum() == null ? ""
-						: Aid.getUserInstance().getMobilePhoneNum());
-		homePhoneNumText
-				.setText(Aid.getUserInstance().getHomePhoneNum() == null ? ""
-						: Aid.getUserInstance().getHomePhoneNum());
-		workPhoneNumText
-				.setText(Aid.getUserInstance().getWorkPhoneNum() == null ? ""
-						: Aid.getUserInstance().getWorkPhoneNum());
+		nameText.setText(currentUser.getUname() == null ? "" : currentUser
+				.getUname());
+		patientText.setText(currentUser.getPname() == null ? "" : currentUser
+				.getPname());
+		sexText.setText(currentUser.getSex() == null ? "" : currentUser
+				.getSex());
+		ageText.setText(String.valueOf(currentUser.getAge() == -1 ? ""
+				: currentUser.getAge()));
+		jobText.setText(currentUser.getJob() == null ? "" : currentUser
+				.getJob());
+		relationshipText.setText(currentUser.getRelationship() == null ? ""
+				: currentUser.getRelationship());
+		homeAddressText.setText(currentUser.getHomeAddress() == null ? ""
+				: currentUser.getHomeAddress());
+		workAddressText.setText(currentUser.getWorkAddress() == null ? ""
+				: currentUser.getWorkAddress());
+		mobilePhoneNumText.setText(currentUser.getMobilePhoneNum() == null ? ""
+				: currentUser.getMobilePhoneNum());
+		homePhoneNumText.setText(currentUser.getHomePhoneNum() == null ? ""
+				: currentUser.getHomePhoneNum());
+		workPhoneNumText.setText(currentUser.getWorkPhoneNum() == null ? ""
+				: currentUser.getWorkPhoneNum());
 	}
 
 	private void startGetUser()
 	{
-		if (null == aid || null == currentUser)
-		{
-			Util.alert(getApplicationContext(), "用户信息异常，请重新登录！");
-			intent = new Intent();
-			intent.setClass(getApplicationContext(), LoginActivity.class);
-			startActivity(intent);
-			finish();
-		}
 		UserGetRequestParam param = new UserGetRequestParam(String.valueOf(aid
 				.getCurrentUid()));
 		param.setFields(UserGetRequestParam.FIELDS_ALL);
@@ -158,8 +135,8 @@ public class PersonalInfoActivity extends AbstractAidRequestActivity
 						{
 							progressDialog.dismiss();
 						}
+						Util.alert(PersonalInfoActivity.this, "获取用户信息失败");
 					}
-					Util.alert(PersonalInfoActivity.this, "获取用户信息失败");
 				}
 			});
 		}
@@ -201,7 +178,9 @@ public class PersonalInfoActivity extends AbstractAidRequestActivity
 						}
 						if (null != bean.getUser())
 						{
-							Aid.setUser(bean.getUser());
+							Aid.saveUser(bean.getUser());
+							currentUser = Aid
+									.getUserInstance(PersonalInfoActivity.this);
 							setText();
 						}
 						else

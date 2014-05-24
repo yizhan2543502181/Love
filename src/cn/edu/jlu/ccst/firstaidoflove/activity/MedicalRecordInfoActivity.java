@@ -6,7 +6,7 @@ package cn.edu.jlu.ccst.firstaidoflove.activity;
 import android.os.Bundle;
 import android.view.Window;
 import android.widget.TextView;
-import cn.edu.jlu.ccst.firstaidoflove.AbstractAidRequestActivity;
+import cn.edu.jlu.ccst.firstaidoflove.BaseActivity;
 import cn.edu.jlu.ccst.firstaidoflove.R;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.medicalRecord.MedicalRecord;
 import cn.edu.jlu.ccst.firstaidoflove.util.Constant;
@@ -15,7 +15,7 @@ import cn.edu.jlu.ccst.firstaidoflove.util.Constant;
  * @author Administrator
  * 
  */
-public class MedicalRecordInfoActivity extends AbstractAidRequestActivity
+public class MedicalRecordInfoActivity extends BaseActivity
 {
 	private MedicalRecord	medicalRecord		= null;
 	private TextView		pnameText			= null;

@@ -5,11 +5,11 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Button;
-import cn.edu.jlu.ccst.firstaidoflove.AbstractAidRequestActivity;
+import cn.edu.jlu.ccst.firstaidoflove.BaseActivity;
 import cn.edu.jlu.ccst.firstaidoflove.R;
 import cn.edu.jlu.ccst.firstaidoflove.util.Util;
 
-public class FindPasswordActivity extends AbstractAidRequestActivity implements
+public class FindPasswordActivity extends BaseActivity implements
 		OnClickListener
 {
 	private Button	findPasswordBtn	= null;

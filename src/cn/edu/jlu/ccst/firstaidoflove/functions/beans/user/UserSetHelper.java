@@ -77,7 +77,7 @@ public class UserSetHelper
 	 * @param listener
 	 *            回调
 	 */
-	public void asyncsetUsersInfo(Executor pool,
+	public void asyncsetUserInfo(Executor pool,
 			final UserSetRequestParam param,
 			final AbstractRequestListener<UserSetResponseBean> listener)
 	{

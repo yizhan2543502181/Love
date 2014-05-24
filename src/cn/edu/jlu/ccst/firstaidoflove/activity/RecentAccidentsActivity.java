@@ -20,10 +20,9 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
-import cn.edu.jlu.ccst.firstaidoflove.AbstractAidRequestActivity;
+import cn.edu.jlu.ccst.firstaidoflove.BaseActivity;
 import cn.edu.jlu.ccst.firstaidoflove.R;
 import cn.edu.jlu.ccst.firstaidoflove.functions.AbstractRequestListener;
-import cn.edu.jlu.ccst.firstaidoflove.functions.beans.Aid;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.AidError;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.AsyncAid;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.accident.Accident;
@@ -36,7 +35,7 @@ import cn.edu.jlu.ccst.firstaidoflove.util.Util;
  * @author Administrator
  * 
  */
-public class RecentAccidentsActivity extends AbstractAidRequestActivity
+public class RecentAccidentsActivity extends BaseActivity
 {
 	private TextView					noMessageText	= null;
 	private ProgressDialog				progressDialog	= null;
@@ -139,18 +138,8 @@ public class RecentAccidentsActivity extends AbstractAidRequestActivity
 
 	private void startGetAccidents()
 	{
-		if ((null == aid) || (null == currentUser))
-		{
-			Util.alert(getApplicationContext(), "用户信息异常，请重新登录！");
-			intent = new Intent();
-			intent.setClass(getApplicationContext(), LoginActivity.class);
-			startActivity(intent);
-			finish();
-		}
 		AccidentsGetRequestParam param = new AccidentsGetRequestParam(
-				String.valueOf(aid.getCurrentUid()), String.valueOf(Aid
-						.getUserInstance().getPid()));
-		param.setUid(String.valueOf(aid.getCurrentUid()));
+				currentUser.getUid(), currentUser.getPid());
 		try
 		{
 			progressDialog = new ProgressDialog(RecentAccidentsActivity.this);
@@ -186,7 +175,7 @@ public class RecentAccidentsActivity extends AbstractAidRequestActivity
 				{
 					if (RecentAccidentsActivity.this != null)
 					{
-						if ((progressDialog != null)
+						if (progressDialog != null
 								&& progressDialog.isShowing())
 						{
 							progressDialog.dismiss();
@@ -207,7 +196,7 @@ public class RecentAccidentsActivity extends AbstractAidRequestActivity
 				{
 					if (RecentAccidentsActivity.this != null)
 					{
-						if ((progressDialog != null)
+						if (progressDialog != null
 								&& progressDialog.isShowing())
 						{
 							progressDialog.dismiss();
@@ -227,7 +216,7 @@ public class RecentAccidentsActivity extends AbstractAidRequestActivity
 				{
 					if (RecentAccidentsActivity.this != null)
 					{
-						if ((progressDialog != null)
+						if (progressDialog != null
 								&& progressDialog.isShowing())
 						{
 							progressDialog.dismiss();

@@ -3,9 +3,7 @@ package cn.edu.jlu.ccst.firstaidoflove.functions.beans;
 import java.util.Set;
 import java.util.TreeSet;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -16,19 +14,23 @@ import cn.edu.jlu.ccst.firstaidoflove.util.Util;
 
 public class Aid implements Parcelable
 {
-	private static Aid				instance	= null;
-	private String					sessionKey	= "1111111111111111111";
-	private static User				user		= null;
-	private Context					context		= null;
-	@SuppressLint("UseValueOf")
-	private static final Integer	lock		= new Integer(0);
+	private static Aid		instance	= null;
+	private static User		user		= null;
+	private static Context	context		= null;
 
 	public Aid()
 	{
 		super();
 	}
 
-	public static synchronized void initInstance()
+	public static void init(Context context)
+	{
+		Aid.context = context;
+		Aid.initInstance(context);
+		Aid.initUserInstance(context);
+	}
+
+	public static synchronized void initInstance(Context context)
 	{
 		if (null == Aid.instance)
 		{
@@ -36,14 +38,27 @@ public class Aid implements Parcelable
 		}
 	}
 
-	public static synchronized Aid getInstance()
+	public static synchronized void initUserInstance(Context context)
 	{
-		Aid.initInstance();
+		if (null == Aid.user)
+		{
+			Aid.user = Util.readUser(Aid.context);
+		}
+	}
+
+	public static synchronized Aid getInstance(Context context)
+	{
+		Aid.context = context;
+		Aid.initInstance(context);
+		Aid.initUserInstance(context);
 		return Aid.instance;
 	}
 
-	public static synchronized User getUserInstance()
+	public static synchronized User getUserInstance(Context context)
 	{
+		Aid.context = context;
+		Aid.initInstance(context);
+		Aid.initUserInstance(context);
 		return Aid.user;
 	}
 
@@ -51,9 +66,10 @@ public class Aid implements Parcelable
 	 * @param user
 	 *            the user to set
 	 */
-	public static void setUser(User user)
+	public static void saveUser(User user)
 	{
 		Aid.user = user;
+		Util.writeUser(Aid.context, user);
 	}
 
 	/**
@@ -65,11 +81,6 @@ public class Aid implements Parcelable
 		User user = new User();
 		user.setUid(uid);
 		Aid.user = user;
-	}
-
-	public void init(Context context)
-	{
-		this.context = context;
 	}
 
 	public Long getCurrentUid()
@@ -95,10 +106,6 @@ public class Aid implements Parcelable
 	private String request(Bundle parameters, String format)
 	{
 		parameters.putString("format", format);
-		if (isSessionKeyValid())
-		{
-			parameters.putString("session_key", sessionKey);
-		}
 		prepareParams(parameters);
 		logRequest(parameters);
 		String response = Util.openUrl(Constant.RESTSERVER_URL, "POST",
@@ -160,7 +167,7 @@ public class Aid implements Parcelable
 	 */
 	private void logResponse(String method, String response)
 	{
-		if ((method != null) && (response != null))
+		if (method != null && response != null)
 		{
 			StringBuffer sb = new StringBuffer();
 			sb.append("method=").append(method).append("&").append(response);
@@ -170,11 +177,6 @@ public class Aid implements Parcelable
 
 	public Aid(Parcel in)
 	{
-		Bundle bundle = in.readBundle();
-		if ((null != bundle) && bundle.containsKey(Constant.SHARE_SESSION_KEY))
-		{
-			sessionKey = bundle.getString(Constant.SHARE_SESSION_KEY);
-		}
 		Aid.user = User.CREATOR.createFromParcel(in);
 	}
 
@@ -187,12 +189,6 @@ public class Aid implements Parcelable
 	@Override
 	public void writeToParcel(Parcel dest, int flags)
 	{
-		Bundle bundle = new Bundle();
-		if (sessionKey != null)
-		{
-			bundle.putString(Constant.SHARE_SESSION_KEY, sessionKey);
-		}
-		bundle.writeToParcel(dest, flags);
 		Aid.user.writeToParcel(dest, flags);
 	}
 
@@ -219,31 +215,11 @@ public class Aid implements Parcelable
 	 * @param context
 	 * @return
 	 */
-	public String logout()
+	public void logout()
 	{
-		Util.clearCookies(context);
-		clearPersistSession();
-		return "true";
-	}
-
-	void clearPersistSession()
-	{
-		Editor editor = context.getSharedPreferences(Constant.SHARE_CONFIG,
-				Context.MODE_PRIVATE).edit();
-		editor.remove(Constant.SHARE_SESSION_KEY);
-		editor.commit();
-		synchronized (Aid.lock)
-		{
-			Aid.user = null;
-			sessionKey = "";
-		}
-	}
-
-	public void savePersistSession()
-	{
-		Editor editor = context.getSharedPreferences(Constant.SHARE_CONFIG,
-				Context.MODE_PRIVATE).edit();
-		editor.putString(Constant.SHARE_SESSION_KEY, sessionKey);
-		editor.commit();
+		Aid.user = null;
+		Aid.instance = null;
+		Util.clearCookies(Aid.context);
+		Util.clearUser(Aid.context);
 	}
 }

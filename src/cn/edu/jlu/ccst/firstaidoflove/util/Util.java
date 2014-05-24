@@ -18,13 +18,14 @@ import java.net.URL;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.security.MessageDigest;
+import java.util.Locale;
 import java.util.Set;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.xmlpull.v1.XmlPullParser;
 
-import android.R;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -42,8 +43,10 @@ import android.util.Xml;
 import android.webkit.CookieManager;
 import android.webkit.CookieSyncManager;
 import android.widget.Toast;
+import cn.edu.jlu.ccst.firstaidoflove.R;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.AidError;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.AidException;
+import cn.edu.jlu.ccst.firstaidoflove.functions.beans.user.User;
 
 /**
  * 工具支持
@@ -51,6 +54,7 @@ import cn.edu.jlu.ccst.firstaidoflove.functions.beans.AidException;
  * @author wangchangshuai 415939252@qq.com
  * 
  */
+@SuppressLint("DefaultLocale")
 public final class Util
 {
 	public static void logger(String message)
@@ -64,6 +68,7 @@ public final class Util
 	 * @param parameters
 	 * @return
 	 */
+	@SuppressWarnings("deprecation")
 	public static String encodeUrl(Bundle parameters)
 	{
 		if (parameters == null)
@@ -94,6 +99,7 @@ public final class Util
 	 * @param s
 	 * @return
 	 */
+	@SuppressWarnings("deprecation")
 	public static Bundle decodeUrl(String s)
 	{
 		Bundle params = new Bundle();
@@ -393,7 +399,7 @@ public final class Util
 					}
 					break;
 				}
-				if ((errorCode > -1) && (errorMsg != null))
+				if (errorCode > -1 && errorMsg != null)
 				{
 					error = new AidError(errorCode, errorMsg, xmlResponse);
 					break;
@@ -468,6 +474,7 @@ public final class Util
 	 * @param title
 	 * @param text
 	 */
+	@SuppressWarnings("deprecation")
 	public static void showAlert(Context context, String title, String text,
 			boolean showOk)
 	{
@@ -496,7 +503,7 @@ public final class Util
 
 	public static String md5(String string)
 	{
-		if ((string == null) || (string.trim().length() < 1))
+		if (string == null || string.trim().length() < 1)
 		{
 			return null;
 		}
@@ -547,8 +554,8 @@ public final class Util
 				ConnectivityManager.TYPE_MOBILE).getState();
 		State wifiState = connManager.getNetworkInfo(
 				ConnectivityManager.TYPE_WIFI).getState();
-		if ((mobileState == State.DISCONNECTED)
-				&& (wifiState == State.DISCONNECTED))
+		if (mobileState == State.DISCONNECTED
+				&& wifiState == State.DISCONNECTED)
 		{
 			return false;
 		}
@@ -861,7 +868,7 @@ public final class Util
 	public static String parseContentType(String fileName)
 	{
 		String contentType = "image/jpg";
-		fileName = fileName.toLowerCase();
+		fileName = fileName.toLowerCase(Locale.CHINESE);
 		if (fileName.endsWith(".jpg"))
 		{
 			contentType = "image/jpg";
@@ -887,5 +894,149 @@ public final class Util
 			throw new RuntimeException("不支持的文件类型'" + fileName + "'(或没有文件扩展名)");
 		}
 		return contentType;
+	}
+
+	public static User readUser(Context context)
+	{
+		long uid = -1;
+		String uname = null;
+		long pid = -1;
+		String pname = null;
+		String sex = null;
+		int age = -1;
+		String job = null;
+		String relationship = null;
+		String homeAddress = null;
+		String workAddress = null;
+		String mobilePhoneNum = null;
+		String homePhoneNum = null;
+		String workPhoneNum = null;
+		SharedPreferences userSetting;
+		userSetting = context.getSharedPreferences(Constant.AID_LABEL, 0);
+		uid = userSetting.getLong(Constant.KEY_UID, -1);
+		if (-1 == uid)
+		{
+			return null;
+		}
+		uname = userSetting.getString(Constant.KEY_UNAME, "");
+		pid = userSetting.getLong(Constant.KEY_PID, -1);
+		pname = userSetting.getString(Constant.KEY_PNAME, "");
+		sex = userSetting.getString(Constant.KEY_SEX, "");
+		age = userSetting.getInt(Constant.KEY_AGE, -1);
+		job = userSetting.getString(Constant.KEY_JOB, "");
+		relationship = userSetting.getString(Constant.KEY_RELATIONSHIP, "");
+		homeAddress = userSetting.getString(Constant.KEY_HOME_ADDRESS, "");
+		workAddress = userSetting.getString(Constant.KEY_WORK_ADDRESS, "");
+		mobilePhoneNum = userSetting.getString(Constant.KEY_MOBILE_PHONE_NUM,
+				"");
+		homePhoneNum = userSetting.getString(Constant.KEY_HOME_PHONE_NUM, "");
+		workPhoneNum = userSetting.getString(Constant.KEY_WORK_PHONE_NUM, "");
+		User user = new User(uid, uname, pid, pname, sex, age, job,
+				relationship, homeAddress, workAddress, mobilePhoneNum,
+				homePhoneNum, workPhoneNum);
+		return user;
+	}
+
+	public static void writeUser(Context context, User user)
+	{
+		SharedPreferences userSetting;
+		userSetting = context.getSharedPreferences(Constant.AID_LABEL, 0);
+		SharedPreferences.Editor localEditor = userSetting.edit();
+		if (-1 != user.getUid())
+		{
+			localEditor.putLong(Constant.KEY_UID, user.getUid());
+		}
+		if (null != user.getUname())
+		{
+			localEditor.putString(Constant.KEY_UNAME, user.getUname());
+		}
+		if (-1 != user.getPid())
+		{
+			localEditor.putLong(Constant.KEY_PID, user.getPid());
+		}
+		if (null != user.getPname())
+		{
+			localEditor.putString(Constant.KEY_PNAME, user.getPname());
+		}
+		if (null != user.getSex())
+		{
+			localEditor.putString(Constant.KEY_SEX, user.getSex());
+		}
+		if (-1 != user.getAge())
+		{
+			localEditor.putInt(Constant.KEY_AGE, user.getAge());
+		}
+		if (null != user.getJob())
+		{
+			localEditor.putString(Constant.KEY_JOB, user.getJob());
+		}
+		if (null != user.getRelationship())
+		{
+			localEditor.putString(Constant.KEY_RELATIONSHIP,
+					user.getRelationship());
+		}
+		if (null != user.getHomeAddress())
+		{
+			localEditor.putString(Constant.KEY_HOME_ADDRESS,
+					user.getHomeAddress());
+		}
+		if (null != user.getWorkAddress())
+		{
+			localEditor.putString(Constant.KEY_WORK_ADDRESS,
+					user.getWorkAddress());
+		}
+		if (null != user.getMobilePhoneNum())
+		{
+			localEditor.putString(Constant.KEY_MOBILE_PHONE_NUM,
+					user.getMobilePhoneNum());
+		}
+		if (null != user.getHomePhoneNum())
+		{
+			localEditor.putString(Constant.KEY_HOME_PHONE_NUM,
+					user.getHomePhoneNum());
+		}
+		if (null != user.getWorkPhoneNum())
+		{
+			localEditor.putString(Constant.KEY_WORK_PHONE_NUM,
+					user.getWorkPhoneNum());
+		}
+		localEditor.commit();
+	}
+
+	public static void clearUser(Context context)
+	{
+		SharedPreferences userSetting;
+		userSetting = context.getSharedPreferences(Constant.AID_LABEL, 0);
+		SharedPreferences.Editor localEditor = userSetting.edit();
+		localEditor.remove(Constant.KEY_UID);
+		localEditor.remove(Constant.KEY_UNAME);
+		localEditor.remove(Constant.KEY_PID);
+		localEditor.remove(Constant.KEY_PNAME);
+		localEditor.remove(Constant.KEY_SEX);
+		localEditor.remove(Constant.KEY_AGE);
+		localEditor.remove(Constant.KEY_JOB);
+		localEditor.remove(Constant.KEY_RELATIONSHIP);
+		localEditor.remove(Constant.KEY_HOME_ADDRESS);
+		localEditor.remove(Constant.KEY_WORK_ADDRESS);
+		localEditor.remove(Constant.KEY_MOBILE_PHONE_NUM);
+		localEditor.remove(Constant.KEY_HOME_PHONE_NUM);
+		localEditor.remove(Constant.KEY_WORK_PHONE_NUM);
+		localEditor.commit();
+	}
+
+	public static void write(Context context, String key, String value)
+	{
+		SharedPreferences userSetting;
+		userSetting = context.getSharedPreferences(Constant.AID_LABEL, 0);
+		SharedPreferences.Editor localEditor = userSetting.edit();
+		localEditor.putString(key, value);
+		localEditor.commit();
+	}
+
+	public static String read(Context context, String key)
+	{
+		SharedPreferences userSetting;
+		userSetting = context.getSharedPreferences(Constant.AID_LABEL, 0);
+		return userSetting.getString(key, "");
 	}
 }

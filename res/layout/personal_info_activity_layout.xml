@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/personal_info_detail_information_layout"
+    android:id="@+id/detail_information_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/login_background"
@@ -34,7 +34,7 @@
                         android:orientation="vertical" >
 
                         <ImageView
-                            android:id="@+id/personal_info_headimg"
+                            android:id="@+id/headimg"
                             android:layout_width="80dp"
                             android:layout_height="80dp"
                             android:background="@drawable/login_background_bg"
@@ -63,7 +63,7 @@
                             android:textSize="20sp" />
 
                         <TextView
-                            android:id="@+id/personal_info_name"
+                            android:id="@+id/name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="王昌帅"
@@ -84,7 +84,7 @@
                             android:textSize="20sp" />
 
                         <TextView
-                            android:id="@+id/personal_info_patient_name"
+                            android:id="@+id/patient_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="李四"
@@ -143,7 +143,7 @@
                             android:textSize="16sp" />
 
                         <TextView
-                            android:id="@+id/personal_info_sex"
+                            android:id="@+id/sex"
                             android:layout_width="match_parent"
                             android:layout_height="30dip"
                             android:layout_gravity="center_vertical"
@@ -176,7 +176,7 @@
                             android:textSize="16sp" />
 
                         <TextView
-                            android:id="@+id/personal_info_age"
+                            android:id="@+id/age"
                             android:layout_width="match_parent"
                             android:layout_height="30dip"
                             android:layout_gravity="center_vertical"
@@ -209,7 +209,7 @@
                             android:textSize="16sp" />
 
                         <TextView
-                            android:id="@+id/personal_info_job"
+                            android:id="@+id/job"
                             android:layout_width="match_parent"
                             android:layout_height="30dip"
                             android:layout_gravity="center_vertical"
@@ -242,7 +242,7 @@
                             android:textSize="16sp" />
 
                         <TextView
-                            android:id="@+id/personal_info_relationship"
+                            android:id="@+id/relationship"
                             android:layout_width="match_parent"
                             android:layout_height="30dip"
                             android:layout_gravity="center_vertical"
@@ -297,7 +297,7 @@
                             android:textSize="16sp" />
 
                         <TextView
-                            android:id="@+id/personal_info_home_address"
+                            android:id="@+id/home_address"
                             android:layout_width="match_parent"
                             android:layout_height="30dip"
                             android:layout_gravity="center_vertical"
@@ -330,7 +330,7 @@
                             android:textSize="16sp" />
 
                         <TextView
-                            android:id="@+id/personal_info_work_address"
+                            android:id="@+id/work_address"
                             android:layout_width="match_parent"
                             android:layout_height="30dip"
                             android:layout_gravity="center_vertical"
@@ -385,7 +385,7 @@
                             android:textSize="16sp" />
 
                         <TextView
-                            android:id="@+id/personal_info_mobile_phone_num"
+                            android:id="@+id/mobile_phone_num"
                             android:layout_width="match_parent"
                             android:layout_height="30dip"
                             android:layout_gravity="center_vertical"
@@ -418,7 +418,7 @@
                             android:textSize="16sp" />
 
                         <TextView
-                            android:id="@+id/personal_info_home_phone_num"
+                            android:id="@+id/home_phone_num"
                             android:layout_width="match_parent"
                             android:layout_height="30dip"
                             android:layout_gravity="center_vertical"
@@ -451,7 +451,7 @@
                             android:textSize="16sp" />
 
                         <TextView
-                            android:id="@+id/personal_info_work_phone_num"
+                            android:id="@+id/work_phone_num"
                             android:layout_width="match_parent"
                             android:layout_height="30dip"
                             android:layout_gravity="center_vertical"

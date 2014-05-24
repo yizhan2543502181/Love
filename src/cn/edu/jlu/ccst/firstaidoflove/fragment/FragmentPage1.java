@@ -1,14 +1,13 @@
 package cn.edu.jlu.ccst.firstaidoflove.fragment;
 
+import java.util.Locale;
 import java.util.concurrent.Executors;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -17,18 +16,15 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import cn.edu.jlu.ccst.firstaidoflove.AidApplication;
+import cn.edu.jlu.ccst.firstaidoflove.BaseFragment;
 import cn.edu.jlu.ccst.firstaidoflove.R;
 import cn.edu.jlu.ccst.firstaidoflove.activity.LoginActivity;
 import cn.edu.jlu.ccst.firstaidoflove.functions.AbstractRequestListener;
-import cn.edu.jlu.ccst.firstaidoflove.functions.RequestListener;
-import cn.edu.jlu.ccst.firstaidoflove.functions.beans.Aid;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.AidError;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.AsyncAid;
-import cn.edu.jlu.ccst.firstaidoflove.functions.beans.login.Login;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.trajectory.Trajectory;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.trajectory.TrajectoryGetRequestParam;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.trajectory.TrajectoryGetResponseBean;
-import cn.edu.jlu.ccst.firstaidoflove.functions.beans.user.User;
 import cn.edu.jlu.ccst.firstaidoflove.util.Util;
 import cn.edu.jlu.ccst.firstaidoflove.util.Util.OnOptionListener;
 import cn.jpush.android.api.JPushInterface;
@@ -49,7 +45,7 @@ import com.baidu.mapapi.search.MKTransitRouteResult;
 import com.baidu.mapapi.search.MKWalkingRouteResult;
 import com.baidu.platform.comapi.basestruct.GeoPoint;
 
-public class FragmentPage1 extends Fragment implements OnClickListener
+public class FragmentPage1 extends BaseFragment implements OnClickListener
 {
 	private TextView			userNameText	= null;
 	private TextView			patientNameText	= null;
@@ -62,7 +58,6 @@ public class FragmentPage1 extends Fragment implements OnClickListener
 	private static GeoPoint		point			= null;
 	private static String		location		= null;
 	private ProgressDialog		progressDialog	= null;
-	private Login				login			= null;
 	private final String		errorMessage	= "获取位置失败,点此重新获取";
 
 	@Override
@@ -100,10 +95,10 @@ public class FragmentPage1 extends Fragment implements OnClickListener
 				R.id.overview_activity_user_name_text);
 		patientNameText = (TextView) getActivity().findViewById(
 				R.id.overview_activity_patient_name_text);
-		if (null != Aid.getUserInstance())
+		if (null != currentUser)
 		{
-			userNameText.setText(Aid.getUserInstance().getUname());
-			patientNameText.setText(Aid.getUserInstance().getPname());
+			userNameText.setText(currentUser.getUname());
+			patientNameText.setText(currentUser.getPname());
 		}
 		locationText = (TextView) getActivity().findViewById(
 				R.id.overview_location_text);
@@ -114,12 +109,10 @@ public class FragmentPage1 extends Fragment implements OnClickListener
 		mMapView.getController().setZoomGesturesEnabled(true);
 		mMapView.getController().setRotationGesturesEnabled(false);
 		mMapView.getController().setScrollGesturesEnabled(true);
-		if (null != FragmentPage1.point
-				&& null != FragmentPage1.location
+		if (null != FragmentPage1.point && null != FragmentPage1.location
 				&& !FragmentPage1.location.equals(errorMessage))
 		{
-			moveToSpecialPoint(FragmentPage1.point,
-					FragmentPage1.location);
+			moveToSpecialPoint(FragmentPage1.point, FragmentPage1.location);
 		}
 		else if (null != FragmentPage1.trajectory)
 		{
@@ -166,21 +159,9 @@ public class FragmentPage1 extends Fragment implements OnClickListener
 
 	private void startLocate()
 	{
-		Aid aid = Aid.getInstance();
-		User currentUser = Aid.getUserInstance();
-		Intent intent = new Intent();
-		if (null == aid || null == currentUser)
-		{
-			Util.alert(getActivity().getApplicationContext(), "用户信息异常，请重新登录！");
-			intent = new Intent();
-			intent.setClass(getActivity().getApplicationContext(),
-					LoginActivity.class);
-			startActivity(intent);
-			getActivity().finish();
-		}
 		TrajectoryGetRequestParam param = new TrajectoryGetRequestParam(
-				String.valueOf(aid.getCurrentUid()), String.valueOf(Aid
-						.getUserInstance().getPid()));
+				String.valueOf(aid.getCurrentUid()), String.valueOf(currentUser
+						.getPid()));
 		param.setUid(String.valueOf(aid.getCurrentUid()));
 		try
 		{
@@ -269,8 +250,7 @@ public class FragmentPage1 extends Fragment implements OnClickListener
 						}
 						if (null != bean.getTrajectory())
 						{
-							FragmentPage1.trajectory = bean
-									.getTrajectory();
+							FragmentPage1.trajectory = bean.getTrajectory();
 							FragmentPage1.point = new GeoPoint(
 									(int) (FragmentPage1.trajectory
 											.getLatitude() * 1e6),
@@ -302,28 +282,10 @@ public class FragmentPage1 extends Fragment implements OnClickListener
 						@Override
 						public void onOK()
 						{
-							AsyncAid aAid = new AsyncAid(Aid.getInstance());
-							aAid.logout(new RequestListener() {
-								@Override
-								public void onFault(Throwable fault)
-								{
-									getActivity().finish();
-								}
-
-								@Override
-								public void onComplete(String response)
-								{
-									getActivity().finish();
-								}
-
-								@Override
-								public void onAidError(AidError AidError)
-								{
-									getActivity().finish();
-								}
-							});
+							aid.logout();
 							JPushInterface.stopPush(getActivity()
 									.getApplicationContext());
+							getActivity().finish();
 						}
 
 						@Override
@@ -393,7 +355,7 @@ public class FragmentPage1 extends Fragment implements OnClickListener
 			{
 				FragmentPage1.location = "解析位置失败,点此重新解析";
 				locationText.setText(FragmentPage1.location);
-				String str = String.format("错误号：%d", error);
+				String str = String.format(Locale.CHINA, "错误号：%d", error);
 				Toast.makeText(getActivity(), str, Toast.LENGTH_LONG).show();
 				return;
 			}
@@ -402,7 +364,7 @@ public class FragmentPage1 extends Fragment implements OnClickListener
 			if (res.type == MKAddrInfo.MK_GEOCODE)
 			{
 				// 地理编码：通过地址检索坐标点
-				String strInfo = String.format("纬度：%f 经度：%f",
+				String strInfo = String.format(Locale.CHINA, "纬度：%f 经度：%f",
 						res.geoPt.getLatitudeE6() / 1e6,
 						res.geoPt.getLongitudeE6() / 1e6);
 				Toast.makeText(getActivity(), strInfo, Toast.LENGTH_LONG)
@@ -415,8 +377,7 @@ public class FragmentPage1 extends Fragment implements OnClickListener
 				FragmentPage1.location = strInfo;
 				FragmentPage1.location = FragmentPage1.location == null ? "位置获取失败,点此重新获取"
 						: FragmentPage1.location;
-				locationText.setText(FragmentPage1.location
-						+ "附近(点击重新获取)");
+				locationText.setText(FragmentPage1.location + "附近(点击重新获取)");
 			}
 			moveToSpecialPoint(res.geoPt, FragmentPage1.location);
 		}

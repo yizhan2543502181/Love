@@ -18,6 +18,12 @@ import cn.edu.jlu.ccst.firstaidoflove.functions.beans.medicalRecord.MedicalRecor
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.password.PasswordSetHelper;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.password.PasswordSetRequestParam;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.password.PasswordSetResponseBean;
+import cn.edu.jlu.ccst.firstaidoflove.functions.beans.patient.PatientGetHelper;
+import cn.edu.jlu.ccst.firstaidoflove.functions.beans.patient.PatientGetRequestParam;
+import cn.edu.jlu.ccst.firstaidoflove.functions.beans.patient.PatientGetResponseBean;
+import cn.edu.jlu.ccst.firstaidoflove.functions.beans.patient.PatientSetHelper;
+import cn.edu.jlu.ccst.firstaidoflove.functions.beans.patient.PatientSetRequestParam;
+import cn.edu.jlu.ccst.firstaidoflove.functions.beans.patient.PatientSetResponseBean;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.trajectory.TrajectoriesGetHelper;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.trajectory.TrajectoriesGetRequestParam;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.trajectory.TrajectoriesGetResponseBean;
@@ -42,32 +48,6 @@ public class AsyncAid
 	{
 		this.aid = aid;
 		pool = Executors.newFixedThreadPool(10);
-	}
-
-	/**
-	 * 退出登录
-	 * 
-	 * @param context
-	 * @param listener
-	 *            注意监听器中不在主线程中执行，所以不能在监听器中直接更新UI代码。
-	 */
-	public void logout(final RequestListener listener)
-	{
-		pool.execute(new Runnable() {
-			@Override
-			public void run()
-			{
-				try
-				{
-					String resp = aid.logout();
-					listener.onComplete(resp);
-				}
-				catch (Throwable e)
-				{
-					listener.onFault(e);
-				}
-			}
-		});
 	}
 
 	/**
@@ -148,7 +128,7 @@ public class AsyncAid
 	public void getUserInfo(UserGetRequestParam param,
 			AbstractRequestListener<UserGetResponseBean> listener)
 	{
-		new UserGetHelper(aid).asyncGetUsersInfo(pool, param, listener);
+		new UserGetHelper(aid).asyncGetUserInfo(pool, param, listener);
 	}
 
 	/**
@@ -160,7 +140,31 @@ public class AsyncAid
 	public void setUserInfo(UserSetRequestParam param,
 			AbstractRequestListener<UserSetResponseBean> listener)
 	{
-		new UserSetHelper(aid).asyncsetUsersInfo(pool, param, listener);
+		new UserSetHelper(aid).asyncsetUserInfo(pool, param, listener);
+	}
+
+	/**
+	 * 获取监护对象的个人信息
+	 * 
+	 * @param param
+	 * @param listener
+	 */
+	public void getPatientInfo(PatientGetRequestParam param,
+			AbstractRequestListener<PatientGetResponseBean> listener)
+	{
+		new PatientGetHelper(aid).asyncGetPatientInfo(pool, param, listener);
+	}
+
+	/**
+	 * 设置监护对象的个人信息
+	 * 
+	 * @param param
+	 * @param listener
+	 */
+	public void setPatientInfo(PatientSetRequestParam param,
+			AbstractRequestListener<PatientSetResponseBean> listener)
+	{
+		new PatientSetHelper(aid).asyncsetPatientInfo(pool, param, listener);
 	}
 
 	/**

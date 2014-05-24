@@ -22,7 +22,7 @@ import cn.edu.jlu.ccst.firstaidoflove.activity.RecentAccidentsActivity;
 import cn.edu.jlu.ccst.firstaidoflove.activity.RecentTrajectoryActivity;
 import cn.edu.jlu.ccst.firstaidoflove.util.Util;
 
-public class FragmentPageQuery extends Fragment
+public class FragmentPage2 extends Fragment
 {
 	private Intent				intent		= null;
 	private static final String	functions[]	= { "个人信息", "病人信息", "最近事故", "最近轨迹",
@@ -49,7 +49,7 @@ public class FragmentPageQuery extends Fragment
 		GridView gridview = (GridView) layout.findViewById(R.id.query_gridview);
 		// 生成动态数组，并且转入数据
 		ArrayList<HashMap<String, Object>> itemList = new ArrayList<HashMap<String, Object>>();
-		for (String function : FragmentPageQuery.functions)
+		for (String function : FragmentPage2.functions)
 		{
 			HashMap<String, Object> map = new HashMap<String, Object>();
 			map.put("image", R.drawable.icon_square_sel);// 添加图像资源的ID

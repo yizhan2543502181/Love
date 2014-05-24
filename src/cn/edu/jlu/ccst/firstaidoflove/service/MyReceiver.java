@@ -9,7 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import cn.edu.jlu.ccst.firstaidoflove.activity.MainActivity;
-import cn.edu.jlu.ccst.firstaidoflove.fragment.FragmentPageNowAccident;
+import cn.edu.jlu.ccst.firstaidoflove.fragment.FragmentPageNow3;
 import cn.edu.jlu.ccst.firstaidoflove.functions.AccidentArriveListener;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.AidError;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.accident.Accident;
@@ -54,13 +54,13 @@ public class MyReceiver extends BroadcastReceiver
 					&& !extraMessage.equals(""))
 			{
 				MyReceiver.dealMessage(extraMessage,
-						FragmentPageNowAccident.accidentArriveListener);
+						FragmentPageNow3.accidentArriveListener);
 			}
 			else
 			{
 				MyReceiver.dealMessage(
 						bundle.getString("cn.jpush.android.ALERT"),
-						FragmentPageNowAccident.accidentArriveListener);
+						FragmentPageNow3.accidentArriveListener);
 			}
 			Log.d(MyReceiver.TAG, "[MyReceiver] 接收到推送下来的通知");
 			int notifactionId = bundle

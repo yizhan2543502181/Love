@@ -18,7 +18,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import cn.edu.jlu.ccst.firstaidoflove.AbstractAidRequestActivity;
 import cn.edu.jlu.ccst.firstaidoflove.R;
-import cn.edu.jlu.ccst.firstaidoflove.fragment.FragmentPageOverview;
+import cn.edu.jlu.ccst.firstaidoflove.fragment.FragmentPage1;
 import cn.edu.jlu.ccst.firstaidoflove.functions.AbstractRequestListener;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.Aid;
 import cn.edu.jlu.ccst.firstaidoflove.functions.beans.AidError;
@@ -326,7 +326,7 @@ public class LoginActivity extends AbstractAidRequestActivity implements
 							Aid.initInstance();
 							Aid.setUser(user);
 							Aid.getInstance().savePersistSession();
-							FragmentPageOverview.trajectory = new Trajectory(
+							FragmentPage1.trajectory = new Trajectory(
 									loginInstance);
 							intent.setClass(LoginActivity.this,
 									MainActivity.class);
@@ -353,7 +353,7 @@ public class LoginActivity extends AbstractAidRequestActivity implements
 		Aid.setUser(user);
 		Login login = new Login(user.getUname(), user.getUid(),
 				user.getPname(), user.getPid(), 116.391729, 39.944713);
-		FragmentPageOverview.trajectory = new Trajectory(login);
+		FragmentPage1.trajectory = new Trajectory(login);
 		intent.setClass(LoginActivity.this, MainActivity.class);
 		startActivity(intent);
 	}

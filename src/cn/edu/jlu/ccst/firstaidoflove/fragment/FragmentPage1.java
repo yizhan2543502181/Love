@@ -49,7 +49,7 @@ import com.baidu.mapapi.search.MKTransitRouteResult;
 import com.baidu.mapapi.search.MKWalkingRouteResult;
 import com.baidu.platform.comapi.basestruct.GeoPoint;
 
-public class FragmentPageOverview extends Fragment implements OnClickListener
+public class FragmentPage1 extends Fragment implements OnClickListener
 {
 	private TextView			userNameText	= null;
 	private TextView			patientNameText	= null;
@@ -114,19 +114,19 @@ public class FragmentPageOverview extends Fragment implements OnClickListener
 		mMapView.getController().setZoomGesturesEnabled(true);
 		mMapView.getController().setRotationGesturesEnabled(false);
 		mMapView.getController().setScrollGesturesEnabled(true);
-		if (null != FragmentPageOverview.point
-				&& null != FragmentPageOverview.location
-				&& !FragmentPageOverview.location.equals(errorMessage))
+		if (null != FragmentPage1.point
+				&& null != FragmentPage1.location
+				&& !FragmentPage1.location.equals(errorMessage))
 		{
-			moveToSpecialPoint(FragmentPageOverview.point,
-					FragmentPageOverview.location);
+			moveToSpecialPoint(FragmentPage1.point,
+					FragmentPage1.location);
 		}
-		else if (null != FragmentPageOverview.trajectory)
+		else if (null != FragmentPage1.trajectory)
 		{
-			FragmentPageOverview.point = new GeoPoint(
-					(int) (FragmentPageOverview.trajectory.getLatitude() * 1e6),
-					(int) (FragmentPageOverview.trajectory.getLongtitude() * 1e6));
-			moveToSpecialPoint(FragmentPageOverview.point, null);
+			FragmentPage1.point = new GeoPoint(
+					(int) (FragmentPage1.trajectory.getLatitude() * 1e6),
+					(int) (FragmentPage1.trajectory.getLongtitude() * 1e6));
+			moveToSpecialPoint(FragmentPage1.point, null);
 			startParseLocation();
 		}
 		else
@@ -222,8 +222,8 @@ public class FragmentPageOverview extends Fragment implements OnClickListener
 						{
 							progressDialog.dismiss();
 						}
-						FragmentPageOverview.location = errorMessage;
-						locationText.setText(FragmentPageOverview.location);
+						FragmentPage1.location = errorMessage;
+						locationText.setText(FragmentPage1.location);
 					}
 					Util.alert(getActivity(), "获取最近一次位置失败！");
 				}
@@ -245,8 +245,8 @@ public class FragmentPageOverview extends Fragment implements OnClickListener
 						{
 							progressDialog.dismiss();
 						}
-						FragmentPageOverview.location = errorMessage;
-						locationText.setText(FragmentPageOverview.location);
+						FragmentPage1.location = errorMessage;
+						locationText.setText(FragmentPage1.location);
 						Util.alert(getActivity(), "获取最近一次位置失败！");
 					}
 				}
@@ -269,20 +269,20 @@ public class FragmentPageOverview extends Fragment implements OnClickListener
 						}
 						if (null != bean.getTrajectory())
 						{
-							FragmentPageOverview.trajectory = bean
+							FragmentPage1.trajectory = bean
 									.getTrajectory();
-							FragmentPageOverview.point = new GeoPoint(
-									(int) (FragmentPageOverview.trajectory
+							FragmentPage1.point = new GeoPoint(
+									(int) (FragmentPage1.trajectory
 											.getLatitude() * 1e6),
-									(int) (FragmentPageOverview.trajectory
+									(int) (FragmentPage1.trajectory
 											.getLongtitude() * 1e6));
-							moveToSpecialPoint(FragmentPageOverview.point, null);
+							moveToSpecialPoint(FragmentPage1.point, null);
 							startParseLocation();
 						}
 						else
 						{
-							FragmentPageOverview.location = errorMessage;
-							locationText.setText(FragmentPageOverview.location);
+							FragmentPage1.location = errorMessage;
+							locationText.setText(FragmentPage1.location);
 							Util.alert(getActivity(), "获取最近一次位置失败！");
 						}
 					}
@@ -361,7 +361,7 @@ public class FragmentPageOverview extends Fragment implements OnClickListener
 						});
 					}
 					// 反Geo搜索
-					mSearch.reverseGeocode(FragmentPageOverview.point);
+					mSearch.reverseGeocode(FragmentPage1.point);
 				}
 				catch (Exception e)
 				{
@@ -391,8 +391,8 @@ public class FragmentPageOverview extends Fragment implements OnClickListener
 			}
 			if (error != 0)
 			{
-				FragmentPageOverview.location = "解析位置失败,点此重新解析";
-				locationText.setText(FragmentPageOverview.location);
+				FragmentPage1.location = "解析位置失败,点此重新解析";
+				locationText.setText(FragmentPage1.location);
 				String str = String.format("错误号：%d", error);
 				Toast.makeText(getActivity(), str, Toast.LENGTH_LONG).show();
 				return;
@@ -412,13 +412,13 @@ public class FragmentPageOverview extends Fragment implements OnClickListener
 			{
 				// 反地理编码：通过坐标点检索详细地址及周边poi
 				String strInfo = res.strAddr;
-				FragmentPageOverview.location = strInfo;
-				FragmentPageOverview.location = FragmentPageOverview.location == null ? "位置获取失败,点此重新获取"
-						: FragmentPageOverview.location;
-				locationText.setText(FragmentPageOverview.location
+				FragmentPage1.location = strInfo;
+				FragmentPage1.location = FragmentPage1.location == null ? "位置获取失败,点此重新获取"
+						: FragmentPage1.location;
+				locationText.setText(FragmentPage1.location
 						+ "附近(点击重新获取)");
 			}
-			moveToSpecialPoint(res.geoPt, FragmentPageOverview.location);
+			moveToSpecialPoint(res.geoPt, FragmentPage1.location);
 		}
 
 		@Override
@@ -550,21 +550,21 @@ public class FragmentPageOverview extends Fragment implements OnClickListener
 
 	public static GeoPoint getPoint()
 	{
-		return FragmentPageOverview.point;
+		return FragmentPage1.point;
 	}
 
 	public static void setPoint(GeoPoint point)
 	{
-		FragmentPageOverview.point = point;
+		FragmentPage1.point = point;
 	}
 
 	public static String getLocation()
 	{
-		return FragmentPageOverview.location;
+		return FragmentPage1.location;
 	}
 
 	public static void setLocation(String location)
 	{
-		FragmentPageOverview.location = location;
+		FragmentPage1.location = location;
 	}
 }

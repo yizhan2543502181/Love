@@ -18,7 +18,7 @@ import cn.edu.jlu.ccst.firstaidoflove.activity.ModifyPasswordActivity;
 import cn.edu.jlu.ccst.firstaidoflove.activity.PatientInfoModifyActivity;
 import cn.edu.jlu.ccst.firstaidoflove.activity.PersonalInfoModifyActivity;
 
-public class FragmentPageModify extends Fragment
+public class FragmentPage4 extends Fragment
 {
 	private static final String functions[] = { "个人信息修改", "病人信息修改", "密码修改" };
 
@@ -44,7 +44,7 @@ public class FragmentPageModify extends Fragment
 				.findViewById(R.id.modify_gridview);
 		// 生成动态数组，并且转入数据
 		ArrayList<HashMap<String, Object>> itemList = new ArrayList<HashMap<String, Object>>();
-		for (String function : FragmentPageModify.functions)
+		for (String function : FragmentPage4.functions)
 		{
 			HashMap<String, Object> map = new HashMap<String, Object>();
 			map.put("image", R.drawable.icon_square_sel);// 添加图像资源的ID

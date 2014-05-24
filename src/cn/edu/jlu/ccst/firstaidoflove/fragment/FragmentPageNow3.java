@@ -26,9 +26,9 @@ import cn.edu.jlu.ccst.firstaidoflove.functions.beans.accident.Accident;
 import cn.edu.jlu.ccst.firstaidoflove.util.Constant;
 import cn.edu.jlu.ccst.firstaidoflove.util.Util;
 
-public class FragmentPageNowAccident extends Fragment
+public class FragmentPageNow3 extends Fragment
 {
-	private static FragmentPageNowAccident		instance		= null;
+	private static FragmentPageNow3		instance		= null;
 	private View								layout;
 	private TextView							noMessageText	= null;
 	private ListView							listView;
@@ -38,17 +38,17 @@ public class FragmentPageNowAccident extends Fragment
 	@SuppressLint("UseValueOf")
 	private static Integer						lock			= new Integer(0);
 
-	public FragmentPageNowAccident()
+	public FragmentPageNow3()
 	{
-		FragmentPageNowAccident.instance = this;
+		FragmentPageNow3.instance = this;
 	}
 
 	/**
 	 * @return the instance
 	 */
-	public static FragmentPageNowAccident getInstance()
+	public static FragmentPageNow3 getInstance()
 	{
-		return FragmentPageNowAccident.instance;
+		return FragmentPageNow3.instance;
 	}
 
 	@Override
@@ -77,22 +77,22 @@ public class FragmentPageNowAccident extends Fragment
 	 */
 	public void updateList()
 	{
-		for (int i = 0; i < FragmentPageNowAccident.list.size(); i++)
+		for (int i = 0; i < FragmentPageNow3.list.size(); i++)
 		{
-			if (false == FragmentPageNowAccident.listIsImport.get(i))
+			if (false == FragmentPageNow3.listIsImport.get(i))
 			{
 				Map<String, Object> map = null;
 				map = new HashMap<String, Object>();
 				map.put("list_item_icon", R.drawable.icon_home_sel);
-				map.put("list_item_text", FragmentPageNowAccident.list.get(i)
+				map.put("list_item_text", FragmentPageNow3.list.get(i)
 						.get("list_item_text"));
-				synchronized (FragmentPageNowAccident.lock)
+				synchronized (FragmentPageNow3.lock)
 				{
-					FragmentPageNowAccident.list.set(i, map);
+					FragmentPageNow3.list.set(i, map);
 				}
 			}
 		}
-		if (FragmentPageNowAccident.list.size() == 0)
+		if (FragmentPageNow3.list.size() == 0)
 		{
 			noMessageText.setVisibility(View.VISIBLE);
 		}
@@ -101,7 +101,7 @@ public class FragmentPageNowAccident extends Fragment
 			noMessageText.setVisibility(View.GONE);
 		}
 		final SimpleAdapter adapter = new SimpleAdapter(getActivity(),
-				FragmentPageNowAccident.list, R.layout.list_item_layout,
+				FragmentPageNow3.list, R.layout.list_item_layout,
 				new String[] { "list_item_icon", "list_item_text" }, new int[] {
 						R.id.list_item_icon, R.id.list_item_text });
 		listView.setAdapter(adapter);
@@ -125,16 +125,16 @@ public class FragmentPageNowAccident extends Fragment
 																			Bundle bundle = new Bundle();
 																			bundle.putParcelable(
 																					Constant.ACCIDENT_LABEL,
-																					FragmentPageNowAccident.accidentList
+																					FragmentPageNow3.accidentList
 																							.get(position));
 																			intent.putExtras(bundle);
 																			intent.setClass(
-																					FragmentPageNowAccident.this
+																					FragmentPageNow3.this
 																							.getActivity(),
 																					AccidentInfoActivity.class);
 																			startActivity(intent);
 																			// 变颜色，来改变重要度
-																			FragmentPageNowAccident.listIsImport
+																			FragmentPageNow3.listIsImport
 																					.set(position,
 																							false);
 																			updateList();
@@ -156,7 +156,7 @@ public class FragmentPageNowAccident extends Fragment
 																						@Override
 																						public void onOK()
 																						{
-																							FragmentPageNowAccident
+																							FragmentPageNow3
 																									.removeListItem(position);
 																							updateList();
 																						}
@@ -178,7 +178,7 @@ public class FragmentPageNowAccident extends Fragment
 																		public void onArrive(
 																				Accident accident)
 																		{
-																			FragmentPageNowAccident
+																			FragmentPageNow3
 																					.addListItem("姓名："
 																							+ accident
 																									.getPname()
@@ -194,13 +194,13 @@ public class FragmentPageNowAccident extends Fragment
 																							+ accident
 																									.getLatitude()
 																							+ "° ");
-																			FragmentPageNowAccident.accidentList
+																			FragmentPageNow3.accidentList
 																					.add(0,
 																							accident);
-																			if (null != FragmentPageNowAccident
+																			if (null != FragmentPageNow3
 																					.getInstance())
 																			{
-																				FragmentPageNowAccident
+																				FragmentPageNow3
 																						.getInstance()
 																						.updateList();
 																			}
@@ -213,20 +213,20 @@ public class FragmentPageNowAccident extends Fragment
 		map = new HashMap<String, Object>();
 		map.put("list_item_icon", R.drawable.icon_home_red);
 		map.put("list_item_text", content);
-		synchronized (FragmentPageNowAccident.lock)
+		synchronized (FragmentPageNow3.lock)
 		{
-			FragmentPageNowAccident.list.add(0, map);
-			FragmentPageNowAccident.listIsImport.add(0, true);
+			FragmentPageNow3.list.add(0, map);
+			FragmentPageNow3.listIsImport.add(0, true);
 		}
 	}
 
 	private static void removeListItem(int position)
 	{
-		synchronized (FragmentPageNowAccident.lock)
+		synchronized (FragmentPageNow3.lock)
 		{
-			FragmentPageNowAccident.accidentList.remove(position);
-			FragmentPageNowAccident.list.remove(position);
-			FragmentPageNowAccident.listIsImport.remove(position);
+			FragmentPageNow3.accidentList.remove(position);
+			FragmentPageNow3.list.remove(position);
+			FragmentPageNow3.listIsImport.remove(position);
 		}
 	}
 }

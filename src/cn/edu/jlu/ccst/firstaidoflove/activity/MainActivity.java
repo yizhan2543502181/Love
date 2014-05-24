@@ -28,10 +28,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 import cn.edu.jlu.ccst.firstaidoflove.AbstractAidRequestActivity;
 import cn.edu.jlu.ccst.firstaidoflove.R;
-import cn.edu.jlu.ccst.firstaidoflove.fragment.FragmentPageModify;
-import cn.edu.jlu.ccst.firstaidoflove.fragment.FragmentPageNowAccident;
-import cn.edu.jlu.ccst.firstaidoflove.fragment.FragmentPageOverview;
-import cn.edu.jlu.ccst.firstaidoflove.fragment.FragmentPageQuery;
+import cn.edu.jlu.ccst.firstaidoflove.fragment.FragmentPage4;
+import cn.edu.jlu.ccst.firstaidoflove.fragment.FragmentPageNow3;
+import cn.edu.jlu.ccst.firstaidoflove.fragment.FragmentPage1;
+import cn.edu.jlu.ccst.firstaidoflove.fragment.FragmentPage2;
 import cn.edu.jlu.ccst.firstaidoflove.util.Constant;
 import cn.edu.jlu.ccst.firstaidoflove.util.JPushUtil;
 import cn.edu.jlu.ccst.firstaidoflove.util.Util;
@@ -52,8 +52,8 @@ public class MainActivity extends AbstractAidRequestActivity
 	private LayoutInflater			layoutInflater;
 	// 定义数组来存放Fragment界面
 	private Class					fragmentArray[]		= {
-			FragmentPageOverview.class, FragmentPageQuery.class,
-			FragmentPageNowAccident.class, FragmentPageModify.class };
+			FragmentPage1.class, FragmentPage2.class,
+			FragmentPageNow3.class, FragmentPage4.class };
 	// 定义数组来存放按钮图片
 	private int						mImageViewArray[]	= {
 			R.drawable.tab_home_btn, R.drawable.tab_square_btn,

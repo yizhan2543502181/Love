@@ -95,6 +95,16 @@ public class Constant
 	// public static final String KEY_LAT = "latitude";
 	// public static final String KEY_TIME = "time";
 	//
+	// 热点的信息
+	public static final String	KEY_HID						= "hid";
+	// public static final String KEY_PID = "pid";
+	// public static final String KEY_PNAME = "pname";
+	public static final String	KEY_ADDRESS_NAME			= "address_name";
+	public static final String	KEY_ADDRESS					= "address";
+	public static final String	KEY_CONTACT_PERSON			= "contact_person";
+	public static final String	KEY_CONTACT_PHONE_NUM		= "contact_phone_num";
+	public static final String	KEY_DESCRIPTION				= "description";
+	//
 	// 设置密码
 	public static final String	KEY_OLD_PASSWORD			= "old_password";
 	public static final String	KEY_NEW_PASSWORD			= "new_password";

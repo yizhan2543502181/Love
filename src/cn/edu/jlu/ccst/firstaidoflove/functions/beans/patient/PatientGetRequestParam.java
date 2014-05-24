@@ -17,12 +17,12 @@ import cn.edu.jlu.ccst.firstaidoflove.util.Constant;
  */
 public class PatientGetRequestParam extends RequestParam
 {
-	private static final String	METHOD	      = "get_patient_info";
+	private static final String	METHOD			= "get_patient_info";
 	/**
 	 * 所有字段
 	 */
-	public static final String	FIELDS_ALL	  = Constant.KEY_UID + ","
-	                                                  + Constant.KEY_PID;
+	public static final String	FIELDS_ALL		= Constant.KEY_UID + ","
+														+ Constant.KEY_PID;
 	/**
 	 * 默认字段<br>
 	 * 不添加fields参数也按此字段返回
@@ -31,15 +31,15 @@ public class PatientGetRequestParam extends RequestParam
 	/**
 	 * 需要获取的用户uid的数组
 	 */
-	private String	            uid;
+	private String				uid;
 	/**
 	 * 监护对象的id
 	 */
-	private String	            pid;
+	private String				pid;
 	/**
 	 * 需要获取的字段
 	 */
-	private String	            fields	      = PatientGetRequestParam.FIELD_DEFAULT;
+	private String				fields			= PatientGetRequestParam.FIELD_DEFAULT;
 
 	/**
 	 * 构造一个patients.getInfo接口请求参数
@@ -122,11 +122,8 @@ public class PatientGetRequestParam extends RequestParam
 	public Bundle getParams() throws AidException
 	{
 		Bundle parameters = new Bundle();
-		parameters.putString(Constant.KEY_METHOD, PatientGetRequestParam.METHOD);
-		if (fields != null)
-		{
-			parameters.putString(Constant.KEY_FIELDS, fields);
-		}
+		parameters
+				.putString(Constant.KEY_METHOD, PatientGetRequestParam.METHOD);
 		if (uid != null)
 		{
 			parameters.putString(Constant.KEY_UID, uid);

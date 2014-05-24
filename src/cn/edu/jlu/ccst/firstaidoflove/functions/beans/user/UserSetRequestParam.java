@@ -110,13 +110,9 @@ public class UserSetRequestParam extends RequestParam
 	{
 		Bundle parameters = new Bundle();
 		parameters.putString(Constant.KEY_METHOD, UserSetRequestParam.METHOD);
-		if (fields != null)
-		{
-			parameters.putString(Constant.KEY_FIELDS, fields);
-		}
 		if (null != user)
 		{
-			parameters.putString(Constant.KEY_VALUES, user.toString2());
+			parameters.putAll(user.getParams());
 		}
 		return parameters;
 	}

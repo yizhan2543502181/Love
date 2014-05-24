@@ -26,7 +26,6 @@ public class Login implements Parcelable
 	public Login()
 	{
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public Login(String uname, long uid, String pname, long pid, double lon,
@@ -191,7 +190,6 @@ public class Login implements Parcelable
 	@Override
 	public int describeContents()
 	{
-		// TODO Auto-generated method stub
 		return 0;
 	}
 

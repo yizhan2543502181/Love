@@ -148,4 +148,22 @@ public class Password implements Parcelable
 			newPassword = bundle.getString(Constant.KEY_NEW_PASSWORD);
 		}
 	}
+
+	public Bundle getParams()
+	{
+		Bundle bundle = new Bundle();
+		if (-1 != uid)
+		{
+			bundle.putLong(Constant.KEY_UID, uid);
+		}
+		if (null != oldPassword)
+		{
+			bundle.putString(Constant.KEY_OLD_PASSWORD, oldPassword);
+		}
+		if (null != newPassword)
+		{
+			bundle.putString(Constant.KEY_NEW_PASSWORD, newPassword);
+		}
+		return bundle;
+	}
 }

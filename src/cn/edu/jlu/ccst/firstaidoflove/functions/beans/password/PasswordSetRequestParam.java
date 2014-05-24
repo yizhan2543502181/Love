@@ -78,14 +78,11 @@ public class PasswordSetRequestParam extends RequestParam
 	public Bundle getParams() throws AidException
 	{
 		Bundle parameters = new Bundle();
-		parameters.putString(Constant.KEY_METHOD, PasswordSetRequestParam.METHOD);
-		if (fields != null)
-		{
-			parameters.putString(Constant.KEY_FIELDS, fields);
-		}
+		parameters.putString(Constant.KEY_METHOD,
+				PasswordSetRequestParam.METHOD);
 		if (null != password)
 		{
-			parameters.putString(Constant.KEY_VALUES, password.toString2());
+			parameters.putAll(password.getParams());
 		}
 		return parameters;
 	}

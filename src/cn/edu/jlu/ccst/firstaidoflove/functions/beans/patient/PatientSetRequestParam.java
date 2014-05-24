@@ -16,29 +16,29 @@ import cn.edu.jlu.ccst.firstaidoflove.util.Constant;
  */
 public class PatientSetRequestParam extends RequestParam
 {
-	private static final String	METHOD	      = "set_patient_info";
+	private static final String	METHOD			= "set_patient_info";
 	/**
 	 * 所有字段
 	 */
-	public static final String	FIELDS_ALL	  = Constant.KEY_PID
-	                                                  + ","
-	                                                  + Constant.KEY_PNAME
-	                                                  + ","
-	                                                  + Constant.KEY_SEX
-	                                                  + ","
-	                                                  + Constant.KEY_AGE
-	                                                  + ","
-	                                                  + Constant.KEY_JOB
-	                                                  + ","
-	                                                  + Constant.KEY_HOME_ADDRESS
-	                                                  + ","
-	                                                  + Constant.KEY_WORK_ADDRESS
-	                                                  + ","
-	                                                  + Constant.KEY_MOBILE_PHONE_NUM
-	                                                  + ","
-	                                                  + Constant.KEY_HOME_PHONE_NUM
-	                                                  + ","
-	                                                  + Constant.KEY_WORK_PHONE_NUM;
+	public static final String	FIELDS_ALL		= Constant.KEY_PID
+														+ ","
+														+ Constant.KEY_PNAME
+														+ ","
+														+ Constant.KEY_SEX
+														+ ","
+														+ Constant.KEY_AGE
+														+ ","
+														+ Constant.KEY_JOB
+														+ ","
+														+ Constant.KEY_HOME_ADDRESS
+														+ ","
+														+ Constant.KEY_WORK_ADDRESS
+														+ ","
+														+ Constant.KEY_MOBILE_PHONE_NUM
+														+ ","
+														+ Constant.KEY_HOME_PHONE_NUM
+														+ ","
+														+ Constant.KEY_WORK_PHONE_NUM;
 	/**
 	 * 默认字段<br>
 	 * 不添加fields参数也按此字段返回
@@ -47,8 +47,8 @@ public class PatientSetRequestParam extends RequestParam
 	/**
 	 * 需要获取的字段
 	 */
-	private String	            fields	      = PatientSetRequestParam.FIELD_DEFAULT;
-	private Patient	            patient	      = null;
+	private String				fields			= PatientSetRequestParam.FIELD_DEFAULT;
+	private Patient				patient			= null;
 
 	public PatientSetRequestParam()
 	{
@@ -102,14 +102,11 @@ public class PatientSetRequestParam extends RequestParam
 	public Bundle getParams() throws AidException
 	{
 		Bundle parameters = new Bundle();
-		parameters.putString(Constant.KEY_METHOD, PatientSetRequestParam.METHOD);
-		if (fields != null)
-		{
-			parameters.putString(Constant.KEY_FIELDS, fields);
-		}
+		parameters
+				.putString(Constant.KEY_METHOD, PatientSetRequestParam.METHOD);
 		if (null != patient)
 		{
-			parameters.putString(Constant.KEY_VALUES, patient.toString2());
+			parameters.putAll(patient.getParams());
 		}
 		return parameters;
 	}

@@ -19,14 +19,14 @@ import cn.edu.jlu.ccst.firstaidoflove.util.Util;
  * @author hecao (he.cao@aid-inc.com) trajectories.getInfo接口 助手类
  * 
  */
-public class TrajectoriesGetHelper
+public class HotAddressesGetHelper
 {
 	/**
 	 * aid对象
 	 */
 	private Aid	aid;
 
-	public TrajectoriesGetHelper(Aid aid)
+	public HotAddressesGetHelper(Aid aid)
 	{
 		this.aid = aid;
 	}
@@ -39,11 +39,11 @@ public class TrajectoriesGetHelper
 	 * @return 返回{@link LoginResponseBean}对象
 	 * @throws AidException
 	 */
-	public TrajectoriesGetResponseBean getTrajectories(
-			TrajectoriesGetRequestParam param) throws AidException, Throwable
+	public HotAddressesGetResponseBean getTrajectories(
+			HotAddressesGetRequestParam param) throws AidException, Throwable
 	{
 		Bundle parameters = param.getParams();
-		TrajectoriesGetResponseBean trajectoriesBean = null;
+		HotAddressesGetResponseBean trajectoriesBean = null;
 		try
 		{
 			String response = aid.requestJSON(parameters);
@@ -57,7 +57,7 @@ public class TrajectoriesGetHelper
 				throw new AidException(Constant.ERROR_CODE_UNKNOWN_ERROR,
 						"null response", "null response");
 			}
-			trajectoriesBean = new TrajectoriesGetResponseBean(response);
+			trajectoriesBean = new HotAddressesGetResponseBean(response);
 		}
 		catch (RuntimeException re)
 		{
@@ -78,8 +78,8 @@ public class TrajectoriesGetHelper
 	 *            回调
 	 */
 	public void asyncGetTrajectories(Executor pool,
-			final TrajectoriesGetRequestParam param,
-			final AbstractRequestListener<TrajectoriesGetResponseBean> listener)
+			final HotAddressesGetRequestParam param,
+			final AbstractRequestListener<HotAddressesGetResponseBean> listener)
 	{
 		pool.execute(new Runnable() {
 			@Override
@@ -87,7 +87,7 @@ public class TrajectoriesGetHelper
 			{
 				try
 				{
-					TrajectoriesGetResponseBean trajectoriesBean = getTrajectories(param);
+					HotAddressesGetResponseBean trajectoriesBean = getTrajectories(param);
 					if (listener != null)
 					{
 						listener.onComplete(trajectoriesBean);

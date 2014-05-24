@@ -126,10 +126,6 @@ public class MedicalRecordsGetRequestParam extends RequestParam
 		Bundle parameters = new Bundle();
 		parameters.putString(Constant.KEY_METHOD,
 				MedicalRecordsGetRequestParam.METHOD);
-		if (fields != null)
-		{
-			parameters.putString(Constant.KEY_FIELDS, fields);
-		}
 		if (uid != null)
 		{
 			parameters.putString(Constant.KEY_UID, uid);

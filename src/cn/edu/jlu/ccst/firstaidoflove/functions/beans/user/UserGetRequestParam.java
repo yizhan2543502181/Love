@@ -16,11 +16,11 @@ import cn.edu.jlu.ccst.firstaidoflove.util.Constant;
  */
 public class UserGetRequestParam extends RequestParam
 {
-	private static final String	METHOD	      = "get_user_info";
+	private static final String	METHOD			= "get_user_info";
 	/**
 	 * 所有字段
 	 */
-	public static final String	FIELDS_ALL	  = Constant.KEY_UID;
+	public static final String	FIELDS_ALL		= Constant.KEY_UID;
 	/**
 	 * 默认字段<br>
 	 * 不添加fields参数也按此字段返回
@@ -29,11 +29,11 @@ public class UserGetRequestParam extends RequestParam
 	/**
 	 * 需要获取的用户uid的数组
 	 */
-	private String	            uid;
+	private String				uid;
 	/**
 	 * 需要获取的字段
 	 */
-	private String	            fields	      = UserGetRequestParam.FIELD_DEFAULT;
+	private String				fields			= UserGetRequestParam.FIELD_DEFAULT;
 
 	/**
 	 * 构造一个users.getInfo接口请求参数
@@ -105,10 +105,6 @@ public class UserGetRequestParam extends RequestParam
 	{
 		Bundle parameters = new Bundle();
 		parameters.putString(Constant.KEY_METHOD, UserGetRequestParam.METHOD);
-		if (fields != null)
-		{
-			parameters.putString(Constant.KEY_FIELDS, fields);
-		}
 		if (uid != null)
 		{
 			parameters.putString(Constant.KEY_UID, uid);

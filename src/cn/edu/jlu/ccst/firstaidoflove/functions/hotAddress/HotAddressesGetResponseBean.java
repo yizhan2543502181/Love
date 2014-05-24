@@ -18,7 +18,7 @@ import cn.edu.jlu.ccst.firstaidoflove.functions.beans.AidException;
  * @author hecao (he.cao@Aid-inc.com)
  * 
  */
-public class TrajectoriesGetResponseBean extends ResponseBean
+public class HotAddressesGetResponseBean extends ResponseBean
 {
 	/**
 	 * user数组
@@ -32,7 +32,7 @@ public class TrajectoriesGetResponseBean extends ResponseBean
 	 *            返回的数据 json格式
 	 * @throws AidException
 	 */
-	public TrajectoriesGetResponseBean(String response)
+	public HotAddressesGetResponseBean(String response)
 	{
 		super(response);
 		if (response == null)

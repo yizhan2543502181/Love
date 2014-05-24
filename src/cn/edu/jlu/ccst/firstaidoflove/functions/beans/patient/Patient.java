@@ -19,31 +19,31 @@ public class Patient implements Parcelable
 	/**
 	 * 监护对象的id
 	 */
-	private long	pid	           = -1;
+	private long	pid				= -1;
 	/**
 	 * 监护对象名字
 	 */
-	private String	pname	       = null;
+	private String	pname			= null;
 	/**
 	 * 性别
 	 */
-	private String	sex	           = null;
+	private String	sex				= null;
 	/**
 	 * 年龄
 	 */
-	private int	   age	           = -1;
+	private int		age				= -1;
 	/**
 	 * 职业
 	 */
-	private String	job	           = null;
+	private String	job				= null;
 	/**
 	 * 家庭地址
 	 */
-	private String	homeAddress	   = null;
+	private String	homeAddress		= null;
 	/**
 	 * 单位地址
 	 */
-	private String	workAddress	   = null;
+	private String	workAddress		= null;
 	/**
 	 * 手机号
 	 */
@@ -63,8 +63,8 @@ public class Patient implements Parcelable
 	}
 
 	public Patient(long pid, String pName, String sex, int age, String job,
-	        String homeAddress, String workAddress, String mobilePhoneNum,
-	        String homePhoneNum, String workPhoneNum)
+			String homeAddress, String workAddress, String mobilePhoneNum,
+			String homePhoneNum, String workPhoneNum)
 	{
 		super();
 		this.pid = pid;
@@ -277,17 +277,17 @@ public class Patient implements Parcelable
 	public String toString()
 	{
 		return "User [pid=" + pid + ", pName=" + pname + ", sex=" + sex
-		        + ", age=" + age + ", job=" + job + ", homeAddress="
-		        + homeAddress + ", workAddress=" + workAddress
-		        + ", mobilePhoneNum=" + mobilePhoneNum + ", homePhoneNum="
-		        + homePhoneNum + ", workPhoneNum=" + workPhoneNum + "]";
+				+ ", age=" + age + ", job=" + job + ", homeAddress="
+				+ homeAddress + ", workAddress=" + workAddress
+				+ ", mobilePhoneNum=" + mobilePhoneNum + ", homePhoneNum="
+				+ homePhoneNum + ", workPhoneNum=" + workPhoneNum + "]";
 	}
 
 	public String toString2()
 	{
 		return pid + "," + pname + "," + sex + "," + age + "," + job + ","
-		        + homeAddress + "," + workAddress + "," + mobilePhoneNum + ","
-		        + homePhoneNum + "," + workPhoneNum;
+				+ homeAddress + "," + workAddress + "," + mobilePhoneNum + ","
+				+ homePhoneNum + "," + workPhoneNum;
 	}
 
 	@Override
@@ -344,21 +344,21 @@ public class Patient implements Parcelable
 	}
 
 	public static final Parcelable.Creator<Patient>	CREATOR	= new Parcelable.Creator<Patient>() {
-		                                                        @Override
-		                                                        public Patient createFromParcel(
-		                                                                Parcel in)
-		                                                        {
-			                                                        return new Patient(
-			                                                                in);
-		                                                        }
+																@Override
+																public Patient createFromParcel(
+																		Parcel in)
+																{
+																	return new Patient(
+																			in);
+																}
 
-		                                                        @Override
-		                                                        public Patient[] newArray(
-		                                                                int size)
-		                                                        {
-			                                                        return new Patient[size];
-		                                                        }
-	                                                        };
+																@Override
+																public Patient[] newArray(
+																		int size)
+																{
+																	return new Patient[size];
+																}
+															};
 
 	public Patient(Parcel in)
 	{
@@ -403,5 +403,51 @@ public class Patient implements Parcelable
 		{
 			homePhoneNum = bundle.getString(Constant.KEY_HOME_PHONE_NUM);
 		}
+	}
+
+	public Bundle getParams()
+	{
+		Bundle bundle = new Bundle();
+		if (-1 != pid)
+		{
+			bundle.putLong(Constant.KEY_PID, pid);
+		}
+		if (null != pname)
+		{
+			bundle.putString(Constant.KEY_PNAME, pname);
+		}
+		if (null != sex)
+		{
+			bundle.putString(Constant.KEY_SEX, sex);
+		}
+		if (-1 != age)
+		{
+			bundle.putInt(Constant.KEY_AGE, age);
+		}
+		if (null != job)
+		{
+			bundle.putString(Constant.KEY_JOB, job);
+		}
+		if (null != homeAddress)
+		{
+			bundle.putString(Constant.KEY_HOME_ADDRESS, homeAddress);
+		}
+		if (null != workAddress)
+		{
+			bundle.putString(Constant.KEY_WORK_ADDRESS, workAddress);
+		}
+		if (null != mobilePhoneNum)
+		{
+			bundle.putString(Constant.KEY_MOBILE_PHONE_NUM, mobilePhoneNum);
+		}
+		if (null != homePhoneNum)
+		{
+			bundle.putString(Constant.KEY_HOME_PHONE_NUM, homePhoneNum);
+		}
+		if (null != workPhoneNum)
+		{
+			bundle.putString(Constant.KEY_WORK_PHONE_NUM, workPhoneNum);
+		}
+		return bundle;
 	}
 }

@@ -88,10 +88,6 @@ public class LoginRequestParam extends RequestParam
 	{
 		Bundle parameters = new Bundle();
 		parameters.putString(Constant.KEY_METHOD, LoginRequestParam.METHOD);
-		if (fields != null)
-		{
-			parameters.putString(Constant.KEY_FIELDS, fields);
-		}
 		if (loginName != null)
 		{
 			parameters.putString(Constant.KEY_LOGIN_NAME, loginName);

@@ -72,7 +72,6 @@ public class User implements Parcelable
 	public User()
 	{
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public User(long uid, String uname, long pid, String pName, String sex,
@@ -374,24 +373,24 @@ public class User implements Parcelable
 	{
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + age;
-		result = prime * result + (sex == null ? 0 : sex.hashCode());
-		result = prime * result
+		result = (prime * result) + age;
+		result = (prime * result) + (sex == null ? 0 : sex.hashCode());
+		result = (prime * result)
 				+ (homeAddress == null ? 0 : homeAddress.hashCode());
-		result = prime * result
+		result = (prime * result)
 				+ (homePhoneNum == null ? 0 : homePhoneNum.hashCode());
-		result = prime * result + (job == null ? 0 : job.hashCode());
-		result = prime * result
+		result = (prime * result) + (job == null ? 0 : job.hashCode());
+		result = (prime * result)
 				+ (mobilePhoneNum == null ? 0 : mobilePhoneNum.hashCode());
-		result = prime * result + (pname == null ? 0 : pname.hashCode());
-		result = prime * result + (int) (pid ^ pid >>> 32);
-		result = prime * result
+		result = (prime * result) + (pname == null ? 0 : pname.hashCode());
+		result = (prime * result) + (int) (pid ^ (pid >>> 32));
+		result = (prime * result)
 				+ (relationship == null ? 0 : relationship.hashCode());
-		result = prime * result + (int) (uid ^ uid >>> 32);
-		result = prime * result + (uname == null ? 0 : uname.hashCode());
-		result = prime * result
+		result = (prime * result) + (int) (uid ^ (uid >>> 32));
+		result = (prime * result) + (uname == null ? 0 : uname.hashCode());
+		result = (prime * result)
 				+ (workAddress == null ? 0 : workAddress.hashCode());
-		result = prime * result
+		result = (prime * result)
 				+ (workPhoneNum == null ? 0 : workPhoneNum.hashCode());
 		return result;
 	}
@@ -545,7 +544,6 @@ public class User implements Parcelable
 	@Override
 	public int describeContents()
 	{
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
@@ -680,5 +678,63 @@ public class User implements Parcelable
 		{
 			homePhoneNum = bundle.getString(Constant.KEY_HOME_PHONE_NUM);
 		}
+	}
+
+	public Bundle getParams()
+	{
+		Bundle bundle = new Bundle();
+		if (-1 != uid)
+		{
+			bundle.putLong(Constant.KEY_UID, uid);
+		}
+		if (null != uname)
+		{
+			bundle.putString(Constant.KEY_UNAME, uname);
+		}
+		if (-1 != pid)
+		{
+			bundle.putLong(Constant.KEY_PID, pid);
+		}
+		if (null != pname)
+		{
+			bundle.putString(Constant.KEY_PNAME, pname);
+		}
+		if (null != sex)
+		{
+			bundle.putString(Constant.KEY_SEX, sex);
+		}
+		if (-1 != age)
+		{
+			bundle.putInt(Constant.KEY_AGE, age);
+		}
+		if (null != job)
+		{
+			bundle.putString(Constant.KEY_JOB, job);
+		}
+		if (null != relationship)
+		{
+			bundle.putString(Constant.KEY_RELATIONSHIP, relationship);
+		}
+		if (null != homeAddress)
+		{
+			bundle.putString(Constant.KEY_HOME_ADDRESS, homeAddress);
+		}
+		if (null != workAddress)
+		{
+			bundle.putString(Constant.KEY_WORK_ADDRESS, workAddress);
+		}
+		if (null != mobilePhoneNum)
+		{
+			bundle.putString(Constant.KEY_MOBILE_PHONE_NUM, mobilePhoneNum);
+		}
+		if (null != homePhoneNum)
+		{
+			bundle.putString(Constant.KEY_HOME_PHONE_NUM, homePhoneNum);
+		}
+		if (null != workPhoneNum)
+		{
+			bundle.putString(Constant.KEY_WORK_PHONE_NUM, workPhoneNum);
+		}
+		return bundle;
 	}
 }

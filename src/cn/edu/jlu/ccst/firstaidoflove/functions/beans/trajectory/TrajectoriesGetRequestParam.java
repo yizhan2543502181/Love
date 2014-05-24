@@ -17,12 +17,12 @@ import cn.edu.jlu.ccst.firstaidoflove.util.Constant;
  */
 public class TrajectoriesGetRequestParam extends RequestParam
 {
-	private static final String	METHOD	      = "get_trajectories";
+	private static final String	METHOD			= "get_trajectories";
 	/**
 	 * 所有字段
 	 */
-	public static final String	FIELDS_ALL	  = Constant.KEY_UID + ","
-	                                                  + Constant.KEY_PID;
+	public static final String	FIELDS_ALL		= Constant.KEY_UID + ","
+														+ Constant.KEY_PID;
 	/**
 	 * 默认字段<br>
 	 * 不添加fields参数也按此字段返回
@@ -31,15 +31,15 @@ public class TrajectoriesGetRequestParam extends RequestParam
 	/**
 	 * 用户
 	 */
-	private String	            uid;
+	private String				uid;
 	/**
 	 * 需要获取的监护对象的id
 	 */
-	private String	            pid;
+	private String				pid;
 	/**
 	 * 需要获取的字段
 	 */
-	private String	            fields	      = TrajectoriesGetRequestParam.FIELD_DEFAULT;
+	private String				fields			= TrajectoriesGetRequestParam.FIELD_DEFAULT;
 
 	public TrajectoriesGetRequestParam(String uid, String pid)
 	{
@@ -124,11 +124,8 @@ public class TrajectoriesGetRequestParam extends RequestParam
 	public Bundle getParams() throws AidException
 	{
 		Bundle parameters = new Bundle();
-		parameters.putString(Constant.KEY_METHOD, TrajectoriesGetRequestParam.METHOD);
-		if (fields != null)
-		{
-			parameters.putString(Constant.KEY_FIELDS, fields);
-		}
+		parameters.putString(Constant.KEY_METHOD,
+				TrajectoriesGetRequestParam.METHOD);
 		if (uid != null)
 		{
 			parameters.putString(Constant.KEY_UID, uid);
